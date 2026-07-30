@@ -140,6 +140,44 @@ describe('dataset colture', () => {
     }
   });
 
+  it('ha un rapporto costi/PLV plausibile per ogni coltura', () => {
+    // Guardrail contro i costi inventati: sotto il 30% della PLV significa costi
+    // dimenticati, sopra il 95% significa che la coltura non starebbe in piedi e
+    // il numero e sbagliato. E il controllo che ha fatto emergere la canapa, dove
+    // la resa ISTAT era in biomassa e il prezzo era quello del seme.
+    for (const c of colture) {
+      const rapporto = c.costi_eur_ha / c.plv_eur_ha.tipica;
+      assert.ok(
+        rapporto >= 0.3 && rapporto <= 0.95,
+        `${c.slug}: costi ${c.costi_eur_ha} su PLV ${c.plv_eur_ha.tipica} = ${rapporto.toFixed(2)}`,
+      );
+    }
+  });
+
+  it('ha un margine per ora di lavoro in una banda credibile', () => {
+    // Il margine per ora e il miglior rilevatore di costi o rese sbagliate:
+    // nessuna coltura di pieno campo rende 600 euro l'ora di lavoro.
+    for (const c of colture) {
+      assert.ok(
+        c.margine_eur_ora > 0 && c.margine_eur_ora < 150,
+        `${c.slug}: ${c.margine_eur_ora} €/h di margine`,
+      );
+    }
+  });
+
+  it('dichiara investimento e anni di attesa per ogni poliennale', () => {
+    for (const c of colture.filter((x) => x.ciclo === 'poliennale')) {
+      assert.ok(Number.isFinite(c.investimento_impianto_eur_ha), `${c.slug}: investimento mancante`);
+      assert.ok(c.anni_alla_produzione >= 1, `${c.slug}: anni alla produzione mancanti`);
+    }
+  });
+
+  it('non contiene piu le colture senza mercato reale', () => {
+    const slug = new Set(colture.map((c) => c.slug));
+    assert.ok(!slug.has('lenticchia-d-acqua'), "lenticchia d'acqua va rimossa");
+    assert.ok(!slug.has('luffa'), 'luffa va rimossa');
+  });
+
   it('ha superfici minime e massime sensate', () => {
     for (const c of colture) {
       assert.ok(c.superficie_min_ha > 0, `${c.slug}: superficie minima non positiva`);
@@ -158,20 +196,9 @@ describe('dataset colture', () => {
     }
   });
 
-  it('accompagna ogni coltura sperimentale con almeno un avvertimento', () => {
-    // Se il dato e sperimentale, l utente deve poterlo sapere senza cercarlo.
-    for (const c of colture.filter((x) => x.affidabilita === 'sperimentale')) {
-      assert.ok(c.avvertenze.length > 0, `${c.slug}: coltura sperimentale senza avvertenze`);
-      assert.ok(
-        c.avvertenze.some((a) => /sperimental/i.test(a)),
-        `${c.slug}: nessuna avvertenza dichiara la natura sperimentale del dato`,
-      );
-    }
-  });
-
-  it('include sia le commodity tradizionali sia le nicchie richieste', () => {
+  it('include commodity, orticole e frutta', () => {
     const slug = new Set(colture.map((c) => c.slug));
-    for (const atteso of ['mais', 'soia', 'frumento-tenero', 'orzo', 'lenticchia-d-acqua', 'luffa']) {
+    for (const atteso of ['mais', 'soia', 'frumento-tenero', 'orzo', 'pomodoro-da-industria', 'mela', 'radicchio']) {
       assert.ok(slug.has(atteso), `coltura attesa mancante: ${atteso}`);
     }
   });

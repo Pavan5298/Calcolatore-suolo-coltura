@@ -15,6 +15,7 @@
       <span class="etichetta etichetta--<%= c.affidabilita %>" title="<%= aff.titolo %>"><%= aff.breve %></span>
       <span class="etichetta">Irrigazione: <%= etichetteIrrigazione[c.irrigazione] %></span>
       <% if (c.ciclo === 'poliennale') { %><span class="etichetta">Poliennale</span><% } %>
+      <% if (c.contratto_filiera) { %><span class="etichetta etichetta--contratto">Da contratto</span><% } %>
       <% if (r.conRiserva) { %><span class="etichetta etichetta--riserva">Con riserva</span><% } %>
     </p>
   </header>
@@ -24,15 +25,30 @@
       <p class="plv__etichetta">PLV per ettaro</p>
       <p class="plv__valore"><%= formattaEuro(r.plvHa.tipica) %><span class="plv__unita">/ha</span></p>
       <p class="plv__range">
-        annata scarsa <%= formattaEuro(r.plvHa.scarsa) %> · annata buona <%= formattaEuro(r.plvHa.buona) %>
+        annata scarsa <%= formattaEuro(r.plvHa.scarsa) %> · buona <%= formattaEuro(r.plvHa.buona) %>
       </p>
     </div>
     <div class="plv__blocco plv__blocco--totale">
-      <p class="plv__etichetta">PLV totale su <%= formattaEttari(r.superficieConsiderataHa) %></p>
-      <p class="plv__valore"><%= formattaEuro(r.plvTotale.tipica) %></p>
+      <p class="plv__etichetta">Margine lordo per ettaro</p>
+      <p class="plv__valore"><%= formattaEuro(r.margineHa) %><span class="plv__unita">/ha</span></p>
       <p class="plv__range">
-        da <%= formattaEuro(r.plvTotale.scarsa) %> a <%= formattaEuro(r.plvTotale.buona) %>
+        costi indicativi <%= formattaEuro(c.costi_eur_ha) %>/ha
       </p>
+    </div>
+  </div>
+
+  <div class="bilancio">
+    <div class="bilancio__voce">
+      <span class="bilancio__etichetta">Su <%= formattaEttari(r.superficieConsiderataHa) %></span>
+      <span class="bilancio__valore"><%= formattaEuro(r.margineTotale) %> <span class="bilancio__nota">di margine</span></span>
+    </div>
+    <div class="bilancio__voce">
+      <span class="bilancio__etichetta">Manodopera</span>
+      <span class="bilancio__valore"><%= formattaNumero(r.oreTotali) %> h <span class="bilancio__nota"><%= c.manodopera_ore_ha %> h/ha</span></span>
+    </div>
+    <div class="bilancio__voce">
+      <span class="bilancio__etichetta">Margine per ora</span>
+      <span class="bilancio__valore"><%= formattaEuro(c.margine_eur_ora) %><span class="bilancio__nota">/h</span></span>
     </div>
   </div>
 
@@ -57,6 +73,12 @@
       <dt>Salinita tollerata</dt>
       <dd><%= c.tolleranza_salinita %></dd>
     </div>
+    <% if (c.investimento_impianto_eur_ha) { %>
+    <div>
+      <dt>Impianto</dt>
+      <dd><%= formattaEuro(c.investimento_impianto_eur_ha) %>/ha · <%= c.anni_alla_produzione %> anni</dd>
+    </div>
+    <% } %>
     <% if (c.superficie_veneto_ha) { %>
     <div>
       <dt>Superficie in Veneto</dt>
@@ -78,5 +100,8 @@
     </details>
   <% } %>
 
-  <p class="scheda__metodo">Stima: <%= r.plvHa.metodo %></p>
+  <p class="scheda__metodo">
+    PLV: <%= r.plvHa.metodo %>.
+    Costi: <%= c.costi_fonte %>, stima di inquadramento.
+  </p>
 </article>

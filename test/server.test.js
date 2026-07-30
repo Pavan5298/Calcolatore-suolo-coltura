@@ -43,7 +43,8 @@ describe('rotte principali', () => {
     assert.equal(r.stato, 200);
     assert.match(r.corpo, /colture compatibili/i);
     assert.match(r.corpo, /PLV per ettaro/);
-    assert.match(r.corpo, /PLV totale/);
+    assert.match(r.corpo, /Margine lordo per ettaro/);
+    assert.match(r.corpo, /Margine per ora/);
   });
 
   it('il link al risultato e canonico e ricostruisce lo stesso calcolo', async () => {
@@ -92,10 +93,10 @@ describe('rotte principali', () => {
     assert.equal(elenco.stato, 200);
     assert.match(elenco.corpo, /<table/);
 
-    const scheda = await prendi('/colture/lenticchia-d-acqua');
+    const scheda = await prendi('/colture/pomodoro-da-industria');
     assert.equal(scheda.stato, 200);
-    assert.match(scheda.corpo, /Lemna minor/);
-    assert.match(scheda.corpo, /Sperimentale/);
+    assert.match(scheda.corpo, /Solanum lycopersicum/);
+    assert.match(scheda.corpo, /Resa ISTAT/);
   });
 
   it('serve la pagina metodologia con le fonti dichiarate', async () => {

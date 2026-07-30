@@ -57,6 +57,35 @@
     <span class="campo__aiuto">Cambia in modo sostanziale le colture proponibili.</span>
   </p>
 
+  <fieldset class="gruppo gruppo--impresa">
+    <legend>Vincoli d'impresa</legend>
+    <p class="gruppo__aiuto">
+      Determinano quali colture sono davvero praticabili: sulla carta rende di piu
+      il peperone, ma servono 550 ore di lavoro per ettaro.
+    </p>
+    <div class="form__griglia">
+      <p class="campo">
+        <label for="manodopera">Manodopera disponibile</label>
+        <select id="manodopera" name="manodopera">
+          <option value="">— non specificata —</option>
+          <option value="limitata" <%= v.manodopera === 'limitata' ? 'selected' : '' %>>Limitata (solo conduttore)</option>
+          <option value="familiare" <%= v.manodopera === 'familiare' ? 'selected' : '' %>>Familiare</option>
+          <option value="stagionali" <%= v.manodopera === 'stagionali' ? 'selected' : '' %>>Con avventizi stagionali</option>
+        </select>
+        <span class="campo__aiuto">Esclude le colture oltre le ore/ha sostenibili.</span>
+      </p>
+      <p class="campo">
+        <label for="orizzonte">Orizzonte di investimento</label>
+        <select id="orizzonte" name="orizzonte">
+          <option value="">— non specificato —</option>
+          <option value="annuale" <%= v.orizzonte === 'annuale' ? 'selected' : '' %>>Solo colture annuali</option>
+          <option value="pluriennale" <%= v.orizzonte === 'pluriennale' ? 'selected' : '' %>>Aperto a impianti pluriennali</option>
+        </select>
+        <span class="campo__aiuto">Un frutteto rende dal quarto o quinto anno.</span>
+      </p>
+    </div>
+  </fieldset>
+
   <details class="avanzati" <%= haAvanzati ? 'open' : '' %>>
     <summary>Dati dell'analisi del suolo <span class="campo__nota">(facoltativi, ma migliorano molto il consiglio)</span></summary>
 

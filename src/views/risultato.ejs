@@ -102,19 +102,47 @@
   </div>
 </section>
 
-<% if (esito.nicchia.length) { %>
+
+
+<% if (esito.alternative && esito.alternative.length) { %>
 <section class="contenitore sezione">
-  <h2>Colture di nicchia compatibili</h2>
+  <h2>Il resto del ventaglio: altre <%= esito.alternative.length %> colture proponibili</h2>
   <p class="sezione__testo">
-    Tenute separate di proposito: hanno diffusione prossima a zero e non esistono
-    dati agronomico-economici pubblici per l'Italia. In un ranking unico
-    finirebbero sempre in fondo, e forzarle in alto falserebbe il suggerimento.
-    I numeri qui sotto sono indicativi, con incertezza molto piu alta.
+    Le schede sopra sono le prime per punteggio complessivo, ma la scelta giusta
+    dipende da quale risorsa ti manca. Se hai terra e non ore, guarda il
+    <strong>margine per ettaro</strong>; se hai ore e non terra, il
+    <strong>margine per ora</strong>. Sono spesso due classifiche diverse.
   </p>
-  <div class="schede">
-    <% esito.nicchia.forEach(function (r) { %>
-      <%- include('partials/scheda-coltura', { r: r }) %>
-    <% }); %>
+  <div class="tabella-scorrevole">
+    <table class="tabella">
+      <caption>Margine lordo indicativo, PAC esclusa e costi di produzione dedotti.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Coltura</th>
+          <th scope="col" class="num">Margine/ha</th>
+          <th scope="col" class="num">Margine/ora</th>
+          <th scope="col" class="num">Ore/ha</th>
+          <th scope="col" class="num">Su <%= formattaEttari(criteri.superficieHa) %></th>
+          <th scope="col">Vincoli</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% esito.alternative.forEach(function (r) { %>
+          <tr>
+            <th scope="row"><a href="/colture/<%= r.coltura.slug %>"><%= r.coltura.nome %></a></th>
+            <td class="num"><%= formattaEuro(r.margineHa) %></td>
+            <td class="num"><%= formattaEuro(r.coltura.margine_eur_ora) %></td>
+            <td class="num"><%= formattaNumero(r.coltura.manodopera_ore_ha) %></td>
+            <td class="num"><%= formattaEuro(r.margineTotale) %></td>
+            <td class="vincoli">
+              <% if (r.coltura.ciclo === 'poliennale') { %><span class="etichetta">Impianto</span><% } %>
+              <% if (r.coltura.contratto_filiera) { %><span class="etichetta etichetta--contratto">Contratto</span><% } %>
+              <% if (r.coltura.superficie_veneto_ha && r.coltura.superficie_veneto_ha < 300) { %><span class="etichetta etichetta--sperimentale">Dato fragile</span><% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
   </div>
 </section>
 <% } %>
@@ -133,7 +161,9 @@
     ph: criteri.ph,
     salinita: criteri.salinita,
     calcare: criteri.calcare,
-    drenaggio: criteri.drenaggio
+    drenaggio: criteri.drenaggio,
+    manodopera: criteri.manodopera,
+    orizzonte: criteri.orizzonte
   }, superficiePredefinita: criteri.superficieHa }) %>
 </section>
 

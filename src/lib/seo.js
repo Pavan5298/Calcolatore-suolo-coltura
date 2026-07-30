@@ -44,6 +44,8 @@ export function percorsoRisultato({
   salinita,
   calcare,
   drenaggio,
+  manodopera,
+  orizzonte,
 }) {
   const params = new URLSearchParams();
   params.set('provincia', provincia);
@@ -64,6 +66,8 @@ export function percorsoRisultato({
   if (salinita) params.set('salinita', salinita);
   if (calcare) params.set('calcare', calcare);
   if (drenaggio) params.set('drenaggio', drenaggio);
+  if (manodopera) params.set('manodopera', manodopera);
+  if (orizzonte) params.set('orizzonte', orizzonte);
 
   return `/risultato?${params.toString()}`;
 }

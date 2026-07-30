@@ -58,6 +58,56 @@
 </section>
 
 <section class="contenitore sezione">
+  <h2>Perche il margine e non la PLV</h2>
+  <p class="sezione__testo">
+    Una prima versione di questo strumento ordinava le colture pesando soprattutto
+    quanto fossero <em>diffuse</em>. Il risultato era un calcolatore che consigliava a
+    tutti di continuare a fare mais e soia: esattamente quello che gia facevano.
+    Il pomodoro da industria, con una PLV quattro volte quella della soia, non
+    compariva mai.
+  </p>
+  <p class="sezione__testo">
+    Oggi l'ordinamento si regge su tre elementi, e nessuno dei tre e la diffusione:
+  </p>
+  <dl class="dettagli dettagli--larghi">
+    <div>
+      <dt>Margine lordo per ettaro</dt>
+      <dd>
+        PLV meno i costi di produzione. E il numero che conta per decidere: colture
+        con PLV simile possono avere margini opposti. I costi sono stime di
+        inquadramento, dichiarate come tali.
+      </dd>
+    </div>
+    <div>
+      <dt>Margine per ora di lavoro</dt>
+      <dd>
+        Il correttivo necessario. Pesando solo il margine per ettaro finirebbero in
+        cima fragola e peperone, che su venti ettari nessuna azienda riesce a
+        gestire. Se hai terra e non ore conta il primo numero, se hai ore e non
+        terra il secondo: sono spesso due classifiche diverse, e lo strumento le
+        mostra entrambe invece di scegliere al posto tuo.
+      </dd>
+    </div>
+    <div>
+      <dt>Confidenza statistica</dt>
+      <dd>
+        Una resa ISTAT calcolata su 23 ettari regionali e rumore; la stessa su
+        140.000 ettari e un dato solido. La superficie regionale scala i due
+        termini economici, e sotto i 300 ettari la fragilita del dato viene
+        dichiarata sulla scheda. Senza questo correttivo emergevano in cima
+        colture marginali il cui margine apparente era solo un artefatto del
+        campione minuscolo.
+      </dd>
+    </div>
+  </dl>
+  <p class="sezione__testo">
+    La diffusione resta, con peso molto ridotto, come segnale di accesso al
+    mercato: una coltura molto praticata in Veneto ha filiere, contoterzisti e
+    acquirenti gia disponibili, e per un'impresa questo vale.
+  </p>
+</section>
+
+<section class="contenitore sezione">
   <h2>Livelli di affidabilita</h2>
   <dl class="dettagli dettagli--larghi">
     <div>
@@ -189,6 +239,24 @@
         sistemazione idraulica prima della semina successiva.
       </dd>
     </div>
+    <div>
+      <dt>Manodopera disponibile</dt>
+      <dd>
+        Vincolo d'impresa, non agronomico, ma spesso e quello che decide davvero:
+        con il solo conduttore le colture oltre le 40 ore/ha vengono escluse, con
+        manodopera familiare la soglia sale a 200. E la ragione per cui il
+        peperone, che rende molto per ettaro, non e proponibile a chiunque.
+      </dd>
+    </div>
+    <div>
+      <dt>Orizzonte di investimento</dt>
+      <dd>
+        Con orizzonte annuale gli impianti pluriennali vengono esclusi: un frutteto
+        entra in piena produzione al quarto o quinto anno e il suo margine annuo
+        non e confrontabile con quello di un seminativo finche l'impianto non e
+        ammortizzato.
+      </dd>
+    </div>
   </dl>
 </section>
 
@@ -224,6 +292,19 @@
       Alcune colture richiedono contratti di filiera (barbabietola, pomodoro da
       industria) o autorizzazioni (nuovi impianti viticoli): la superficie non e
       liberamente coltivabile.
+    </li>
+    <li>
+      <strong>I costi di produzione sono la parte piu debole del modello.</strong> Sono
+      stime di inquadramento tecnico, non rilevazioni: per l'ortofrutta sono
+      espressi come quota tipica della PLV, perche manodopera di raccolta e
+      confezionamento scalano con i chilogrammi e un valore assoluto sarebbe
+      inventato. Vanno validati su RICA o su contabilita aziendale prima di
+      fondarci una decisione.
+    </li>
+    <li>
+      Il modello non considera rotazioni, disponibilita di macchine specifiche,
+      accesso al credito ne i canali commerciali gia attivi in azienda: tutti
+      fattori che nella pratica pesano quanto l'agronomia.
     </li>
     <li>
       Il dataset copre <%= meta.colture.colture %> colture e risale al

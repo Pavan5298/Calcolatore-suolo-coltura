@@ -34,19 +34,7 @@
   </div>
 </section>
 
-<% if (esito.nicchia.length) { %>
-<section class="contenitore sezione">
-  <h2>Colture di nicchia compatibili</h2>
-  <p class="sezione__testo">
-    Senza dati statistici pubblici: valori indicativi, incertezza elevata.
-  </p>
-  <div class="schede">
-    <% esito.nicchia.forEach(function (r) { %>
-      <%- include('partials/scheda-coltura', { r: r }) %>
-    <% }); %>
-  </div>
-</section>
-<% } %>
+
 
 <section class="contenitore sezione">
   <h2>Calcola sui tuoi ettari</h2>

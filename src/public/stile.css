@@ -511,3 +511,34 @@ button:hover, .bottone:hover { background: var(--verde-scuro); color: #fff; }
 @media (prefers-color-scheme: dark) {
   .etichetta--istat_resa { background: #22331f; border-color: #3d5c3a; }
 }
+
+/* ------------------------------------------------------- bilancio rapido */
+
+.bilancio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: .5rem .9rem;
+  padding: .7rem .85rem;
+  background: var(--fondo);
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+}
+.bilancio__voce { display: flex; flex-direction: column; gap: .1rem; }
+.bilancio__etichetta {
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--testo-tenue);
+}
+.bilancio__valore { font-weight: 600; font-variant-numeric: tabular-nums; }
+.bilancio__nota { font-weight: 400; font-size: .8em; color: var(--testo-tenue); }
+
+.gruppo--impresa { margin-top: 1.25rem; }
+.etichetta--contratto { background: #e6e2f0; border-color: #b8afd4; }
+
+@media (prefers-color-scheme: dark) {
+  .etichetta--contratto { background: #292339; border-color: #4a3f66; }
+}
+.vincoli { white-space: nowrap; }
+.vincoli .etichetta { font-size: .68rem; }

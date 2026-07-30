@@ -2,12 +2,12 @@
 
 Calcolatore web che, dato un terreno agricolo veneto (zona, tessitura, superficie,
 disponibilita di irrigazione), suggerisce le colture compatibili con una stima
-della **PLV** (Produzione Lorda Vendibile) per ettaro e totale, con il range tra
-annata buona e annata scarsa.
+della **PLV** (Produzione Lorda Vendibile) e del **margine lordo** per ettaro,
+con il range tra annata buona e annata scarsa.
 
-Copertura: le **sette province del Veneto**, 85 colture (cereali, oleaginose,
-industriali, foraggere, orticole, frutta e nicchie), con i 50 comuni della
-provincia di Rovigo mappati singolarmente.
+Copertura: le **sette province del Veneto**, 83 colture (cereali, oleaginose,
+industriali, foraggere, orticole e frutta), con i 50 comuni della provincia di
+Rovigo mappati singolarmente.
 
 Le **rese vengono da ISTAT** (dataflow `101_1015`, `DCSP_COLTIVAZIONI`); i prezzi
 sono ancora stime di settore. Ogni coltura dichiara in interfaccia la provenienza
@@ -35,7 +35,7 @@ geografiche AVEPA — si riscrive quel file e non il resto.
 npm install
 npm start              # avvia su http://localhost:3000
 npm run dev            # con ricarica automatica
-npm test               # 92 test: dataset, PLV, tessitura, matching, rotte e SEO
+npm test               # 102 test: dataset, PLV, tessitura, matching, rotte e SEO
 ```
 
 Aggiornare i dati:
@@ -96,7 +96,7 @@ test/                     suite di test
 | `/cosa-coltivare-in/:provincia` | landing di provincia |
 | `/colture` e `/colture/:slug` | elenco e schede per coltura, pronte per diventare landing dedicate |
 | `/metodologia` | metodo di calcolo, fonti e limiti dichiarati |
-| `/sitemap.xml`, `/robots.txt` | 151 URL in sitemap |
+| `/sitemap.xml`, `/robots.txt` | 149 URL in sitemap |
 | `/salute` | health check per Railway |
 
 Ogni pagina indicizzabile ha `title`, `meta description`, `canonical`, Open Graph
@@ -142,13 +142,43 @@ coltura**.
 | Calcare attivo | Segnala il rischio di clorosi ferrica sulle arboree sensibili |
 | Drenaggio | Con drenaggio lento esclude gli impianti poliennali che richiedono suolo drenato |
 
+## Come vengono ordinate le colture
+
+L'ordinamento non premia la coltura piu diffusa ma la migliore opportunita, e si
+regge su tre termini:
+
+| Termine | Ruolo |
+|---|---|
+| **Margine lordo €/ha** | PLV meno costi. E il numero che conta per decidere, non la PLV |
+| **Margine €/ora di lavoro** | Il correttivo: senza, in cima finiscono fragola e peperone, che su 20 ha nessuno gestisce |
+| **Confidenza statistica** | Una resa ISTAT su 23 ha e rumore, su 140.000 ha e un dato: la superficie regionale scala i termini economici |
+
+La diffusione resta con peso ridotto, come segnale di accesso al mercato
+(filiere, contoterzisti, acquirenti gia disponibili).
+
+Oltre ai parametri del suolo il form accetta due **vincoli d'impresa**:
+manodopera disponibile (esclude le colture oltre le ore/ha sostenibili) e
+orizzonte di investimento (esclude gli impianti pluriennali). Sono spesso il
+vincolo che decide davvero.
+
+Le schede in dettaglio sono 8, ma **tutte** le colture ammesse restano visibili
+nella tabella di confronto: nascondere 60 opzioni dietro un top-5 non guida
+nessuna scelta.
+
 ## Stato dei dati
 
 - `istat` — resa e prezzo entrambi rilevati. **Nessuna coltura ha ancora questo
   livello**: i prezzi restano stime.
 - `istat_resa` — resa da `DCSP_COLTIVAZIONI`, prezzo da stima di settore.
 - `stima_esperto` — nessuna rilevazione ISTAT per quella coltura.
-- `sperimentale` — nessun dato pubblico italiano (lenticchia d'acqua, luffa).
+
+I **costi di produzione** sono la parte piu debole del modello: stime di
+inquadramento, per l'ortofrutta espresse come quota tipica della PLV perche
+manodopera di raccolta e confezionamento scalano con i chilogrammi. Due test di
+guardrail impediscono che una modifica futura produca valori assurdi: il rapporto
+costi/PLV deve restare tra 0,30 e 0,95 e il margine orario sotto i 150 €/h — e
+stato quel controllo a far emergere la canapa, dove la resa ISTAT era in biomassa
+e il prezzo era quello del seme.
 
 ### Nota metodologica sul range
 

@@ -14,7 +14,14 @@ import {
   getProvince,
   getZone,
 } from './data/index.js';
-import { LIVELLI_CALCARE, LIVELLI_DRENAGGIO, LIVELLI_SALINITA, suggerisci } from './lib/matching.js';
+import {
+  LIVELLI_CALCARE,
+  LIVELLI_DRENAGGIO,
+  LIVELLI_MANODOPERA,
+  LIVELLI_SALINITA,
+  ORIZZONTI,
+  suggerisci,
+} from './lib/matching.js';
 import { analizzaTessitura, caratteristicheTessitura, profiloDaClasse } from './lib/tessitura.js';
 import { plvPerEttaro } from './lib/plv.js';
 import {
@@ -144,6 +151,8 @@ function leggiCriteri(query) {
     salinita: opzionale(query.salinita, LIVELLI_SALINITA),
     calcare: opzionale(query.calcare, LIVELLI_CALCARE),
     drenaggio: opzionale(query.drenaggio, LIVELLI_DRENAGGIO),
+    manodopera: opzionale(query.manodopera, LIVELLI_MANODOPERA),
+    orizzonte: opzionale(query.orizzonte, ORIZZONTI),
     comune,
     errori,
   };
@@ -167,6 +176,8 @@ function costruisciRisultato(criteri) {
     salinita: criteri.salinita ?? undefined,
     calcare: criteri.calcare ?? undefined,
     drenaggio: criteri.drenaggio ?? undefined,
+    manodopera: criteri.manodopera ?? undefined,
+    orizzonte: criteri.orizzonte ?? undefined,
   });
 
   return { esito, luogo, percorso, noteTessitura: caratteristicheTessitura(criteri.tessitura) };

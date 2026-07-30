@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { TERRENI, getColture, getProvince, getProvincia } from '../src/data/index.js';
-import { CATEGORIA_NICCHIA, MAX_RISULTATI, MIN_RISULTATI, suggerisci, valuta } from '../src/lib/matching.js';
+import { MAX_RISULTATI, MIN_RISULTATI, suggerisci, valuta } from '../src/lib/matching.js';
 import { profiloDaClasse } from '../src/lib/tessitura.js';
 
 const colture = getColture();
@@ -70,13 +70,16 @@ describe('punteggio', () => {
   });
 
   it('penalizza e segnala le colture che non scalano sulla superficie inserita', () => {
-    const esito = valuta(trova('luffa'), ({ ...conTerreno(criteriBase, 'sabbioso'), superficieHa: 200 }));
+    const esito = valuta(trova('aglio'), ({ ...conTerreno(criteriBase, 'limoso'), superficieHa: 200 }));
     assert.ok(esito.avvertenze.some((a) => a.includes('non scala')));
   });
 
-  it('colloca i dati sperimentali sotto le stime di settore, a parita di condizioni', () => {
-    const sperimentali = colture.filter((c) => c.affidabilita === 'sperimentale');
-    assert.ok(sperimentali.length > 0, 'il dataset deve contenere colture sperimentali');
+  it('non contiene piu colture senza mercato reale', () => {
+    // Lenticchia d'acqua e luffa sono state rimosse: mercato troppo ristretto
+    // per fondarci una decisione imprenditoriale.
+    const slug = new Set(colture.map((c) => c.slug));
+    assert.ok(!slug.has('lenticchia-d-acqua'));
+    assert.ok(!slug.has('luffa'));
   });
 });
 
@@ -204,16 +207,105 @@ describe('parametri agronomici facoltativi', () => {
   });
 });
 
+describe('guida alla scelta imprenditoriale', () => {
+  it('fa emergere una coltura ad alto margine anche se meno diffusa', () => {
+    // Il difetto della prima versione: il punteggio pesava la diffusione, quindi
+    // vincevano sempre mais e soia e il calcolatore consigliava a tutti di fare
+    // quello che gia facevano. Il pomodoro da industria ha una PLV quattro volte
+    // la soia e deve poter comparire.
+    const pomodoro = trova('pomodoro-da-industria');
+    const soia = trova('soia');
+
+    // Sul margine per ettaro il pomodoro vale molte volte la soia; sul margine
+    // per ora e la soia a vincere, perche e meccanizzata. Sono due classifiche
+    // diverse ed e giusto che lo siano: il calcolatore deve mostrarle entrambe,
+    // non decidere al posto dell'imprenditore quale conti di piu.
+    assert.ok(pomodoro.margine_lordo_eur_ha > soia.margine_lordo_eur_ha * 2);
+    assert.ok(soia.margine_eur_ora > pomodoro.margine_eur_ora);
+
+    const criteri = { ...conTerreno(criteriBase, 'limoso'), provincia: getProvincia('RO') };
+    const esito = suggerisci(colture, criteri);
+
+    // Il punto della modifica: con il vecchio punteggio, dominato dalla
+    // diffusione, il pomodoro non compariva mai. Ora deve essere visibile.
+    const visibili = [...esito.principali, ...esito.alternative].map((r) => r.coltura.slug);
+    assert.ok(visibili.includes('pomodoro-da-industria'));
+    assert.ok(
+      esito.principali.some((r) => r.coltura.slug === 'pomodoro-da-industria'),
+      `pomodoro fuori dalle schede in dettaglio: ${esito.principali.map((r) => r.coltura.slug).join(', ')}`,
+    );
+  });
+
+  it('mostra tutte le colture ammesse, non solo le prime', () => {
+    // Nascondere 60 opzioni dietro un top-5 non guida nessuna scelta.
+    const esito = suggerisci(colture, conTerreno(criteriBase, 'limoso'));
+    assert.equal(esito.principali.length + esito.alternative.length, esito.ammesse);
+    assert.ok(esito.alternative.length > 20, 'la tabella di confronto deve coprire il resto del ventaglio');
+  });
+
+  it('ordina per margine lordo, non per PLV', () => {
+    // Due colture con PLV simile ma costi molto diversi non possono valere uguale.
+    const criteri = conTerreno(criteriBase, 'limoso');
+    const coppie = colture
+      .filter((c) => c.province.includes('RO') && c.terreni.includes('limoso'))
+      .map((c) => ({ c, v: valuta(c, criteri) }))
+      .filter((x) => x.v.ammessa);
+
+    assert.ok(coppie.length > 5);
+    // il margine deve spiegare l'ordinamento meglio della sola PLV
+    const perPunteggio = [...coppie].sort((a, b) => b.v.punteggio - a.v.punteggio);
+    const primi = perPunteggio.slice(0, 5).map((x) => x.c.margine_lordo_eur_ha);
+    const ultimi = perPunteggio.slice(-5).map((x) => x.c.margine_lordo_eur_ha);
+    const media = (a) => a.reduce((s, v) => s + v, 0) / a.length;
+    assert.ok(media(primi) > media(ultimi), 'i primi in classifica devono avere margine medio superiore');
+  });
+
+  it('esclude le colture oltre la manodopera dichiarata', () => {
+    const peperone = trova('peperone');
+    assert.ok(peperone.manodopera_ore_ha > 400);
+
+    const conAvventizi = valuta(peperone, { ...conTerreno(criteriBase, 'limoso'), manodopera: 'stagionali' });
+    const soloConduttore = valuta(peperone, { ...conTerreno(criteriBase, 'limoso'), manodopera: 'limitata' });
+
+    assert.equal(conAvventizi.ammessa, true);
+    assert.equal(soloConduttore.ammessa, false);
+    assert.ok(soloConduttore.esclusioni.some((e) => e.includes('ore/ha')));
+  });
+
+  it('esclude gli impianti pluriennali con orizzonte annuale', () => {
+    const melo = trova('mela');
+    assert.equal(melo.ciclo, 'poliennale');
+    const esito = valuta(melo, { ...conTerreno(criteriBase, 'limoso'), orizzonte: 'annuale' });
+    assert.equal(esito.ammessa, false);
+    assert.ok(esito.esclusioni.some((e) => e.includes('orizzonte')));
+  });
+
+  it('dichiara investimento e anni di attesa per gli impianti pluriennali', () => {
+    const esito = valuta(trova('mela'), conTerreno(criteriBase, 'limoso'));
+    assert.ok(esito.avvertenze.some((a) => /investimento indicativo/.test(a)));
+    assert.ok(esito.avvertenze.some((a) => /anni prima della piena produzione/.test(a)));
+  });
+
+  it('segnala le colture che richiedono un contratto di filiera', () => {
+    const esito = valuta(trova('pomodoro-da-industria'), conTerreno(criteriBase, 'limoso'));
+    assert.ok(esito.avvertenze.some((a) => a.includes('contratto')));
+  });
+
+  it('calcola margine, costi e ore sulla superficie considerata', () => {
+    const esito = suggerisci(colture, { ...conTerreno(criteriBase, 'limoso'), superficieHa: 12 });
+    for (const r of esito.principali) {
+      const ha = r.superficieConsiderataHa;
+      assert.equal(r.margineTotale, Math.round(r.coltura.margine_lordo_eur_ha * ha));
+      assert.equal(r.costiTotale, Math.round(r.coltura.costi_eur_ha * ha));
+      assert.equal(r.oreTotali, Math.round(r.coltura.manodopera_ore_ha * ha));
+    }
+  });
+});
+
 describe('suggerisci', () => {
   it('restituisce al massimo MAX_RISULTATI colture principali', () => {
     const esito = suggerisci(colture, criteriBase);
     assert.ok(esito.principali.length <= MAX_RISULTATI);
-  });
-
-  it('tiene le colture di nicchia in un elenco separato', () => {
-    const esito = suggerisci(colture, criteriBase);
-    assert.ok(esito.principali.every((r) => r.coltura.categoria !== CATEGORIA_NICCHIA));
-    assert.ok(esito.nicchia.every((r) => r.coltura.categoria === CATEGORIA_NICCHIA));
   });
 
   it('ordina le principali per punteggio decrescente', () => {
@@ -231,9 +323,8 @@ describe('suggerisci', () => {
   });
 
   it('calcola il totale sulla superficie investibile, non su quella inserita', () => {
-    const esito = suggerisci(colture, ({ ...conTerreno(criteriBase, 'sabbioso'), superficieHa: 500 }));
-    const tutte = [...esito.principali, ...esito.nicchia];
-    const limitate = tutte.filter((r) => Number.isFinite(r.coltura.superficie_max_ha));
+    const esito = suggerisci(colture, ({ ...conTerreno(criteriBase, 'limoso'), superficieHa: 500 }));
+    const limitate = esito.principali.filter((r) => Number.isFinite(r.coltura.superficie_max_ha));
 
     for (const r of limitate) {
       assert.equal(r.superficieConsiderataHa, r.coltura.superficie_max_ha);
