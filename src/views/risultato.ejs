@@ -1,0 +1,73 @@
+<%- include('partials/head') %>
+
+<section class="eroe eroe--compatto">
+  <div class="contenitore">
+    <h1>
+      Colture adatte a <%= luogo %><br>
+      <span class="eroe__qualifica">
+        <%= formattaEttari(criteri.superficieHa) %> · terreno <%= criteri.terreno %> ·
+        <%= criteri.irrigazione ? 'con irrigazione' : 'senza irrigazione' %>
+      </span>
+    </h1>
+    <p class="condividi">
+      <label for="link-condivisione">Link a questo risultato</label>
+      <input id="link-condivisione" type="text" readonly value="<%= canonico %>" onclick="this.select()">
+    </p>
+  </div>
+</section>
+
+<% if (criteri.comune) { %>
+<section class="contenitore">
+  <p class="nota-zona">
+    <strong><%= criteri.comune.nome %></strong> — <%= zone[criteri.comune.zona] %>
+    I dati di resa sono provinciali (<%= criteri.provincia.nome %>): il comune serve a
+    inquadrare la zona, non aumenta la precisione della stima.
+  </p>
+</section>
+<% } %>
+
+<section class="contenitore sezione">
+  <h2><%= esito.principali.length %> colture compatibili</h2>
+  <% if (esito.conRiserva) { %>
+    <p class="avviso">
+      Con questi vincoli poche colture risultano pienamente compatibili. L'elenco
+      include quindi anche colture segnate <strong>con riserva</strong>: proponibili
+      solo verificando tessitura e drenaggio con un agronomo.
+    </p>
+  <% } %>
+  <div class="schede">
+    <% esito.principali.forEach(function (r) { %>
+      <%- include('partials/scheda-coltura', { r: r }) %>
+    <% }); %>
+  </div>
+</section>
+
+<% if (esito.nicchia.length) { %>
+<section class="contenitore sezione">
+  <h2>Colture di nicchia compatibili</h2>
+  <p class="sezione__testo">
+    Tenute separate di proposito: hanno diffusione prossima a zero e non esistono
+    dati agronomico-economici pubblici per l'Italia. In un ranking unico
+    finirebbero sempre in fondo, e forzarle in alto falserebbe il suggerimento.
+    I numeri qui sotto sono indicativi, con incertezza molto piu alta.
+  </p>
+  <div class="schede">
+    <% esito.nicchia.forEach(function (r) { %>
+      <%- include('partials/scheda-coltura', { r: r }) %>
+    <% }); %>
+  </div>
+</section>
+<% } %>
+
+<section class="contenitore sezione">
+  <h2>Modifica i parametri</h2>
+  <%- include('partials/form', { valori: {
+    provincia: criteri.provincia.slug,
+    terreno: criteri.terreno,
+    superficie: criteri.superficieHa,
+    irrigazione: criteri.irrigazione,
+    comune: criteri.comune ? criteri.comune.slug : null
+  }, superficiePredefinita: criteri.superficieHa }) %>
+</section>
+
+<%- include('partials/piede') %>

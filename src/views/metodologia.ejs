@@ -1,0 +1,159 @@
+<%- include('partials/head') %>
+
+<section class="eroe eroe--compatto">
+  <div class="contenitore">
+    <h1>Metodologia e fonti</h1>
+    <p class="eroe__testo">
+      Come sono calcolate le stime, da dove vengono i numeri e - soprattutto - cosa
+      non sanno fare.
+    </p>
+  </div>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Cos'e la PLV, e cosa non e</h2>
+  <p class="sezione__testo">
+    La Produzione Lorda Vendibile e il valore della produzione ottenibile da un
+    ettaro: <code>PLV = resa (q/ha) × prezzo (€/q)</code>.
+  </p>
+  <p class="sezione__testo">
+    <strong>La PLV non e il reddito.</strong> Non sottrae i costi di produzione, che tra
+    una coltura e l'altra cambiano in modo enorme. Il mais ha PLV alta e margine
+    sottile; una nicchia puo avere PLV modesta e marginalita migliore. Confrontare
+    due colture solo sulla PLV e il modo piu rapido per prendere una decisione
+    sbagliata.
+  </p>
+  <p class="sezione__testo">
+    <strong>La PAC non e inclusa.</strong> I pagamenti diretti non fanno parte della PLV.
+    Per alcune colture - i prati permanenti in modo evidente - pesano
+    proporzionalmente molto piu che sui seminativi, e vanno valutati a parte.
+  </p>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Il range annata buona / annata scarsa</h2>
+  <p class="sezione__testo">
+    Il modo intuitivo di costruirlo e sbagliato. Moltiplicare la resa peggiore per
+    il prezzo peggiore descrive uno scenario che storicamente non si e mai
+    verificato: <strong>resa e prezzo sono negativamente correlati</strong>, perche l'annata
+    siccitosa che dimezza la resa e la stessa che fa salire il prezzo.
+  </p>
+  <p class="sezione__testo">
+    Il metodo corretto, che questo strumento adotta quando la serie storica e
+    disponibile: calcolare la PLV di <em>ogni singolo anno</em> e prendere i percentili
+    della serie di PLV annuali (20° per l'annata scarsa, 50° per la tipica, 80° per
+    la buona). La correlazione e cosi gia dentro i dati, e il range risulta piu
+    stretto e piu difendibile.
+  </p>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Livelli di affidabilita</h2>
+  <dl class="dettagli dettagli--larghi">
+    <div>
+      <dt><span class="etichetta etichetta--istat">Dato ISTAT</span></dt>
+      <dd><%= meta.colture.affidabilita.istat %></dd>
+    </div>
+    <div>
+      <dt><span class="etichetta etichetta--stima_esperto">Stima di settore</span></dt>
+      <dd><%= meta.colture.affidabilita.stima_esperto %></dd>
+    </div>
+    <div>
+      <dt><span class="etichetta etichetta--sperimentale">Sperimentale</span></dt>
+      <dd><%= meta.colture.affidabilita.sperimentale %></dd>
+    </div>
+  </dl>
+  <p class="sezione__testo">
+    Le colture di nicchia sono marcate come sperimentali perche per l'Italia non
+    esistono dati agronomico-economici pubblici: la letteratura disponibile sulla
+    lenticchia d'acqua, per esempio, ammette esplicitamente che la produttivita
+    industriale alle nostre latitudini non e nota. Dichiararlo e piu utile che
+    simulare una precisione che non c'e.
+  </p>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Fonti pubbliche utilizzate</h2>
+  <dl class="dettagli dettagli--larghi">
+    <div>
+      <dt>ISTAT — Coltivazioni</dt>
+      <dd>
+        Dataflow <code>101_1015</code> (<code>DCSP_COLTIVAZIONI</code>): superfici e
+        produzioni per coltura, <strong>per provincia</strong>, annuali, via API SDMX.
+        E la fonte delle rese. Licenza CC-BY.
+      </dd>
+    </div>
+    <div>
+      <dt>ISTAT — Prezzi dei prodotti agricoli</dt>
+      <dd>
+        Dataflow <code>101_12</code> (<code>DCSP_PREZZIAGR</code>): la fonte dei prezzi,
+        automatizzabile via la stessa API.
+      </dd>
+    </div>
+    <div>
+      <dt>ISMEA</dt>
+      <dd>
+        Banca dati prezzi all'origine, per piazza di scambio e con serie settimanali.
+        Piu granulare di ISTAT ma senza API pubblica: usata come riscontro, non come
+        alimentazione automatica.
+      </dd>
+    </div>
+    <div>
+      <dt>CREA — RICA</dt>
+      <dd>
+        Risultati economici delle aziende agricole. Usata per il riscontro degli ordini
+        di grandezza e, in prospettiva, per i costi di produzione. I microdati della
+        Banca Dati RICA richiedono accreditamento e sono limitati alla ricerca
+        scientifica: non alimentano questo strumento.
+      </dd>
+    </div>
+    <div>
+      <dt>AVEPA — piani colturali</dt>
+      <dd>
+        Piani colturali validati per campagna e per provincia, open data. Non
+        contengono PLV: dicono cosa viene effettivamente coltivato e su quanti ettari.
+        Previsti come riscontro del motore di suggerimento.
+      </dd>
+    </div>
+    <div>
+      <dt>Regione Veneto e Veneto Agricoltura</dt>
+      <dd>
+        Sistema Statistico Regionale e rapporto annuale sulla congiuntura
+        agroalimentare, per l'inquadramento e il confronto degli aggregati.
+      </dd>
+    </div>
+  </dl>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Limiti dichiarati</h2>
+  <ul class="elenco-avvertenze">
+    <li>
+      La granularita geografica del dato di resa e <strong>provinciale</strong>. Il comune
+      serve a inquadrare la zona e a precompilare il form, non ad aumentare la
+      precisione della stima.
+    </li>
+    <li>
+      Il tipo di terreno e inserito dall'utente come tessitura prevalente: non
+      sostituisce un'analisi del suolo, che rimane la base di qualunque decisione
+      colturale reale.
+    </li>
+    <li>
+      Il modello non considera rotazioni, precessioni colturali, vincoli di
+      condizionalita, disponibilita di manodopera e macchine, ne gli sbocchi
+      commerciali - che nella pratica sono spesso il vincolo vero.
+    </li>
+    <li>
+      Alcune colture richiedono contratti di filiera (barbabietola, pomodoro da
+      industria) o autorizzazioni (nuovi impianti viticoli): la superficie non e
+      liberamente coltivabile.
+    </li>
+    <li>
+      Le stime attualmente in uso sono in prevalenza di inquadramento
+      (<em>stima di settore</em>), in attesa del ricalcolo sulle serie ISTAT.
+      L'aggiornamento del dataset e: <%= meta.colture.aggiornato %>.
+    </li>
+  </ul>
+</section>
+
+<%- include('partials/piede') %>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= titolo %></title>
+<meta name="description" content="<%= descrizione %>">
+<link rel="canonical" href="<%= canonico %>">
+<% if (typeof noindex !== 'undefined' && noindex) { %>
+<meta name="robots" content="noindex, follow">
+<% } %>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="<%= sito.nome %>">
+<meta property="og:locale" content="<%= sito.locale %>">
+<meta property="og:title" content="<%= titolo %>">
+<meta property="og:description" content="<%= descrizione %>">
+<meta property="og:url" content="<%= canonico %>">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
+<link rel="stylesheet" href="/stile.css">
+<% if (typeof jsonLd !== 'undefined' && jsonLd) { %>
+<script type="application/ld+json"><%- JSON.stringify(jsonLd) %></script>
+<% } %>
+</head>
+<body>
+<a class="salta" href="#contenuto">Salta al contenuto</a>
+<header class="intestazione">
+  <div class="contenitore intestazione__interno">
+    <a class="marchio" href="/"><span aria-hidden="true">🌾</span> <%= sito.nome %></a>
+    <nav aria-label="Navigazione principale">
+      <a href="/colture">Colture</a>
+      <a href="/metodologia">Metodologia</a>
+    </nav>
+  </div>
+</header>
+<main id="contenuto">

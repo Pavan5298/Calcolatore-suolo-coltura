@@ -1,0 +1,92 @@
+{
+  "_meta": {
+    "descrizione": "Le 7 province del Veneto con inquadramento agronomico. L'unita geografica del calcolatore e la provincia perche e la granularita del dataflow ISTAT DCSP_COLTIVAZIONI.",
+    "campi": {
+      "altimetria": "fasce altimetriche presenti e rilevanti per la scelta colturale",
+      "terreni_prevalenti": "tessiture dominanti secondo l'inquadramento pedologico regionale",
+      "irrigazione_contesto": "disponibilita irrigua tipica del comprensorio",
+      "affidabilita": "inquadramento qualitativo, non un dato statistico"
+    },
+    "affidabilita": "stima_esperto",
+    "aggiornato": "2026-07"
+  },
+  "province": [
+    {
+      "sigla": "RO",
+      "slug": "rovigo",
+      "nome": "Rovigo",
+      "nome_esteso": "Provincia di Rovigo (Polesine)",
+      "istat": "029",
+      "altimetria": ["pianura"],
+      "terreni_prevalenti": ["argilloso", "limoso", "misto", "sabbioso"],
+      "irrigazione_contesto": "buona, consorzi di bonifica diffusi; nel Delta problemi di risalita salina",
+      "note": "Pianura alluvionale tra Adige e Po. Argille nel medio Polesine, sabbie e limi nel Delta e lungo le golene. Nel Delta del Po la salinita delle falde e un vincolo reale nella scelta colturale."
+    },
+    {
+      "sigla": "PD",
+      "slug": "padova",
+      "nome": "Padova",
+      "nome_esteso": "Provincia di Padova",
+      "istat": "028",
+      "altimetria": ["pianura", "collina"],
+      "terreni_prevalenti": ["limoso", "misto", "argilloso"],
+      "irrigazione_contesto": "buona in pianura, piu limitata sui Colli Euganei",
+      "note": "Pianura a seminativi e orticole intensive, con l'area collinare dei Colli Euganei vocata alla viticoltura."
+    },
+    {
+      "sigla": "VE",
+      "slug": "venezia",
+      "nome": "Venezia",
+      "nome_esteso": "Provincia di Venezia",
+      "istat": "027",
+      "altimetria": ["pianura"],
+      "terreni_prevalenti": ["sabbioso", "limoso", "misto", "argilloso"],
+      "irrigazione_contesto": "buona, ma con vincoli di salinita nella fascia litoranea e lagunare",
+      "note": "Pianura litoranea e di bonifica. Sabbie nella fascia costiera, terreni piu pesanti nell'entroterra. Forte vocazione orticola."
+    },
+    {
+      "sigla": "TV",
+      "slug": "treviso",
+      "nome": "Treviso",
+      "nome_esteso": "Provincia di Treviso",
+      "istat": "026",
+      "altimetria": ["pianura", "collina"],
+      "terreni_prevalenti": ["misto", "limoso", "sabbioso"],
+      "irrigazione_contesto": "molto buona, alta pianura con falda superficiale e consorzi strutturati",
+      "note": "Alta e media pianura ghiaioso-sabbiosa, fascia collinare a forte vocazione viticola."
+    },
+    {
+      "sigla": "VI",
+      "slug": "vicenza",
+      "nome": "Vicenza",
+      "nome_esteso": "Provincia di Vicenza",
+      "istat": "024",
+      "altimetria": ["pianura", "collina", "montagna"],
+      "terreni_prevalenti": ["misto", "limoso", "sabbioso"],
+      "irrigazione_contesto": "buona in pianura, scarsa in area montana",
+      "note": "Dalla pianura a seminativi fino all'Altopiano di Asiago. La fascia altimetrica cambia radicalmente le colture possibili."
+    },
+    {
+      "sigla": "VR",
+      "slug": "verona",
+      "nome": "Verona",
+      "nome_esteso": "Provincia di Verona",
+      "istat": "023",
+      "altimetria": ["pianura", "collina", "montagna"],
+      "terreni_prevalenti": ["misto", "limoso", "sabbioso", "argilloso"],
+      "irrigazione_contesto": "molto buona in pianura, con comprensori irrigui storici",
+      "note": "La provincia agricola piu diversificata del Veneto: risaie nella bassa, frutticoltura e viticoltura, orticole, fino alla Lessinia."
+    },
+    {
+      "sigla": "BL",
+      "slug": "belluno",
+      "nome": "Belluno",
+      "nome_esteso": "Provincia di Belluno",
+      "istat": "025",
+      "altimetria": ["montagna"],
+      "terreni_prevalenti": ["misto", "sabbioso", "limoso"],
+      "irrigazione_contesto": "generalmente non necessaria, precipitazioni sufficienti",
+      "note": "Territorio interamente montano. Prevalgono prati permanenti, pascoli e cereali minori; i seminativi intensivi di pianura non sono proponibili."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+<%- include('partials/head') %>
+
+<section class="eroe eroe--compatto">
+  <div class="contenitore">
+    <h1>
+      <% if (ambito === 'comune') { %>
+        Cosa coltivare a <%= comune.nome %>
+      <% } else { %>
+        Cosa coltivare in provincia di <%= provincia.nome %>
+      <% } %>
+    </h1>
+    <p class="eroe__testo">
+      <% if (ambito === 'comune') { %>
+        <%= zone[comune.zona] %>
+        Terreno prevalente della zona: <strong><%= comune.terreno_prevalente %></strong>.
+      <% } else { %>
+        <%= provincia.note %>
+      <% } %>
+    </p>
+  </div>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Colture piu adatte</h2>
+  <p class="sezione__testo">
+    Ipotesi di questa pagina: <%= formattaEttari(criteri.superficieHa) %>, terreno
+    <strong><%= criteri.terreno %></strong>, irrigazione disponibile. Sono le condizioni
+    piu comuni della zona: <a href="<%= percorso %>">cambiale sui tuoi valori reali</a>.
+  </p>
+  <div class="schede">
+    <% esito.principali.forEach(function (r) { %>
+      <%- include('partials/scheda-coltura', { r: r }) %>
+    <% }); %>
+  </div>
+</section>
+
+<% if (esito.nicchia.length) { %>
+<section class="contenitore sezione">
+  <h2>Colture di nicchia compatibili</h2>
+  <p class="sezione__testo">
+    Senza dati statistici pubblici: valori indicativi, incertezza elevata.
+  </p>
+  <div class="schede">
+    <% esito.nicchia.forEach(function (r) { %>
+      <%- include('partials/scheda-coltura', { r: r }) %>
+    <% }); %>
+  </div>
+</section>
+<% } %>
+
+<section class="contenitore sezione">
+  <h2>Calcola sui tuoi ettari</h2>
+  <%- include('partials/form', { valori: {
+    provincia: provincia.slug,
+    terreno: criteri.terreno,
+    superficie: criteri.superficieHa,
+    irrigazione: criteri.irrigazione,
+    comune: comune ? comune.slug : null
+  }, superficiePredefinita: criteri.superficieHa }) %>
+</section>
+
+<% if (altriComuni.length) { %>
+<section class="contenitore sezione">
+  <h2>Altri comuni in provincia di <%= provincia.nome %></h2>
+  <ul class="pillole">
+    <% altriComuni.forEach(function (c) { %>
+      <li><a class="pillola" href="/cosa-coltivare-a/<%= c.slug %>"><%= c.nome %></a></li>
+    <% }); %>
+  </ul>
+</section>
+<% } %>
+
+<section class="contenitore sezione">
+  <h2>Le altre province</h2>
+  <ul class="pillole">
+    <% province.filter(function (p) { return p.sigla !== provincia.sigla; }).forEach(function (p) { %>
+      <li><a class="pillola" href="/cosa-coltivare-in/<%= p.slug %>"><%= p.nome %></a></li>
+    <% }); %>
+  </ul>
+</section>
+
+<%- include('partials/piede') %>

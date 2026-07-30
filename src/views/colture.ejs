@@ -1,0 +1,54 @@
+<%- include('partials/head') %>
+
+<section class="eroe eroe--compatto">
+  <div class="contenitore">
+    <h1>Colture considerate</h1>
+    <p class="eroe__testo">
+      <%= colture.length %> colture con PLV indicativa per ettaro, terreni adatti e
+      fabbisogno irriguo. Ogni riga dichiara l'affidabilita del dato: dalle stime
+      di settore ai valori sperimentali sulle nicchie.
+    </p>
+  </div>
+</section>
+
+<section class="contenitore sezione">
+  <div class="tabella-scorrevole">
+    <table class="tabella">
+      <caption>PLV indicativa per ettaro, PAC esclusa. Annata tipica e range scarsa–buona.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Coltura</th>
+          <th scope="col">Categoria</th>
+          <th scope="col" class="num">PLV tipica</th>
+          <th scope="col" class="num">Range</th>
+          <th scope="col">Terreni</th>
+          <th scope="col">Irrigazione</th>
+          <th scope="col">Dato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% colture.forEach(function (v) { %>
+          <tr>
+            <th scope="row"><a href="/colture/<%= v.coltura.slug %>"><%= v.coltura.nome %></a></th>
+            <td><%= v.coltura.categoria %></td>
+            <td class="num"><%= formattaEuro(v.plvHa.tipica) %></td>
+            <td class="num"><%= formattaEuro(v.plvHa.scarsa) %> – <%= formattaEuro(v.plvHa.buona) %></td>
+            <td><%= v.coltura.terreni.join(', ') %></td>
+            <td><%= etichetteIrrigazione[v.coltura.irrigazione] %></td>
+            <td>
+              <% const aff = etichettaAffidabilita(v.coltura.affidabilita); %>
+              <span class="etichetta etichetta--<%= v.coltura.affidabilita %>" title="<%= aff.titolo %>"><%= aff.breve %></span>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <p class="sezione__testo">
+    Ordini di grandezza molto diversi tra righe non significano redditivita molto
+    diversa: le orticole e le nicchie hanno PLV alte e costi altrettanto alti.
+    <a href="/metodologia">Perche la PLV non e il reddito</a>.
+  </p>
+</section>
+
+<%- include('partials/piede') %>

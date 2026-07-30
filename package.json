@@ -1,0 +1,22 @@
+{
+  "name": "calcolatore-suolo-coltura",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Calcolatore che suggerisce le colture piu adatte a un terreno agricolo veneto con stima della PLV per ettaro e totale",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/avvio.js",
+    "dev": "node --watch src/avvio.js",
+    "test": "node --test \"test/*.test.js\"",
+    "import:rese": "node scripts/import-istat.mjs rese",
+    "import:prezzi": "node scripts/import-istat.mjs prezzi",
+    "import:discover": "node scripts/import-istat.mjs discover"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}

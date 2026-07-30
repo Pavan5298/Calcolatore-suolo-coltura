@@ -1,0 +1,72 @@
+<%- include('partials/head') %>
+
+<section class="eroe">
+  <div class="contenitore">
+    <h1>Cosa conviene coltivare sul tuo terreno?</h1>
+    <p class="eroe__testo">
+      Inserisci zona, tipo di terreno, superficie e disponibilita di irrigazione:
+      il calcolatore propone le colture compatibili con una stima della
+      <strong>PLV per ettaro</strong> e <strong>totale</strong>, con il range tra annata
+      buona e annata scarsa. Copertura: le sette province del Veneto.
+    </p>
+  </div>
+</section>
+
+<section class="contenitore sezione">
+  <%- include('partials/form', { valori: null }) %>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Come funziona</h2>
+  <div class="passi">
+    <div class="passo">
+      <h3>1. Vincoli agronomici</h3>
+      <p>
+        Prima si escludono le colture non proponibili: fascia altimetrica,
+        tessitura incompatibile, irrigazione indispensabile assente, superficie
+        minima. Sono esclusioni, non penalita.
+      </p>
+    </div>
+    <div class="passo">
+      <h3>2. Ordinamento</h3>
+      <p>
+        Le colture rimaste vengono ordinate per vocazione del terreno, diffusione
+        effettiva in provincia, coerenza con l'irrigazione disponibile e
+        affidabilita del dato di partenza.
+      </p>
+    </div>
+    <div class="passo">
+      <h3>3. Stima della PLV</h3>
+      <p>
+        PLV = resa (q/ha) × prezzo (€/q). Il range annata buona / scarsa non e
+        inventato: nasce dalla variabilita storica.
+        <a href="/metodologia">Vedi la metodologia</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Colture considerate</h2>
+  <p class="sezione__testo">
+    <%= colture.length %> colture, dalle commodity di pianura alle nicchie senza
+    dati statistici pubblici. Ogni coltura dichiara il livello di affidabilita del
+    proprio dato.
+  </p>
+  <ul class="pillole">
+    <% colture.forEach(function (c) { %>
+      <li><a class="pillola pillola--<%= c.affidabilita %>" href="/colture/<%= c.slug %>"><%= c.nome %></a></li>
+    <% }); %>
+  </ul>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Cosa coltivare in provincia di…</h2>
+  <ul class="pillole">
+    <% province.forEach(function (p) { %>
+      <li><a class="pillola" href="/cosa-coltivare-in/<%= p.slug %>"><%= p.nome %></a></li>
+    <% }); %>
+  </ul>
+</section>
+
+<%- include('partials/piede') %>

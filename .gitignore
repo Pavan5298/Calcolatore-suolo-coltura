@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log*
+.env
+.env.local
+.DS_Store
+
+# scaricati dagli importer: riproducibili, non si versionano
+src/data/raw/*
+!src/data/raw/.gitkeep

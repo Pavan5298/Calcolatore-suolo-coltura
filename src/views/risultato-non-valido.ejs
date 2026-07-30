@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+
+<section class="contenitore sezione">
+  <h1>Parametri non validi</h1>
+  <p class="sezione__testo">
+    Il link che hai aperto non contiene parametri utilizzabili. Puoi rifare il
+    calcolo dal form.
+  </p>
+  <ul class="elenco-avvertenze">
+    <% errori.forEach(function (e) { %><li><%= e %></li><% }); %>
+  </ul>
+  <p class="form__azioni"><a class="bottone" href="/">Torna al calcolatore</a></p>
+</section>
+
+<%- include('partials/piede') %>

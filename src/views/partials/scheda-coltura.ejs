@@ -1,0 +1,67 @@
+<%
+  // r: risultato arricchito da matching.suggerisci
+  const aff = etichettaAffidabilita(r.coltura.affidabilita);
+%>
+<article class="scheda <%= r.conRiserva ? 'scheda--riserva' : '' %>">
+  <header class="scheda__testa">
+    <h3 class="scheda__titolo">
+      <a href="/colture/<%= r.coltura.slug %>"><%= r.coltura.nome %></a>
+    </h3>
+    <p class="scheda__sottotitolo">
+      <em><%= r.coltura.nome_scientifico %></em> · <%= r.coltura.categoria %>
+    </p>
+    <p class="etichette">
+      <span class="etichetta etichetta--<%= r.coltura.affidabilita %>" title="<%= aff.titolo %>"><%= aff.breve %></span>
+      <span class="etichetta">Irrigazione: <%= etichetteIrrigazione[r.coltura.irrigazione] %></span>
+      <% if (r.coltura.ciclo === 'poliennale') { %><span class="etichetta">Poliennale</span><% } %>
+      <% if (r.conRiserva) { %><span class="etichetta etichetta--riserva">Con riserva</span><% } %>
+    </p>
+  </header>
+
+  <div class="plv">
+    <div class="plv__blocco">
+      <p class="plv__etichetta">PLV per ettaro</p>
+      <p class="plv__valore"><%= formattaEuro(r.plvHa.tipica) %><span class="plv__unita">/ha</span></p>
+      <p class="plv__range">
+        annata scarsa <%= formattaEuro(r.plvHa.scarsa) %> · annata buona <%= formattaEuro(r.plvHa.buona) %>
+      </p>
+    </div>
+    <div class="plv__blocco plv__blocco--totale">
+      <p class="plv__etichetta">PLV totale su <%= formattaEttari(r.superficieConsiderataHa) %></p>
+      <p class="plv__valore"><%= formattaEuro(r.plvTotale.tipica) %></p>
+      <p class="plv__range">
+        da <%= formattaEuro(r.plvTotale.scarsa) %> a <%= formattaEuro(r.plvTotale.buona) %>
+      </p>
+    </div>
+  </div>
+
+  <dl class="dettagli">
+    <div>
+      <dt>Resa tipica</dt>
+      <dd><%= formattaNumero(r.coltura.resa_q_ha.tipica) %> q/ha</dd>
+    </div>
+    <div>
+      <dt>Prezzo tipico</dt>
+      <dd><%= formattaNumero(r.coltura.prezzo_eur_q.tipico) %> €/q</dd>
+    </div>
+    <div>
+      <dt>Terreni adatti</dt>
+      <dd><%= r.coltura.terreni.join(', ') %></dd>
+    </div>
+  </dl>
+
+  <% if (r.motivi && r.motivi.length) { %>
+    <p class="motivi"><% r.motivi.forEach(function (m, i) { %><%= i ? ' · ' : '' %><%= m %><% }); %></p>
+  <% } %>
+
+  <% if (r.avvertenze && r.avvertenze.length) { %>
+    <details class="avvertenze">
+      <summary><%= r.avvertenze.length %> <%= r.avvertenze.length === 1 ? 'avvertenza' : 'avvertenze' %> da leggere</summary>
+      <ul>
+        <% r.avvertenze.forEach(function (a) { %><li><%= a %></li><% }); %>
+      </ul>
+    </details>
+  <% } %>
+
+  <p class="scheda__metodo">Metodo di stima: <%= r.plvHa.metodo %></p>
+</article>

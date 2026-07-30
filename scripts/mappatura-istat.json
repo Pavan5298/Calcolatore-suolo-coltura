@@ -1,0 +1,66 @@
+{
+  "_istruzioni": [
+    "Questo file collega gli slug delle colture di src/data/colture.json ai codici ISTAT.",
+    "Non e compilabile a priori: l'ordine delle dimensioni e i codici vanno letti dalla Data",
+    "Structure Definition reale. Esegui prima 'npm run import:discover', che li stampa, poi",
+    "compila 'chiave_query' e 'colture' qui sotto.",
+    "",
+    "La chiave di query SDMX e POSIZIONALE: i valori sono separati da punti nell'ordine delle",
+    "dimensioni, e un segmento vuoto significa 'tutti i valori'. Esempio con 4 dimensioni dove",
+    "si filtra solo la seconda: '.IT_VENETO..'",
+    "",
+    "Le province venete hanno codici ISTAT: VR 023, VI 024, BL 025, TV 026, VE 027, PD 028, RO 029.",
+    "Verifica come sono espressi nella lista di codici del dataflow (possono essere prefissati)."
+  ],
+  "rese": {
+    "dataflow": "101_1015",
+    "struttura": "DCSP_COLTIVAZIONI",
+    "chiave_query": null,
+    "dimensioni_attese": [
+      "riferimento territoriale (province)",
+      "tipo di coltivazione",
+      "tipo di dato (superficie totale, superficie in produzione, produzione totale, produzione raccolta)"
+    ],
+    "misure": {
+      "superficie_in_produzione": null,
+      "produzione_raccolta": null
+    },
+    "nota_calcolo": "resa (q/ha) = produzione raccolta / superficie in produzione, per anno e provincia",
+    "colture": {
+      "mais": null,
+      "soia": null,
+      "frumento-tenero": null,
+      "orzo": null,
+      "barbabietola-da-zucchero": null,
+      "riso": null,
+      "girasole": null,
+      "sorgo-da-granella": null,
+      "colza": null,
+      "erba-medica": null,
+      "prato-polifita": null,
+      "segale": null,
+      "patata": null,
+      "pomodoro-da-industria": null,
+      "radicchio": null,
+      "zucca": null,
+      "aglio": null,
+      "vite-da-vino": null
+    },
+    "senza_corrispondenza": {
+      "lenticchia-d-acqua": "nessuna voce ISTAT: coltura sperimentale, resta stima manuale",
+      "luffa": "nessuna voce ISTAT: coltura sperimentale, resta stima manuale"
+    }
+  },
+  "prezzi": {
+    "dataflow": "101_12",
+    "struttura": "DCSP_PREZZIAGR",
+    "chiave_query": null,
+    "dimensioni_attese": [
+      "riferimento territoriale",
+      "prodotto",
+      "tipo di prezzo"
+    ],
+    "nota_granularita": "La granularita geografica dei prezzi ISTAT e piu grossolana di quella delle rese. Se il dato provinciale non esiste, usare il regionale e dichiararlo nella scheda coltura.",
+    "colture": {}
+  }
+}

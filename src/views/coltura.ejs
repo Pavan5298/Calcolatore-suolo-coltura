@@ -1,0 +1,108 @@
+<%- include('partials/head') %>
+<% const aff = etichettaAffidabilita(coltura.affidabilita); %>
+
+<section class="eroe eroe--compatto">
+  <div class="contenitore">
+    <h1><%= coltura.nome %></h1>
+    <p class="eroe__qualifica"><em><%= coltura.nome_scientifico %></em> · <%= coltura.categoria %> · ciclo <%= coltura.ciclo %></p>
+    <p class="etichette">
+      <span class="etichetta etichetta--<%= coltura.affidabilita %>" title="<%= aff.titolo %>"><%= aff.breve %></span>
+      <span class="etichetta">Irrigazione: <%= etichetteIrrigazione[coltura.irrigazione] %></span>
+    </p>
+  </div>
+</section>
+
+<section class="contenitore sezione">
+  <h2>PLV per ettaro</h2>
+  <div class="plv plv--grande">
+    <div class="plv__blocco">
+      <p class="plv__etichetta">Annata scarsa</p>
+      <p class="plv__valore"><%= formattaEuro(plvHa.scarsa) %><span class="plv__unita">/ha</span></p>
+    </div>
+    <div class="plv__blocco plv__blocco--totale">
+      <p class="plv__etichetta">Annata tipica</p>
+      <p class="plv__valore"><%= formattaEuro(plvHa.tipica) %><span class="plv__unita">/ha</span></p>
+    </div>
+    <div class="plv__blocco">
+      <p class="plv__etichetta">Annata buona</p>
+      <p class="plv__valore"><%= formattaEuro(plvHa.buona) %><span class="plv__unita">/ha</span></p>
+    </div>
+  </div>
+  <p class="sezione__testo">
+    Metodo di stima: <%= plvHa.metodo %>. Fonte: <%= coltura.fonte %>.
+    PAC esclusa, costi di produzione non considerati.
+  </p>
+</section>
+
+<section class="contenitore sezione">
+  <h2>Requisiti agronomici</h2>
+  <dl class="dettagli dettagli--larghi">
+    <div>
+      <dt>Terreni compatibili</dt>
+      <dd><%= coltura.terreni.join(', ') %></dd>
+    </div>
+    <div>
+      <dt>Vocazione ottimale</dt>
+      <dd><%= coltura.terreni_ottimali.join(', ') %></dd>
+    </div>
+    <div>
+      <dt>Fasce altimetriche</dt>
+      <dd><%= coltura.altimetria.join(', ') %></dd>
+    </div>
+    <div>
+      <dt>Irrigazione</dt>
+      <dd><%= etichetteIrrigazione[coltura.irrigazione] %></dd>
+    </div>
+    <div>
+      <dt>Superficie minima indicativa</dt>
+      <dd><%= formattaEttari(coltura.superficie_min_ha) %></dd>
+    </div>
+    <div>
+      <dt>Superficie massima realistica</dt>
+      <dd><%= coltura.superficie_max_ha ? formattaEttari(coltura.superficie_max_ha) : 'nessun limite pratico' %></dd>
+    </div>
+    <div>
+      <dt>Resa <%= coltura.unita_resa_speciale ? '(' + coltura.unita_resa_speciale + ')' : '(q/ha)' %></dt>
+      <dd><%= formattaNumero(coltura.resa_q_ha.scarsa) %> – <%= formattaNumero(coltura.resa_q_ha.tipica) %> – <%= formattaNumero(coltura.resa_q_ha.buona) %></dd>
+    </div>
+    <div>
+      <dt>Prezzo <%= coltura.unita_prezzo_speciale ? '(' + coltura.unita_prezzo_speciale + ')' : '(€/q)' %></dt>
+      <dd><%= formattaNumero(coltura.prezzo_eur_q.scarso) %> – <%= formattaNumero(coltura.prezzo_eur_q.tipico) %> – <%= formattaNumero(coltura.prezzo_eur_q.buono) %></dd>
+    </div>
+  </dl>
+</section>
+
+<% if (coltura.note) { %>
+<section class="contenitore sezione">
+  <h2>Note agronomiche</h2>
+  <p class="sezione__testo"><%= coltura.note %></p>
+</section>
+<% } %>
+
+<% if (coltura.avvertenze && coltura.avvertenze.length) { %>
+<section class="contenitore sezione">
+  <h2>Avvertenze</h2>
+  <ul class="elenco-avvertenze">
+    <% coltura.avvertenze.forEach(function (a) { %><li><%= a %></li><% }); %>
+  </ul>
+</section>
+<% } %>
+
+<section class="contenitore sezione">
+  <h2>Dove e proponibile</h2>
+  <ul class="pillole">
+    <% province.forEach(function (p) { %>
+      <li>
+        <a class="pillola" href="/risultato?provincia=<%= p.slug %>&amp;terreno=<%= coltura.terreni_ottimali[0] %>&amp;superficie=<%= superficiePredefinita %>&amp;irrigazione=<%= coltura.irrigazione === 'non_necessaria' ? 'no' : 'si' %>">
+          <%= p.nome %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+  <p class="sezione__testo">
+    Ogni link apre il calcolatore con la tessitura ottimale per questa coltura in
+    quella provincia: da lì puoi correggere superficie e irrigazione sui tuoi valori.
+  </p>
+</section>
+
+<%- include('partials/piede') %>
