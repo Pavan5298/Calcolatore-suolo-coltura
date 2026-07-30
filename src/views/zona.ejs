@@ -57,6 +57,12 @@
     irrigazione: criteri.irrigazione,
     comune: comune ? comune.slug : null
   }, superficiePredefinita: criteri.superficieHa }) %>
+
+  <% if (noteTessitura && noteTessitura.length) { %>
+    <ul class="profilo__note">
+      <% noteTessitura.forEach(function (n) { %><li><%= n %></li><% }); %>
+    </ul>
+  <% } %>
 </section>
 
 <% if (altriComuni.length) { %>

@@ -1,19 +1,20 @@
 <%
   // r: risultato arricchito da matching.suggerisci
   const aff = etichettaAffidabilita(r.coltura.affidabilita);
+  const c = r.coltura;
 %>
 <article class="scheda <%= r.conRiserva ? 'scheda--riserva' : '' %>">
   <header class="scheda__testa">
     <h3 class="scheda__titolo">
-      <a href="/colture/<%= r.coltura.slug %>"><%= r.coltura.nome %></a>
+      <a href="/colture/<%= c.slug %>"><%= c.nome %></a>
     </h3>
     <p class="scheda__sottotitolo">
-      <em><%= r.coltura.nome_scientifico %></em> · <%= r.coltura.categoria %>
+      <em><%= c.nome_scientifico %></em> · <%= c.categoria %>
     </p>
     <p class="etichette">
-      <span class="etichetta etichetta--<%= r.coltura.affidabilita %>" title="<%= aff.titolo %>"><%= aff.breve %></span>
-      <span class="etichetta">Irrigazione: <%= etichetteIrrigazione[r.coltura.irrigazione] %></span>
-      <% if (r.coltura.ciclo === 'poliennale') { %><span class="etichetta">Poliennale</span><% } %>
+      <span class="etichetta etichetta--<%= c.affidabilita %>" title="<%= aff.titolo %>"><%= aff.breve %></span>
+      <span class="etichetta">Irrigazione: <%= etichetteIrrigazione[c.irrigazione] %></span>
+      <% if (c.ciclo === 'poliennale') { %><span class="etichetta">Poliennale</span><% } %>
       <% if (r.conRiserva) { %><span class="etichetta etichetta--riserva">Con riserva</span><% } %>
     </p>
   </header>
@@ -38,16 +39,30 @@
   <dl class="dettagli">
     <div>
       <dt>Resa tipica</dt>
-      <dd><%= formattaNumero(r.coltura.resa_q_ha.tipica) %> q/ha</dd>
+      <dd><%= formattaNumero(c.resa_q_ha.tipica) %> <%= c.unita_resa_speciale ? 'pz/ha' : 'q/ha' %></dd>
     </div>
     <div>
       <dt>Prezzo tipico</dt>
-      <dd><%= formattaNumero(r.coltura.prezzo_eur_q.tipico) %> €/q</dd>
+      <dd><%= formattaNumero(c.prezzo_eur_q.tipico) %> <%= c.unita_prezzo_speciale ? '€/pz' : '€/q' %></dd>
+    </div>
+    <div>
+      <dt>pH ottimale</dt>
+      <dd><%= formattaNumero(c.ph.ottimale_min) %>–<%= formattaNumero(c.ph.ottimale_max) %></dd>
     </div>
     <div>
       <dt>Terreni adatti</dt>
-      <dd><%= r.coltura.terreni.join(', ') %></dd>
+      <dd><%= c.terreni.join(', ') %></dd>
     </div>
+    <div>
+      <dt>Salinita tollerata</dt>
+      <dd><%= c.tolleranza_salinita %></dd>
+    </div>
+    <% if (c.superficie_veneto_ha) { %>
+    <div>
+      <dt>Superficie in Veneto</dt>
+      <dd><%= formattaEttari(c.superficie_veneto_ha) %></dd>
+    </div>
+    <% } %>
   </dl>
 
   <% if (r.motivi && r.motivi.length) { %>
@@ -63,5 +78,5 @@
     </details>
   <% } %>
 
-  <p class="scheda__metodo">Metodo di stima: <%= r.plvHa.metodo %></p>
+  <p class="scheda__metodo">Stima: <%= r.plvHa.metodo %></p>
 </article>

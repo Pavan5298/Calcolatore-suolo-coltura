@@ -435,3 +435,79 @@ button:hover, .bottone:hover { background: var(--verde-scuro); color: #fff; }
 }
 .piede__avvertenza { margin: 0 0 .75rem; max-width: 80ch; color: var(--testo-tenue); }
 .piede__meta { margin: 0; color: var(--testo-tenue); }
+
+/* ------------------------------------------------- profilo del terreno */
+
+.profilo {
+  background: var(--superficie);
+  border: 1px solid var(--bordo);
+  border-radius: var(--raggio);
+  padding: 1.15rem 1.25rem;
+  margin-top: 1.5rem;
+}
+.profilo__titolo { margin: 0 0 .85rem; font-size: 1.1rem; }
+.profilo__usda { color: var(--testo-tenue); font-size: .85em; }
+.profilo__note {
+  margin: 1rem 0 0;
+  padding-left: 1.15rem;
+  font-size: .9rem;
+  color: var(--testo-tenue);
+  max-width: 78ch;
+}
+.profilo__note li + li { margin-top: .4rem; }
+.profilo__suggerimento {
+  margin: 1rem 0 0;
+  padding: .7rem .9rem;
+  border-left: 3px solid var(--grano);
+  background: var(--fondo);
+  border-radius: 0 8px 8px 0;
+  font-size: .9rem;
+  color: var(--testo-tenue);
+  max-width: 78ch;
+}
+
+/* ------------------------------------------------------ campi avanzati */
+
+.avanzati {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--bordo);
+  padding-top: 1rem;
+}
+.avanzati > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+}
+.avanzati__intro {
+  margin: .75rem 0 0;
+  font-size: .87rem;
+  color: var(--testo-tenue);
+  max-width: 70ch;
+}
+.gruppo {
+  margin: 1rem 0 0;
+  border: 1px solid var(--bordo);
+  border-radius: 8px;
+  padding: .85rem 1rem 1rem;
+}
+.gruppo legend { font-weight: 600; font-size: .9rem; padding: 0 .35rem; }
+.gruppo__aiuto {
+  margin: 0 0 .75rem;
+  font-size: .84rem;
+  color: var(--testo-tenue);
+  max-width: 70ch;
+}
+.form__griglia--stretta { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.gruppo__esito { margin: .6rem 0 0; font-size: .84rem; min-height: 1.2em; }
+.gruppo__esito--ok { color: var(--verde); }
+.gruppo__esito--errore { color: #b4432f; }
+
+@media (prefers-color-scheme: dark) {
+  .gruppo__esito--errore { color: #e9917d; }
+}
+
+.etichetta--istat_resa { background: #dfeadd; border-color: #a9c9ae; }
+
+@media (prefers-color-scheme: dark) {
+  .etichetta--istat_resa { background: #22331f; border-color: #3d5c3a; }
+}

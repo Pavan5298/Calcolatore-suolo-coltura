@@ -32,6 +32,11 @@ export const ETICHETTE_AFFIDABILITA = {
     breve: 'Dato ISTAT',
     titolo: 'Resa da ISTAT DCSP_COLTIVAZIONI e prezzo da DCSP_PREZZIAGR: calcolo riproducibile.',
   },
+  istat_resa: {
+    breve: 'Resa ISTAT',
+    titolo:
+      'Resa rilevata da ISTAT DCSP_COLTIVAZIONI per il Veneto. Il prezzo e ancora una stima di settore, quindi la PLV eredita quell\'incertezza.',
+  },
   stima_esperto: {
     breve: 'Stima di settore',
     titolo: 'Valore di inquadramento da esperienza di settore e letteratura tecnica, non ancora ricalcolato sulle serie ISTAT.',

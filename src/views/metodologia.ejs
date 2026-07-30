@@ -45,6 +45,16 @@
     la buona). La correlazione e cosi gia dentro i dati, e il range risulta piu
     stretto e piu difendibile.
   </p>
+  <p class="sezione__testo">
+    <strong>Oggi quel metodo non e ancora applicabile</strong>, e va detto: l'export ISTAT
+    attualmente caricato copre <%= meta.colture.rese.replace(/^.*anni /, 'gli anni ') %>,
+    e per i percentili servono almeno cinque annate. Nel frattempo il range si
+    costruisce applicando un <em>coefficiente di variabilita dichiarato</em> - diverso per
+    categoria, piu ampio sulle orticole che sui cereali - direttamente <em>alla PLV</em> e
+    non separatamente a resa e prezzo. Applicandolo al prodotto anziche ai due
+    fattori si evita per costruzione l'errore di correlazione descritto sopra.
+    Ogni scheda dichiara quale dei due metodi ha usato.
+  </p>
 </section>
 
 <section class="contenitore sezione">
@@ -53,6 +63,10 @@
     <div>
       <dt><span class="etichetta etichetta--istat">Dato ISTAT</span></dt>
       <dd><%= meta.colture.affidabilita.istat %></dd>
+    </div>
+    <div>
+      <dt><span class="etichetta etichetta--istat_resa">Resa ISTAT</span></dt>
+      <dd><%= meta.colture.affidabilita.istat_resa %></dd>
     </div>
     <div>
       <dt><span class="etichetta etichetta--stima_esperto">Stima di settore</span></dt>
@@ -79,8 +93,11 @@
       <dt>ISTAT — Coltivazioni</dt>
       <dd>
         Dataflow <code>101_1015</code> (<code>DCSP_COLTIVAZIONI</code>): superfici e
-        produzioni per coltura, <strong>per provincia</strong>, annuali, via API SDMX.
-        E la fonte delle rese. Licenza CC-BY.
+        produzioni per coltura. E la fonte delle rese di questo strumento, con
+        <code>resa = produzione raccolta / superficie in produzione</code>. Licenza CC-BY.
+        <strong>L'export in uso e a livello regionale (Veneto)</strong>: comune e provincia
+        servono a inquadrare altimetria e comprensori, non aumentano la precisione
+        del dato di resa.
       </dd>
     </div>
     <div>
@@ -126,17 +143,77 @@
 </section>
 
 <section class="contenitore sezione">
+  <h2>I parametri del terreno</h2>
+  <dl class="dettagli dettagli--larghi">
+    <div>
+      <dt>Tessitura</dt>
+      <dd>
+        Si puo indicare come classe semplificata o inserendo le percentuali di
+        sabbia, limo e argilla da analisi. Nel secondo caso il terreno viene
+        classificato con il <strong>triangolo USDA</strong> (12 classi) e ricondotto alla
+        classe semplificata corrispondente, mostrando comunque la classe completa.
+      </dd>
+    </div>
+    <div>
+      <dt>pH</dt>
+      <dd>
+        Il parametro piu selettivo. Ogni coltura dichiara un intervallo di
+        tolleranza e uno ottimale: fuori dalla tolleranza la coltura viene
+        esclusa, fuori dall'ottimale viene segnalata. E cio che distingue un
+        mirtillo (acidofilo obbligato, pH 4-5,5) da un orzo, che sotto pH 6 gia
+        soffre.
+      </dd>
+    </div>
+    <div>
+      <dt>Salinita</dt>
+      <dd>
+        Rilevante nel Delta del Po e nella fascia litoranea, dove la risalita
+        salina e un vincolo reale. Con salinita elevata le colture poco
+        tolleranti vengono escluse; barbabietola, orzo, asparago e olivo reggono.
+      </dd>
+    </div>
+    <div>
+      <dt>Calcare attivo</dt>
+      <dd>
+        Determina il rischio di clorosi ferrica. Non esclude, ma segnala: sulle
+        arboree sensibili (kiwi, pesco, melo, pero) la scelta del portinnesto
+        diventa determinante.
+      </dd>
+    </div>
+    <div>
+      <dt>Drenaggio</dt>
+      <dd>
+        Con drenaggio lento gli <strong>impianti poliennali</strong> che richiedono suolo
+        ben drenato vengono esclusi: un frutteto su suolo asfittico non si
+        recupera, mentre su una coltura annuale si puo intervenire sulla
+        sistemazione idraulica prima della semina successiva.
+      </dd>
+    </div>
+  </dl>
+</section>
+
+<section class="contenitore sezione">
   <h2>Limiti dichiarati</h2>
   <ul class="elenco-avvertenze">
     <li>
-      La granularita geografica del dato di resa e <strong>provinciale</strong>. Il comune
-      serve a inquadrare la zona e a precompilare il form, non ad aumentare la
-      precisione della stima.
+      La granularita geografica del dato di resa e <strong>regionale</strong>. Una resa
+      media veneta comprende insieme la pianura irrigua e le aree marginali: sul
+      singolo appezzamento lo scostamento puo essere ampio.
     </li>
     <li>
-      Il tipo di terreno e inserito dall'utente come tessitura prevalente: non
-      sostituisce un'analisi del suolo, che rimane la base di qualunque decisione
-      colturale reale.
+      I <strong>prezzi sono ancora stime di settore</strong>, non rilevazioni. E l'anello
+      debole della catena: nessuna coltura puo quindi dichiarare affidabilita ISTAT
+      piena, anche quando la resa e rilevata.
+    </li>
+    <li>
+      Tessitura, pH, salinita, calcare e drenaggio sono inseriti dall'utente. Il
+      calcolatore li usa come dichiarati: non sostituiscono un'analisi del suolo,
+      che resta la base di qualunque decisione colturale reale.
+    </li>
+    <li>
+      I parametri agronomici facoltativi non compilati <strong>non penalizzano nessuna
+      coltura</strong>. Un consiglio piu generico e preferibile a uno costruito su
+      assunzioni non dichiarate.
     </li>
     <li>
       Il modello non considera rotazioni, precessioni colturali, vincoli di
@@ -149,9 +226,8 @@
       liberamente coltivabile.
     </li>
     <li>
-      Le stime attualmente in uso sono in prevalenza di inquadramento
-      (<em>stima di settore</em>), in attesa del ricalcolo sulle serie ISTAT.
-      L'aggiornamento del dataset e: <%= meta.colture.aggiornato %>.
+      Il dataset copre <%= meta.colture.colture %> colture e risale al
+      <%= meta.colture.generato %>.
     </li>
   </ul>
 </section>

@@ -3,16 +3,20 @@ import { describe, it } from 'node:test';
 
 import { TERRENI, getColture, getProvince, getProvincia } from '../src/data/index.js';
 import { CATEGORIA_NICCHIA, MAX_RISULTATI, MIN_RISULTATI, suggerisci, valuta } from '../src/lib/matching.js';
+import { profiloDaClasse } from '../src/lib/tessitura.js';
 
 const colture = getColture();
 const trova = (slug) => colture.find((c) => c.slug === slug);
 
 const criteriBase = {
   provincia: getProvincia('RO'),
-  terreno: 'argilloso',
+  tessitura: profiloDaClasse('argilloso'),
   superficieHa: 20,
   irrigazione: true,
 };
+
+/** Scorciatoia: cambia la sola tessitura dei criteri. */
+const conTerreno = (criteri, classe) => ({ ...criteri, tessitura: profiloDaClasse(classe) });
 
 describe('filtri rigidi', () => {
   it('esclude una coltura che richiede irrigazione se l irrigazione non c e', () => {
@@ -29,7 +33,7 @@ describe('filtri rigidi', () => {
 
   it('esclude per tessitura incompatibile', () => {
     // il riso vuole terreni impermeabili: sul sabbioso non e proponibile
-    const esito = valuta(trova('riso'), { ...criteriBase, terreno: 'sabbioso' });
+    const esito = valuta(trova('riso'), conTerreno(criteriBase, 'sabbioso'));
     assert.equal(esito.ammessa, false);
     assert.ok(esito.esclusioni.some((e) => e.startsWith('non adatta a terreno')));
   });
@@ -54,8 +58,8 @@ describe('punteggio', () => {
     assert.ok(soia.terreni.includes('misto'));
     assert.ok(!soia.terreni_ottimali.includes('misto'));
 
-    const ottimale = valuta(soia, { ...criteriBase, terreno: 'argilloso' });
-    const compatibile = valuta(soia, { ...criteriBase, terreno: 'misto' });
+    const ottimale = valuta(soia, conTerreno(criteriBase, 'argilloso'));
+    const compatibile = valuta(soia, conTerreno(criteriBase, 'misto'));
     assert.ok(ottimale.punteggio > compatibile.punteggio);
   });
 
@@ -66,13 +70,137 @@ describe('punteggio', () => {
   });
 
   it('penalizza e segnala le colture che non scalano sulla superficie inserita', () => {
-    const esito = valuta(trova('luffa'), { ...criteriBase, terreno: 'sabbioso', superficieHa: 200 });
+    const esito = valuta(trova('luffa'), ({ ...conTerreno(criteriBase, 'sabbioso'), superficieHa: 200 }));
     assert.ok(esito.avvertenze.some((a) => a.includes('non scala')));
   });
 
   it('colloca i dati sperimentali sotto le stime di settore, a parita di condizioni', () => {
     const sperimentali = colture.filter((c) => c.affidabilita === 'sperimentale');
     assert.ok(sperimentali.length > 0, 'il dataset deve contenere colture sperimentali');
+  });
+});
+
+describe('parametri agronomici facoltativi', () => {
+  it('non penalizza nessuna coltura quando non sono forniti', () => {
+    // E il punto centrale del progetto: un dato che l utente non ha inserito non
+    // deve influenzare il consiglio in nessuna direzione.
+    const senza = suggerisci(colture, criteriBase);
+    const conVuoti = suggerisci(colture, {
+      ...criteriBase, ph: null, salinita: null, calcare: null, drenaggio: null,
+    });
+    assert.deepEqual(
+      senza.principali.map((r) => r.coltura.slug),
+      conVuoti.principali.map((r) => r.coltura.slug),
+    );
+  });
+
+  it('esclude una coltura con pH fuori dall intervallo di tolleranza', () => {
+    // Il mirtillo e acidofilo obbligato: su suolo alcalino non e proponibile.
+    const mirtillo = trova('mirtillo');
+    assert.ok(mirtillo.ph.massimo < 7);
+
+    const alcalino = valuta(mirtillo, { ...conTerreno(criteriBase, 'sabbioso'), ph: 7.8 });
+    assert.equal(alcalino.ammessa, false);
+    assert.ok(alcalino.esclusioni.some((e) => e.includes('pH')));
+
+    const acido = valuta(mirtillo, { ...conTerreno(criteriBase, 'sabbioso'), ph: 4.6 });
+    assert.equal(acido.ammessa, true);
+  });
+
+  it('esclude una coltura con pH sotto il minimo', () => {
+    // Il castagno e l opposto: non vegeta su suolo alcalino, l orzo su acido.
+    const orzo = trova('orzo');
+    const acido = valuta(orzo, { ...criteriBase, ph: 4.5 });
+    assert.equal(acido.ammessa, false);
+    assert.ok(acido.esclusioni.some((e) => e.includes('sotto il minimo')));
+  });
+
+  it('premia il pH ottimale e avvisa su quello solo tollerato', () => {
+    const soia = trova('soia');
+    const ottimale = valuta(soia, { ...criteriBase, ph: 6.5 });
+    const tollerato = valuta(soia, { ...criteriBase, ph: 7.6 });
+
+    assert.equal(ottimale.ammessa, true);
+    assert.equal(tollerato.ammessa, true);
+    assert.ok(ottimale.punteggio > tollerato.punteggio);
+    assert.ok(tollerato.avvertenze.some((a) => a.includes('fuori dall\'ottimale')));
+  });
+
+  it('esclude le colture poco tolleranti dove la salinita e elevata', () => {
+    // E il caso del Delta del Po: il fagiolo non regge, la barbabietola si.
+    const fagiolo = trova('fagiolo-secco');
+    const barbabietola = trova('barbabietola-da-zucchero');
+    assert.equal(fagiolo.tolleranza_salinita, 'bassa');
+    assert.equal(barbabietola.tolleranza_salinita, 'alta');
+
+    const criteri = { ...conTerreno(criteriBase, 'limoso'), salinita: 'elevata' };
+    assert.equal(valuta(fagiolo, criteri).ammessa, false);
+    const esitoBarbabietola = valuta(barbabietola, criteri);
+    assert.equal(esitoBarbabietola.ammessa, true);
+    assert.ok(esitoBarbabietola.motivi.some((m) => m.includes('salinita')));
+  });
+
+  it('avvisa del rischio di clorosi ferrica su calcare elevato', () => {
+    const kiwi = trova('kiwi');
+    assert.equal(kiwi.sensibilita_calcare, 'alta');
+
+    const esito = valuta(kiwi, { ...conTerreno(criteriBase, 'limoso'), calcare: 'elevato' });
+    assert.ok(esito.avvertenze.some((a) => a.includes('clorosi')));
+  });
+
+  it('esclude gli impianti poliennali dove il drenaggio e lento', () => {
+    // Su una annuale si interviene sulla sistemazione idraulica prima della
+    // semina successiva; un frutteto su suolo asfittico non si recupera.
+    const kiwi = trova('kiwi');
+    assert.equal(kiwi.ciclo, 'poliennale');
+    const arboreo = valuta(kiwi, { ...conTerreno(criteriBase, 'limoso'), drenaggio: 'lento' });
+    assert.equal(arboreo.ammessa, false);
+    assert.ok(arboreo.esclusioni.some((e) => e.includes('drenaggio lento')));
+
+    const annuale = valuta(trova('cipolla'), { ...conTerreno(criteriBase, 'limoso'), drenaggio: 'lento' });
+    assert.equal(annuale.ammessa, true);
+    assert.ok(annuale.avvertenze.some((a) => a.includes('Drenaggio lento')));
+  });
+
+  it('dichiara apertamente quando i vincoli agronomici lasciano meno di MIN_RISULTATI', () => {
+    // pH acido e salinita elevata insieme sono una condizione estrema: e giusto
+    // che restino pochissime colture, purche il risultato lo dichiari invece di
+    // riempirsi di suggerimenti non proponibili.
+    const esito = suggerisci(colture, {
+      provincia: getProvincia('RO'),
+      tessitura: profiloDaClasse('argilloso'),
+      superficieHa: 15,
+      irrigazione: true,
+      ph: 5,
+      salinita: 'elevata',
+    });
+
+    assert.ok(esito.principali.length < MIN_RISULTATI);
+    assert.equal(esito.sottoSoglia, true);
+    assert.ok(esito.principali.length > 0, 'deve restare almeno una coltura proponibile');
+  });
+
+  it('non scende mai sotto soglia con i soli vincoli di base', () => {
+    const fallimenti = [];
+    for (const ph of [6.5, 7, 7.5]) {
+      for (const salinita of ['assente', 'moderata']) {
+        for (const terreno of TERRENI) {
+          const esito = suggerisci(colture, {
+            provincia: getProvincia('RO'),
+            tessitura: profiloDaClasse(terreno),
+            superficieHa: 15,
+            irrigazione: true,
+            ph,
+            salinita,
+          });
+          if (esito.principali.length < MIN_RISULTATI) {
+            fallimenti.push(`pH ${ph} / salinita ${salinita} / ${terreno} -> ${esito.principali.length}`);
+          }
+          assert.equal(esito.sottoSoglia, esito.principali.length < MIN_RISULTATI);
+        }
+      }
+    }
+    assert.deepEqual(fallimenti, [], `combinazioni scoperte:\n${fallimenti.join('\n')}`);
   });
 });
 
@@ -103,7 +231,7 @@ describe('suggerisci', () => {
   });
 
   it('calcola il totale sulla superficie investibile, non su quella inserita', () => {
-    const esito = suggerisci(colture, { ...criteriBase, terreno: 'sabbioso', superficieHa: 500 });
+    const esito = suggerisci(colture, ({ ...conTerreno(criteriBase, 'sabbioso'), superficieHa: 500 }));
     const tutte = [...esito.principali, ...esito.nicchia];
     const limitate = tutte.filter((r) => Number.isFinite(r.coltura.superficie_max_ha));
 
@@ -122,7 +250,7 @@ describe('suggerisci', () => {
       for (const terreno of TERRENI) {
         for (const irrigazione of [true, false]) {
           for (const superficieHa of [1, 20, 300]) {
-            const esito = suggerisci(colture, { provincia, terreno, superficieHa, irrigazione });
+            const esito = suggerisci(colture, { provincia, tessitura: profiloDaClasse(terreno), superficieHa, irrigazione });
             const totale = esito.principali.length;
             if (totale < MIN_RISULTATI) {
               fallimenti.push(
@@ -142,7 +270,7 @@ describe('suggerisci', () => {
     // il ripescaggio con riserva deve attivarsi e deve essere dichiarato.
     const esito = suggerisci(colture, {
       provincia: getProvincia('BL'),
-      terreno: 'argilloso',
+      tessitura: profiloDaClasse('argilloso'),
       superficieHa: 5,
       irrigazione: false,
     });

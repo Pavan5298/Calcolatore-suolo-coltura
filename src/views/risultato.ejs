@@ -20,14 +20,74 @@
 <section class="contenitore">
   <p class="nota-zona">
     <strong><%= criteri.comune.nome %></strong> — <%= zone[criteri.comune.zona] %>
-    I dati di resa sono provinciali (<%= criteri.provincia.nome %>): il comune serve a
-    inquadrare la zona, non aumenta la precisione della stima.
+    Le rese ISTAT sono <strong>regionali</strong> (Veneto): comune e provincia
+    servono a inquadrare zona, altimetria e comprensori, non aumentano la
+    precisione del dato di resa.
   </p>
 </section>
 <% } %>
 
+<section class="contenitore">
+  <div class="profilo">
+    <h2 class="profilo__titolo">Profilo del terreno considerato</h2>
+    <dl class="dettagli">
+      <div>
+        <dt>Tessitura</dt>
+        <dd>
+          <%= criteri.tessitura.semplificata %><% if (criteri.tessitura.nomeUsda) { %>
+            <span class="profilo__usda">(<%= criteri.tessitura.nomeUsda %>, USDA)</span>
+          <% } %>
+        </dd>
+      </div>
+      <div>
+        <dt>Sabbia / limo / argilla</dt>
+        <dd>
+          <%= formattaNumero(criteri.tessitura.sabbia) %>% / <%= formattaNumero(criteri.tessitura.limo) %>% / <%= formattaNumero(criteri.tessitura.argilla) %>%
+          <% if (!criteri.tessitura.valido) { %><span class="profilo__usda">valori tipici della classe</span><% } %>
+        </dd>
+      </div>
+      <div>
+        <dt>pH</dt>
+        <dd><%= criteri.ph != null ? formattaNumero(criteri.ph) : 'non indicato' %></dd>
+      </div>
+      <div>
+        <dt>Salinita</dt>
+        <dd><%= criteri.salinita || 'non rilevata' %></dd>
+      </div>
+      <div>
+        <dt>Calcare attivo</dt>
+        <dd><%= criteri.calcare || 'non rilevato' %></dd>
+      </div>
+      <div>
+        <dt>Drenaggio</dt>
+        <dd><%= criteri.drenaggio || 'non valutato' %></dd>
+      </div>
+    </dl>
+    <% if (noteTessitura && noteTessitura.length) { %>
+      <ul class="profilo__note">
+        <% noteTessitura.forEach(function (n) { %><li><%= n %></li><% }); %>
+      </ul>
+    <% } %>
+    <% if (criteri.ph == null) { %>
+      <p class="profilo__suggerimento">
+        Non hai indicato il pH: e il parametro piu selettivo di tutti e senza di
+        esso il consiglio resta generico. Se hai un'analisi del suolo, aggiungilo
+        nei campi avanzati qui sotto.
+      </p>
+    <% } %>
+  </div>
+</section>
+
 <section class="contenitore sezione">
-  <h2><%= esito.principali.length %> colture compatibili</h2>
+  <h2><%= esito.principali.length %> colture compatibili su <%= esito.ammesse %> proponibili</h2>
+  <% if (esito.sottoSoglia) { %>
+    <p class="avviso">
+      Con questi parametri del terreno restano poche colture proponibili. Non ne
+      aggiungiamo altre per arrivare a tre: su questo suolo non starebbero in
+      piedi. Se il vincolo e il pH, valuta con un agronomo una correzione
+      (calcitazione o acidificazione) e riprova con il valore corretto.
+    </p>
+  <% } %>
   <% if (esito.conRiserva) { %>
     <p class="avviso">
       Con questi vincoli poche colture risultano pienamente compatibili. L'elenco
@@ -66,7 +126,14 @@
     terreno: criteri.terreno,
     superficie: criteri.superficieHa,
     irrigazione: criteri.irrigazione,
-    comune: criteri.comune ? criteri.comune.slug : null
+    comune: criteri.comune ? criteri.comune.slug : null,
+    sabbia: criteri.tessitura.valido ? criteri.tessitura.sabbia : null,
+    limo: criteri.tessitura.valido ? criteri.tessitura.limo : null,
+    argilla: criteri.tessitura.valido ? criteri.tessitura.argilla : null,
+    ph: criteri.ph,
+    salinita: criteri.salinita,
+    calcare: criteri.calcare,
+    drenaggio: criteri.drenaggio
   }, superficiePredefinita: criteri.superficieHa }) %>
 </section>
 

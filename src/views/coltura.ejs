@@ -54,6 +54,31 @@
       <dd><%= etichetteIrrigazione[coltura.irrigazione] %></dd>
     </div>
     <div>
+      <dt>pH tollerato</dt>
+      <dd>
+        da <%= formattaNumero(coltura.ph.minimo) %> a <%= formattaNumero(coltura.ph.massimo) %>,
+        ottimale <%= formattaNumero(coltura.ph.ottimale_min) %>–<%= formattaNumero(coltura.ph.ottimale_max) %>
+      </dd>
+    </div>
+    <div>
+      <dt>Tolleranza alla salinita</dt>
+      <dd><%= coltura.tolleranza_salinita %></dd>
+    </div>
+    <div>
+      <dt>Sensibilita al calcare attivo</dt>
+      <dd><%= coltura.sensibilita_calcare %><%= coltura.sensibilita_calcare === 'alta' ? ' — rischio clorosi ferrica' : '' %></dd>
+    </div>
+    <div>
+      <dt>Drenaggio richiesto</dt>
+      <dd><%= coltura.drenaggio_richiesto.replace('_', ' ') %></dd>
+    </div>
+    <% if (coltura.superficie_veneto_ha) { %>
+    <div>
+      <dt>Superficie coltivata in Veneto</dt>
+      <dd><%= formattaEttari(coltura.superficie_veneto_ha) %> (ISTAT)</dd>
+    </div>
+    <% } %>
+    <div>
       <dt>Superficie minima indicativa</dt>
       <dd><%= formattaEttari(coltura.superficie_min_ha) %></dd>
     </div>

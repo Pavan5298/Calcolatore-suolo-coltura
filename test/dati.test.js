@@ -18,7 +18,9 @@ const comuni = getComuni();
 const SIGLE = new Set(province.map((p) => p.sigla));
 const ALTIMETRIE = new Set(['pianura', 'collina', 'montagna']);
 const IRRIGAZIONI = new Set(['necessaria', 'consigliata', 'non_necessaria']);
-const AFFIDABILITA = new Set(['istat', 'stima_esperto', 'sperimentale']);
+const AFFIDABILITA = new Set(['istat', 'istat_resa', 'stima_esperto', 'sperimentale']);
+const LIVELLI = new Set(['bassa', 'media', 'alta']);
+const DRENAGGI = new Set(['buono', 'medio', 'tollera_ristagno']);
 const CICLI = new Set(['annuale', 'poliennale']);
 
 describe('dataset colture', () => {
@@ -95,6 +97,49 @@ describe('dataset colture', () => {
     }
   });
 
+  it('dichiara un intervallo di pH coerente e ordinato', () => {
+    for (const c of colture) {
+      assert.ok(c.ph, `${c.slug}: pH mancante`);
+      const { minimo, ottimale_min: ottMin, ottimale_max: ottMax, massimo } = c.ph;
+      assert.ok(minimo < ottMin, `${c.slug}: minimo ${minimo} non sotto l ottimale ${ottMin}`);
+      assert.ok(ottMin < ottMax, `${c.slug}: ottimale non ordinato`);
+      assert.ok(ottMax < massimo, `${c.slug}: ottimale ${ottMax} non sotto il massimo ${massimo}`);
+      assert.ok(minimo >= 3 && massimo <= 10, `${c.slug}: pH fuori da una scala plausibile`);
+    }
+  });
+
+  it('dichiara tolleranze e requisiti del suolo con valori ammessi', () => {
+    for (const c of colture) {
+      assert.ok(LIVELLI.has(c.tolleranza_salinita), `${c.slug}: salinita ${c.tolleranza_salinita}`);
+      assert.ok(LIVELLI.has(c.sensibilita_calcare), `${c.slug}: calcare ${c.sensibilita_calcare}`);
+      assert.ok(DRENAGGI.has(c.drenaggio_richiesto), `${c.slug}: drenaggio ${c.drenaggio_richiesto}`);
+    }
+  });
+
+  it('collega alla resa ISTAT tutte le colture che ne hanno una', () => {
+    // Una coltura con codice ISTAT deve avere resa di fonte ISTAT e dichiararlo,
+    // altrimenti l etichetta mostrata all utente mente sulla provenienza.
+    for (const c of colture) {
+      if (c.istat) {
+        assert.equal(c.resa_fonte, 'istat', `${c.slug}: ha codice ISTAT ma resa da stima`);
+        assert.ok(Array.isArray(c.resa_anni) && c.resa_anni.length > 0, `${c.slug}: anni ISTAT mancanti`);
+        assert.ok(c.superficie_veneto_ha > 0, `${c.slug}: superficie ISTAT mancante`);
+      } else {
+        assert.equal(c.resa_fonte, 'stima_esperto', `${c.slug}: senza codice ISTAT ma resa dichiarata ISTAT`);
+      }
+    }
+  });
+
+  it('non dichiara mai affidabilita ISTAT piena finche i prezzi sono stimati', () => {
+    // Il prezzo e ancora una stima di settore: l affidabilita complessiva non
+    // puo essere migliore del suo anello debole.
+    for (const c of colture) {
+      if (c.affidabilita === 'istat') {
+        assert.equal(c.affidabilita_prezzo, 'istat', `${c.slug}: affidabilita piena con prezzo stimato`);
+      }
+    }
+  });
+
   it('ha superfici minime e massime sensate', () => {
     for (const c of colture) {
       assert.ok(c.superficie_min_ha > 0, `${c.slug}: superficie minima non positiva`);
@@ -107,6 +152,7 @@ describe('dataset colture', () => {
   it('dichiara fonte e note per ogni coltura', () => {
     for (const c of colture) {
       assert.ok(c.fonte && c.fonte.length > 10, `${c.slug}: fonte assente o troppo generica`);
+      assert.ok(/ISTAT|stima di settore/.test(c.fonte), `${c.slug}: la fonte non dichiara la provenienza`);
       assert.ok(c.note && c.note.length > 20, `${c.slug}: note agronomiche assenti`);
       assert.ok(Array.isArray(c.avvertenze), `${c.slug}: avvertenze deve essere un array`);
     }

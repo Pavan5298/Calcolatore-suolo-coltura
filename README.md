@@ -5,8 +5,13 @@ disponibilita di irrigazione), suggerisce le colture compatibili con una stima
 della **PLV** (Produzione Lorda Vendibile) per ettaro e totale, con il range tra
 annata buona e annata scarsa.
 
-Copertura v1: le **sette province del Veneto**, con i 50 comuni della provincia di
-Rovigo mappati singolarmente.
+Copertura: le **sette province del Veneto**, 85 colture (cereali, oleaginose,
+industriali, foraggere, orticole, frutta e nicchie), con i 50 comuni della
+provincia di Rovigo mappati singolarmente.
+
+Le **rese vengono da ISTAT** (dataflow `101_1015`, `DCSP_COLTIVAZIONI`); i prezzi
+sono ancora stime di settore. Ogni coltura dichiara in interfaccia la provenienza
+del proprio dato.
 
 ---
 
@@ -30,16 +35,22 @@ geografiche AVEPA — si riscrive quel file e non il resto.
 npm install
 npm start              # avvia su http://localhost:3000
 npm run dev            # con ricarica automatica
-npm test               # 64 test: dataset, calcolo PLV, matching, rotte e SEO
+npm test               # 92 test: dataset, PLV, tessitura, matching, rotte e SEO
 ```
 
-Import dei dati ISTAT:
+Aggiornare i dati:
 
 ```bash
-npm run import:discover   # ispeziona la struttura del dataflow (da eseguire per primo)
-npm run import:rese       # superfici e produzioni -> rese per anno e provincia
-npm run import:prezzi     # prezzi dei prodotti agricoli
+npm run importa        # legge l'export CSV ISTAT in src/data/raw/ -> istat-veneto.json
+npm run costruisci     # unisce rese ISTAT + tabella curata -> src/data/colture.json
 ```
+
+Il ciclo e sempre questo: si scarica un nuovo export dal databrowser ISTAT, lo si
+mette in `src/data/raw/`, si lancia `npm run importa && npm run costruisci` e si
+committa il risultato.
+
+Per correggere un prezzo o un requisito agronomico si modifica la **tabella
+curata** in `scripts/costruisci-colture.mjs` e si rilancia `npm run costruisci`.
 
 ---
 
@@ -50,23 +61,27 @@ src/
   avvio.js              unico punto che apre una porta
   server.js             rotte, validazione input, metadati per pagina
   data/
-    index.js            strato di accesso ai dati (l'unica cosa da cambiare per Postgres)
-    colture.json        dataset curato: agronomia, compatibilita, range di PLV
-    province.json       le 7 province venete con inquadramento agronomico
-    comuni.json         50 comuni di Rovigo + capoluoghi delle altre province
+    index.js              strato di accesso ai dati (l'unica cosa da cambiare per Postgres)
+    colture.json          GENERATO: agronomia + rese ISTAT + PLV
+    istat-veneto.json     GENERATO: rese e superfici importate da ISTAT
+    province.json         le 7 province venete con inquadramento agronomico
+    comuni.json           50 comuni di Rovigo + capoluoghi delle altre province
+    raw/                  export CSV scaricati da ISTAT
   lib/
-    plv.js              calcolo PLV e percentili sulla serie annuale
-    matching.js         filtri rigidi + punteggio di adattamento
-    seo.js              canonical, Open Graph, dati strutturati JSON-LD
-    format.js           formattazione italiana di valute e numeri
-  views/                template EJS
-  public/stile.css      foglio di stile unico
+    plv.js                calcolo PLV, percentili e coefficiente di variabilita
+    matching.js           filtri rigidi + punteggio di adattamento
+    tessitura.js          triangolo USDA e caratteristiche del suolo
+    seo.js                canonical, Open Graph, dati strutturati JSON-LD
+    format.js             formattazione italiana di valute e numeri
+  views/                  template EJS
+  public/stile.css        foglio di stile unico
 scripts/
-  import-istat.mjs      importer API SDMX ISTAT
-  mappatura-istat.json  slug colture -> codici ISTAT (da compilare con "discover")
+  importa-istat-csv.mjs   export CSV del databrowser ISTAT -> istat-veneto.json
+  costruisci-colture.mjs  TABELLA CURATA + rese ISTAT -> colture.json
+  import-istat.mjs        importer via API SDMX (alternativa all'export manuale)
 docs/
-  fonti-dati.md         analisi delle fonti pubbliche italiane per la PLV
-test/                   suite di test
+  fonti-dati.md           analisi delle fonti pubbliche italiane per la PLV
+test/                     suite di test
 ```
 
 ---
@@ -81,7 +96,7 @@ test/                   suite di test
 | `/cosa-coltivare-in/:provincia` | landing di provincia |
 | `/colture` e `/colture/:slug` | elenco e schede per coltura, pronte per diventare landing dedicate |
 | `/metodologia` | metodo di calcolo, fonti e limiti dichiarati |
-| `/sitemap.xml`, `/robots.txt` | 86 URL in sitemap |
+| `/sitemap.xml`, `/robots.txt` | 151 URL in sitemap |
 | `/salute` | health check per Railway |
 
 Ogni pagina indicizzabile ha `title`, `meta description`, `canonical`, Open Graph
@@ -113,27 +128,46 @@ Railway ridistribuisce.
 
 ---
 
+## Parametri del terreno
+
+Oltre alla classe di tessitura, il calcolatore accetta i dati di un'analisi del
+suolo. Tutti facoltativi: **un parametro non compilato non penalizza nessuna
+coltura**.
+
+| Parametro | Effetto |
+|---|---|
+| Sabbia / limo / argilla (%) | Classificazione con il **triangolo USDA** (12 classi), ricondotta alle 4 classi semplificate |
+| pH | Il piu selettivo: fuori tolleranza esclude, fuori dall'ottimale segnala |
+| Salinita | Con salinita elevata esclude le colture poco tolleranti — rilevante nel Delta |
+| Calcare attivo | Segnala il rischio di clorosi ferrica sulle arboree sensibili |
+| Drenaggio | Con drenaggio lento esclude gli impianti poliennali che richiedono suolo drenato |
+
 ## Stato dei dati
 
-I valori di PLV attualmente in uso sono in prevalenza **stime di inquadramento**
-(`stima_esperto`), non ancora ricalcolate sulle serie ISTAT. Ogni coltura dichiara
-il proprio livello di affidabilita, mostrato nell'interfaccia:
-
-- `istat` — resa da `DCSP_COLTIVAZIONI` e prezzo da `DCSP_PREZZIAGR`, riproducibile
-- `stima_esperto` — inquadramento da esperienza di settore e letteratura tecnica
-- `sperimentale` — nessun dato pubblico italiano disponibile (lenticchia d'acqua, luffa)
-
-Il passaggio a `istat` avviene popolando `serie_annuale` in `colture.json` tramite
-gli importer: da quel momento `src/lib/plv.js` calcola il range con i percentili
-sulla serie di PLV annuali invece di usare il range curato.
+- `istat` — resa e prezzo entrambi rilevati. **Nessuna coltura ha ancora questo
+  livello**: i prezzi restano stime.
+- `istat_resa` — resa da `DCSP_COLTIVAZIONI`, prezzo da stima di settore.
+- `stima_esperto` — nessuna rilevazione ISTAT per quella coltura.
+- `sperimentale` — nessun dato pubblico italiano (lenticchia d'acqua, luffa).
 
 ### Nota metodologica sul range
 
 Il range annata buona / scarsa **non** si ottiene moltiplicando la resa peggiore
-per il prezzo peggiore: resa e prezzo sono negativamente correlati, e quel prodotto
-descrive uno scenario mai verificatosi. Si calcola la PLV di ogni singolo anno e si
-prendono i percentili di quella serie. Dettagli in `src/lib/plv.js` e su
-`/metodologia`.
+per il prezzo peggiore: resa e prezzo sono negativamente correlati, e quel
+prodotto descrive uno scenario mai verificatosi.
+
+Il metodo corretto - percentili sulla serie di PLV annuali - richiede almeno 5
+annate. L'export ISTAT attualmente caricato ne copre 2, quindi il range si
+costruisce con un **coefficiente di variabilita dichiarato applicato alla PLV**,
+non separatamente a resa e prezzo: applicandolo al prodotto si evita per
+costruzione l'errore di correlazione. `src/lib/plv.js` implementa entrambi i
+metodi e passa al primo appena la serie e abbastanza lunga.
+
+### Prossimo passo sui dati
+
+Scaricare da ISTAT `DCSP_PREZZIAGR` (prezzi dei prodotti agricoli) e una serie di
+rese piu lunga di 5 anni. Con quelli, prezzi e range diventano entrambi
+riproducibili.
 
 ---
 

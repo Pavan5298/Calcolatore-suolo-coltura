@@ -1,0 +1,1930 @@
+{
+  "_meta": {
+    "fonte": "ISTAT, dataflow 101_1015 (DCSP_COLTIVAZIONI), export databrowser",
+    "licenza": "CC-BY: citare ISTAT come fonte",
+    "territorio": "ITD3",
+    "territorio_nota": "L'export e a livello REGIONALE (Veneto), non provinciale: le rese qui dentro valgono per l'intera regione.",
+    "anni": [
+      "2025",
+      "2026"
+    ],
+    "anni_nota": "Serie troppo corta per calcolare i percentili della PLV annuale: servono almeno 5 anni. Fino ad allora il range si costruisce con un coefficiente di variabilita dichiarato.",
+    "file_origine": "Superfici e produzione - dati in complesso (IT1,101_1015_DF_DCSP_COLTIVAZIONI_1,1.0).csv",
+    "importato": "2026-07-30",
+    "colture": 131
+  },
+  "colture": {
+    "COMMEAT": {
+      "nome": "Frumento tenero",
+      "anni": {
+        "2025": {
+          "superficie_ha": 91220,
+          "produzione_q": 4794843,
+          "resa_q_ha": 52.6
+        },
+        "2026": {
+          "superficie_ha": 91220,
+          "produzione_q": 5834993,
+          "resa_q_ha": 64
+        }
+      },
+      "resa_media_q_ha": 58.3,
+      "superficie_max_ha": 91220
+    },
+    "PIGWETWINT": {
+      "nome": "Grano invernale e farro",
+      "anni": {
+        "2025": {
+          "superficie_ha": 91220,
+          "produzione_q": 4794843,
+          "resa_q_ha": 52.6
+        },
+        "2026": {
+          "superficie_ha": 91220,
+          "produzione_q": 5834993,
+          "resa_q_ha": 64
+        }
+      },
+      "resa_media_q_ha": 58.3,
+      "superficie_max_ha": 91220
+    },
+    "WHEATD": {
+      "nome": "Frumento duro",
+      "anni": {
+        "2025": {
+          "superficie_ha": 14208,
+          "produzione_q": 665582,
+          "resa_q_ha": 46.8
+        },
+        "2026": {
+          "superficie_ha": 14208,
+          "produzione_q": 792513,
+          "resa_q_ha": 55.8
+        }
+      },
+      "resa_media_q_ha": 51.3,
+      "superficie_max_ha": 14208
+    },
+    "ITRSOYEAN": {
+      "nome": "Miscele di segale e cereali invernali",
+      "anni": {
+        "2025": {
+          "superficie_ha": 48,
+          "produzione_q": 2107,
+          "resa_q_ha": 43.9
+        },
+        "2026": {
+          "superficie_ha": 48,
+          "produzione_q": 2187,
+          "resa_q_ha": 45.6
+        }
+      },
+      "resa_media_q_ha": 44.8,
+      "superficie_max_ha": 48
+    },
+    "RYE": {
+      "nome": "Segale",
+      "anni": {
+        "2025": {
+          "superficie_ha": 48,
+          "produzione_q": 2107,
+          "resa_q_ha": 43.9
+        },
+        "2026": {
+          "superficie_ha": 48,
+          "produzione_q": 2187,
+          "resa_q_ha": 45.6
+        }
+      },
+      "resa_media_q_ha": 44.8,
+      "superficie_max_ha": 48
+    },
+    "BARLEY": {
+      "nome": "Orzo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 12626,
+          "produzione_q": 570361,
+          "resa_q_ha": 45.2
+        },
+        "2026": {
+          "superficie_ha": 12626,
+          "produzione_q": 679789,
+          "resa_q_ha": 53.8
+        }
+      },
+      "resa_media_q_ha": 49.5,
+      "superficie_max_ha": 12626
+    },
+    "WNEALY": {
+      "nome": "Orzo invernale",
+      "anni": {
+        "2025": {
+          "superficie_ha": 12626,
+          "produzione_q": 570361,
+          "resa_q_ha": 45.2
+        },
+        "2026": {
+          "superficie_ha": 12626,
+          "produzione_q": 679789,
+          "resa_q_ha": 53.8
+        }
+      },
+      "resa_media_q_ha": 49.5,
+      "superficie_max_ha": 12626
+    },
+    "MXSOASANDS": {
+      "nome": "Miscele di avena e cereali primaverili (grano misto diverso dal maslin)",
+      "anni": {
+        "2025": {
+          "superficie_ha": 346,
+          "produzione_q": 12161,
+          "resa_q_ha": 35.1
+        },
+        "2026": {
+          "superficie_ha": 346,
+          "produzione_q": 12768,
+          "resa_q_ha": 36.9
+        }
+      },
+      "resa_media_q_ha": 36,
+      "superficie_max_ha": 346
+    },
+    "OATS": {
+      "nome": "Avena",
+      "anni": {
+        "2025": {
+          "superficie_ha": 346,
+          "produzione_q": 12161,
+          "resa_q_ha": 35.1
+        },
+        "2026": {
+          "superficie_ha": 346,
+          "produzione_q": 12768,
+          "resa_q_ha": 36.9
+        }
+      },
+      "resa_media_q_ha": 36,
+      "superficie_max_ha": 346
+    },
+    "MAIZE": {
+      "nome": "Mais",
+      "anni": {
+        "2025": {
+          "superficie_ha": 140425,
+          "produzione_q": 13745036,
+          "resa_q_ha": 97.9
+        },
+        "2026": {
+          "superficie_ha": 140425,
+          "produzione_q": 13340947,
+          "resa_q_ha": 95
+        }
+      },
+      "resa_media_q_ha": 96.5,
+      "superficie_max_ha": 140425
+    },
+    "RICE": {
+      "nome": "Riso",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4154,
+          "produzione_q": 218286,
+          "resa_q_ha": 52.5
+        }
+      },
+      "resa_media_q_ha": 52.5,
+      "superficie_max_ha": 4154
+    },
+    "SORGH": {
+      "nome": "Sorgo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4378,
+          "produzione_q": 231441,
+          "resa_q_ha": 52.9
+        },
+        "2026": {
+          "superficie_ha": 4378,
+          "produzione_q": 250872,
+          "resa_q_ha": 57.3
+        }
+      },
+      "resa_media_q_ha": 55.1,
+      "superficie_max_ha": 4378
+    },
+    "TITICALE": {
+      "nome": "Triticale",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2725,
+          "produzione_q": 94359,
+          "resa_q_ha": 34.6
+        },
+        "2026": {
+          "superficie_ha": 2725,
+          "produzione_q": 91032,
+          "resa_q_ha": 33.4
+        }
+      },
+      "resa_media_q_ha": 34,
+      "superficie_max_ha": 2725
+    },
+    "PSEUDOCEREA": {
+      "nome": "Pseudocereali",
+      "anni": {
+        "2025": {
+          "superficie_ha": 10,
+          "produzione_q": 163,
+          "resa_q_ha": 16.3
+        }
+      },
+      "resa_media_q_ha": 16.3,
+      "superficie_max_ha": 10
+    },
+    "BUCKWHEAT": {
+      "nome": "Grano saraceno",
+      "anni": {
+        "2025": {
+          "superficie_ha": 10,
+          "produzione_q": 163,
+          "resa_q_ha": 16.3
+        }
+      },
+      "resa_media_q_ha": 16.3,
+      "superficie_max_ha": 10
+    },
+    "PEAPROT": {
+      "nome": "Pisello proteico",
+      "anni": {
+        "2025": {
+          "superficie_ha": 182,
+          "produzione_q": 6655,
+          "resa_q_ha": 36.6
+        },
+        "2026": {
+          "superficie_ha": 182,
+          "produzione_q": 6641,
+          "resa_q_ha": 36.5
+        }
+      },
+      "resa_media_q_ha": 36.6,
+      "superficie_max_ha": 182
+    },
+    "CEREAOG_NO_FORAGENR": {
+      "nome": "'Altri cereali n.c.a. (miglio, scagliola, ecc.)'",
+      "anni": {
+        "2025": {
+          "superficie_ha": 127,
+          "produzione_q": 2842,
+          "resa_q_ha": 22.4
+        },
+        "2026": {
+          "superficie_ha": 127,
+          "produzione_q": 2837,
+          "resa_q_ha": 22.3
+        }
+      },
+      "resa_media_q_ha": 22.4,
+      "superficie_max_ha": 127
+    },
+    "PEAS": {
+      "nome": "Pisello da granella",
+      "anni": {
+        "2025": {
+          "superficie_ha": 373,
+          "produzione_q": 16142,
+          "resa_q_ha": 43.3
+        },
+        "2026": {
+          "superficie_ha": 373,
+          "produzione_q": 19338,
+          "resa_q_ha": 51.8
+        }
+      },
+      "resa_media_q_ha": 47.6,
+      "superficie_max_ha": 373
+    },
+    "BEANK": {
+      "nome": "Fagiolo secco",
+      "anni": {
+        "2025": {
+          "superficie_ha": 431,
+          "produzione_q": 22742,
+          "resa_q_ha": 52.8
+        },
+        "2026": {
+          "superficie_ha": 431,
+          "produzione_q": 22316,
+          "resa_q_ha": 51.8
+        }
+      },
+      "resa_media_q_ha": 52.3,
+      "superficie_max_ha": 431
+    },
+    "BROAFIELD": {
+      "nome": "Fava da granella",
+      "anni": {
+        "2025": {
+          "superficie_ha": 13,
+          "produzione_q": 596,
+          "resa_q_ha": 45.8
+        },
+        "2026": {
+          "superficie_ha": 14,
+          "produzione_q": 640,
+          "resa_q_ha": 45.7
+        }
+      },
+      "resa_media_q_ha": 45.8,
+      "superficie_max_ha": 14
+    },
+    "LENTIL": {
+      "nome": "Lenticchia",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4,
+          "produzione_q": 119,
+          "resa_q_ha": 29.8
+        },
+        "2026": {
+          "superficie_ha": 1,
+          "produzione_q": 17,
+          "resa_q_ha": 17
+        }
+      },
+      "resa_media_q_ha": 23.4,
+      "superficie_max_ha": 4
+    },
+    "CHICS": {
+      "nome": "Cece",
+      "anni": {
+        "2025": {
+          "superficie_ha": 12,
+          "produzione_q": 296,
+          "resa_q_ha": 24.7
+        },
+        "2026": {
+          "superficie_ha": 13,
+          "produzione_q": 330,
+          "resa_q_ha": 25.4
+        }
+      },
+      "resa_media_q_ha": 25,
+      "superficie_max_ha": 13
+    },
+    "POTA": {
+      "nome": "Patata comune",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4022,
+          "produzione_q": 1717473,
+          "resa_q_ha": 427
+        },
+        "2026": {
+          "superficie_ha": 4022,
+          "produzione_q": 1676067,
+          "resa_q_ha": 416.7
+        }
+      },
+      "resa_media_q_ha": 421.9,
+      "superficie_max_ha": 4022
+    },
+    "BEETS": {
+      "nome": "Barbabietola da zucchero",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4734,
+          "produzione_q": 2629434,
+          "resa_q_ha": 555.4
+        }
+      },
+      "resa_media_q_ha": 555.4,
+      "superficie_max_ha": 4734
+    },
+    "SWEEATOES": {
+      "nome": "Batata o patata dolce",
+      "anni": {
+        "2025": {
+          "superficie_ha": 201,
+          "produzione_q": 27067,
+          "resa_q_ha": 134.7
+        }
+      },
+      "resa_media_q_ha": 134.7,
+      "superficie_max_ha": 201
+    },
+    "TOBAC": {
+      "nome": "Tabacco",
+      "anni": {
+        "2025": {
+          "superficie_ha": 3496,
+          "produzione_q": 122061,
+          "resa_q_ha": 34.9
+        }
+      },
+      "resa_media_q_ha": 34.9,
+      "superficie_max_ha": 3496
+    },
+    "HOPS": {
+      "nome": "Luppolo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 18,
+          "produzione_q": 283,
+          "resa_q_ha": 15.7
+        }
+      },
+      "resa_media_q_ha": 15.7,
+      "superficie_max_ha": 18
+    },
+    "FLAX": {
+      "nome": "Lino",
+      "anni": {
+        "2025": {
+          "superficie_ha": 19,
+          "produzione_q": 738,
+          "resa_q_ha": 38.8
+        }
+      },
+      "resa_media_q_ha": 38.8,
+      "superficie_max_ha": 19
+    },
+    "HEMP": {
+      "nome": "Canapa",
+      "anni": {
+        "2025": {
+          "superficie_ha": 152,
+          "produzione_q": 21821,
+          "resa_q_ha": 143.6
+        }
+      },
+      "resa_media_q_ha": 143.6,
+      "superficie_max_ha": 152
+    },
+    "GROU": {
+      "nome": "Arachide",
+      "anni": {
+        "2025": {
+          "superficie_ha": 17,
+          "produzione_q": 168,
+          "resa_q_ha": 9.9
+        }
+      },
+      "resa_media_q_ha": 9.9,
+      "superficie_max_ha": 17
+    },
+    "RAPE": {
+      "nome": "Colza",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2128,
+          "produzione_q": 57525,
+          "resa_q_ha": 27
+        },
+        "2026": {
+          "superficie_ha": 2128,
+          "produzione_q": 73366,
+          "resa_q_ha": 34.5
+        }
+      },
+      "resa_media_q_ha": 30.8,
+      "superficie_max_ha": 2128
+    },
+    "SUNFLO": {
+      "nome": "Girasole",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4591,
+          "produzione_q": 146380,
+          "resa_q_ha": 31.9
+        },
+        "2026": {
+          "superficie_ha": 4592,
+          "produzione_q": 147363,
+          "resa_q_ha": 32.1
+        }
+      },
+      "resa_media_q_ha": 32,
+      "superficie_max_ha": 4592
+    },
+    "OTHOLNOSES": {
+      "nome": "Altre colture di semi oleosi diversi dal sesamo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1176,
+          "produzione_q": 12944,
+          "resa_q_ha": 11
+        }
+      },
+      "resa_media_q_ha": 11,
+      "superficie_max_ha": 1176
+    },
+    "SOYA": {
+      "nome": "Soia",
+      "anni": {
+        "2025": {
+          "superficie_ha": 142693,
+          "produzione_q": 5515795,
+          "resa_q_ha": 38.7
+        },
+        "2026": {
+          "superficie_ha": 142693,
+          "produzione_q": 4730179,
+          "resa_q_ha": 33.1
+        }
+      },
+      "resa_media_q_ha": 35.9,
+      "superficie_max_ha": 142693
+    },
+    "PARSNGROPEN": {
+      "nome": "Prezzemolo in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4,
+          "produzione_q": 1000,
+          "resa_q_ha": 250
+        }
+      },
+      "resa_media_q_ha": 250,
+      "superficie_max_ha": 4
+    },
+    "CERFORRLEY": {
+      "nome": "Orzo a maturazione cerosa",
+      "anni": {
+        "2025": {
+          "superficie_ha": 998,
+          "produzione_q": 228000,
+          "resa_q_ha": 228.5
+        }
+      },
+      "resa_media_q_ha": 228.5,
+      "superficie_max_ha": 998
+    },
+    "CEROIS": {
+      "nome": "Mais ceroso",
+      "anni": {
+        "2025": {
+          "superficie_ha": 49054,
+          "produzione_q": 27974705,
+          "resa_q_ha": 570.3
+        }
+      },
+      "resa_media_q_ha": 570.3,
+      "superficie_max_ha": 49054
+    },
+    "COMMEGRASS": {
+      "nome": "Loietto",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1823,
+          "produzione_q": 245921,
+          "resa_q_ha": 134.9
+        }
+      },
+      "resa_media_q_ha": 134.9,
+      "superficie_max_ha": 1823
+    },
+    "OTHEEHERBA": {
+      "nome": "Altri erbai monofiti",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5410,
+          "produzione_q": 1001059,
+          "resa_q_ha": 185
+        }
+      },
+      "resa_media_q_ha": 185,
+      "superficie_max_ha": 5410
+    },
+    "GRAM": {
+      "nome": "Graminacee",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1385,
+          "produzione_q": 162273,
+          "resa_q_ha": 117.2
+        }
+      },
+      "resa_media_q_ha": 117.2,
+      "superficie_max_ha": 1385
+    },
+    "DRIESES": {
+      "nome": "Leguminose",
+      "anni": {
+        "2025": {
+          "superficie_ha": 448,
+          "produzione_q": 32026,
+          "resa_q_ha": 71.5
+        }
+      },
+      "resa_media_q_ha": 71.5,
+      "superficie_max_ha": 448
+    },
+    "OTHETURES": {
+      "nome": "Altri miscugli",
+      "anni": {
+        "2025": {
+          "superficie_ha": 4026,
+          "produzione_q": 475060,
+          "resa_q_ha": 118
+        }
+      },
+      "resa_media_q_ha": 118,
+      "superficie_max_ha": 4026
+    },
+    "LUCERNE": {
+      "nome": "Erba medica",
+      "anni": {
+        "2025": {
+          "superficie_ha": 20702,
+          "produzione_q": 2486960,
+          "resa_q_ha": 120.1
+        }
+      },
+      "resa_media_q_ha": 120.1,
+      "superficie_max_ha": 20702
+    },
+    "MIXEPORARY": {
+      "nome": "Prati avvicendati polifiti",
+      "anni": {
+        "2025": {
+          "superficie_ha": 8807,
+          "produzione_q": 1654687,
+          "resa_q_ha": 187.9
+        }
+      },
+      "resa_media_q_ha": 187.9,
+      "superficie_max_ha": 8807
+    },
+    "LVRADBENDS": {
+      "nome": "Trifoglio e miscele",
+      "anni": {
+        "2025": {
+          "superficie_ha": 18,
+          "produzione_q": 1241,
+          "resa_q_ha": 68.9
+        }
+      },
+      "resa_media_q_ha": 68.9,
+      "superficie_max_ha": 18
+    },
+    "LEGMIX": {
+      "nome": "Miscele di leguminose",
+      "anni": {
+        "2025": {
+          "superficie_ha": 3320,
+          "produzione_q": 622872,
+          "resa_q_ha": 187.6
+        }
+      },
+      "resa_media_q_ha": 187.6,
+      "superficie_max_ha": 3320
+    },
+    "OTMFC": {
+      "nome": "Altri erbai monofiti di cereali",
+      "anni": {
+        "2025": {
+          "superficie_ha": 7481,
+          "produzione_q": 3347650,
+          "resa_q_ha": 447.5
+        }
+      },
+      "resa_media_q_ha": 447.5,
+      "superficie_max_ha": 7481
+    },
+    "OTHGRENOCER": {
+      "nome": "Altre piante raccolte verdi da seminativi",
+      "anni": {
+        "2025": {
+          "superficie_ha": 470,
+          "produzione_q": 186650,
+          "resa_q_ha": 397.1
+        }
+      },
+      "resa_media_q_ha": 397.1,
+      "superficie_max_ha": 470
+    },
+    "OTHFRELPULS": {
+      "nome": "Altri legumi freschi",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2,
+          "produzione_q": 100,
+          "resa_q_ha": 50
+        }
+      },
+      "resa_media_q_ha": 50,
+      "superficie_max_ha": 2
+    },
+    "FRESADBEAN": {
+      "nome": "Fava fresca in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2,
+          "produzione_q": 100,
+          "resa_q_ha": 50
+        }
+      },
+      "resa_media_q_ha": 50,
+      "superficie_max_ha": 2
+    },
+    "LEEKOPENFI": {
+      "nome": "Porro in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 315,
+          "produzione_q": 85869,
+          "resa_q_ha": 272.6
+        }
+      },
+      "resa_media_q_ha": 272.6,
+      "superficie_max_ha": 315
+    },
+    "HTABG": {
+      "nome": "Cavolo bianco",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1313,
+          "produzione_q": 484165,
+          "resa_q_ha": 368.7
+        },
+        "2026": {
+          "superficie_ha": 1297,
+          "produzione_q": 426188,
+          "resa_q_ha": 328.6
+        }
+      },
+      "resa_media_q_ha": 348.7,
+      "superficie_max_ha": 1313
+    },
+    "SAVOBAGEIN": {
+      "nome": "Cavolo verza",
+      "anni": {
+        "2025": {
+          "superficie_ha": 195,
+          "produzione_q": 65400,
+          "resa_q_ha": 335.4
+        },
+        "2026": {
+          "superficie_ha": 180,
+          "produzione_q": 52595,
+          "resa_q_ha": 292.2
+        }
+      },
+      "resa_media_q_ha": 313.8,
+      "superficie_max_ha": 195
+    },
+    "OTHBROCI": {
+      "nome": "Altri cavoli diversi dai broccoletti di rapa",
+      "anni": {
+        "2025": {
+          "superficie_ha": 15,
+          "produzione_q": 4140,
+          "resa_q_ha": 276
+        },
+        "2026": {
+          "superficie_ha": 15,
+          "produzione_q": 4048,
+          "resa_q_ha": 269.9
+        }
+      },
+      "resa_media_q_ha": 273,
+      "superficie_max_ha": 15
+    },
+    "BROCINOPEN": {
+      "nome": "Broccoletto di rapa in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 23,
+          "produzione_q": 7525,
+          "resa_q_ha": 327.2
+        },
+        "2026": {
+          "superficie_ha": 23,
+          "produzione_q": 6637,
+          "resa_q_ha": 288.6
+        }
+      },
+      "resa_media_q_ha": 307.9,
+      "superficie_max_ha": 23
+    },
+    "CAULERAND": {
+      "nome": "Cavolfiore  (e cavolo broccolo)",
+      "anni": {
+        "2025": {
+          "superficie_ha": 254,
+          "produzione_q": 63671,
+          "resa_q_ha": 250.7
+        },
+        "2026": {
+          "superficie_ha": 254,
+          "produzione_q": 59384,
+          "resa_q_ha": 233.8
+        }
+      },
+      "resa_media_q_ha": 242.3,
+      "superficie_max_ha": 254
+    },
+    "PEAENFIEL": {
+      "nome": "Pisello in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2010,
+          "produzione_q": 120664,
+          "resa_q_ha": 60
+        }
+      },
+      "resa_media_q_ha": 60,
+      "superficie_max_ha": 2010
+    },
+    "FRESNEYBEA": {
+      "nome": "Fagiolo e fagiolino in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1329,
+          "produzione_q": 60799,
+          "resa_q_ha": 45.7
+        },
+        "2026": {
+          "superficie_ha": 1329,
+          "produzione_q": 42980,
+          "resa_q_ha": 32.3
+        }
+      },
+      "resa_media_q_ha": 39,
+      "superficie_max_ha": 1329
+    },
+    "SHALLOT": {
+      "nome": "Scalogno in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 19,
+          "produzione_q": 4684,
+          "resa_q_ha": 246.5
+        },
+        "2026": {
+          "superficie_ha": 19,
+          "produzione_q": 4896,
+          "resa_q_ha": 257.7
+        }
+      },
+      "resa_media_q_ha": 252.1,
+      "superficie_max_ha": 19
+    },
+    "ONIOOPENF": {
+      "nome": "Cipolla in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 764,
+          "produzione_q": 236620,
+          "resa_q_ha": 309.7
+        },
+        "2026": {
+          "superficie_ha": 793,
+          "produzione_q": 220178,
+          "resa_q_ha": 277.7
+        }
+      },
+      "resa_media_q_ha": 293.7,
+      "superficie_max_ha": 793
+    },
+    "CARRNDPARS": {
+      "nome": "Carota e pastinaca in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 595,
+          "produzione_q": 290462,
+          "resa_q_ha": 488.2
+        },
+        "2026": {
+          "superficie_ha": 595,
+          "produzione_q": 274358,
+          "resa_q_ha": 461.1
+        }
+      },
+      "resa_media_q_ha": 474.7,
+      "superficie_max_ha": 595
+    },
+    "BEETANDLEA": {
+      "nome": "Barbabietola da orto in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 17,
+          "produzione_q": 3663,
+          "resa_q_ha": 215.5
+        }
+      },
+      "resa_media_q_ha": 215.5,
+      "superficie_max_ha": 17
+    },
+    "ASPAINGREOPEN": {
+      "nome": "Asparago in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1729,
+          "produzione_q": 124547,
+          "resa_q_ha": 72
+        },
+        "2026": {
+          "superficie_ha": 1741,
+          "produzione_q": 123212,
+          "resa_q_ha": 70.8
+        }
+      },
+      "resa_media_q_ha": 71.4,
+      "superficie_max_ha": 1741
+    },
+    "CHICNOPEN": {
+      "nome": "Radicchio o cicoria in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5151,
+          "produzione_q": 796069,
+          "resa_q_ha": 154.5
+        },
+        "2026": {
+          "superficie_ha": 5151,
+          "produzione_q": 552430,
+          "resa_q_ha": 107.2
+        }
+      },
+      "resa_media_q_ha": 130.9,
+      "superficie_max_ha": 5151
+    },
+    "CELEOPENF": {
+      "nome": "Sedano in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 32,
+          "produzione_q": 11166,
+          "resa_q_ha": 348.9
+        }
+      },
+      "resa_media_q_ha": 348.9,
+      "superficie_max_ha": 32
+    },
+    "GLOBICHOKE": {
+      "nome": "Carciofo in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 26,
+          "produzione_q": 1932,
+          "resa_q_ha": 74.3
+        },
+        "2026": {
+          "superficie_ha": 33,
+          "produzione_q": 2366,
+          "resa_q_ha": 71.7
+        }
+      },
+      "resa_media_q_ha": 73,
+      "superficie_max_ha": 33
+    },
+    "EGGINOPE": {
+      "nome": "Melanzana in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 67,
+          "produzione_q": 24600,
+          "resa_q_ha": 367.2
+        },
+        "2026": {
+          "superficie_ha": 55,
+          "produzione_q": 21918,
+          "resa_q_ha": 398.5
+        }
+      },
+      "resa_media_q_ha": 382.9,
+      "superficie_max_ha": 67
+    },
+    "REDRINOP": {
+      "nome": "Peperone in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 36,
+          "produzione_q": 13580,
+          "resa_q_ha": 377.2
+        },
+        "2026": {
+          "superficie_ha": 36,
+          "produzione_q": 12721,
+          "resa_q_ha": 353.4
+        }
+      },
+      "resa_media_q_ha": 365.3,
+      "superficie_max_ha": 36
+    },
+    "CUCUINOPE": {
+      "nome": "Cetriolo da mensa in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 16,
+          "produzione_q": 7037,
+          "resa_q_ha": 439.8
+        }
+      },
+      "resa_media_q_ha": 439.8,
+      "superficie_max_ha": 16
+    },
+    "LETTNOPEN": {
+      "nome": "Lattuga in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 180,
+          "produzione_q": 43951,
+          "resa_q_ha": 244.2
+        },
+        "2026": {
+          "superficie_ha": 153,
+          "produzione_q": 42645,
+          "resa_q_ha": 278.7
+        }
+      },
+      "resa_media_q_ha": 261.5,
+      "superficie_max_ha": 180
+    },
+    "MELOOPENFI": {
+      "nome": "Popone o melone in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 372,
+          "produzione_q": 107376,
+          "resa_q_ha": 288.6
+        },
+        "2026": {
+          "superficie_ha": 372,
+          "produzione_q": 109279,
+          "resa_q_ha": 293.8
+        }
+      },
+      "resa_media_q_ha": 291.2,
+      "superficie_max_ha": 372
+    },
+    "COURINOPE": {
+      "nome": "Zucchina in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1978,
+          "produzione_q": 505811,
+          "resa_q_ha": 255.7
+        },
+        "2026": {
+          "superficie_ha": 2200,
+          "produzione_q": 533489,
+          "resa_q_ha": 242.5
+        }
+      },
+      "resa_media_q_ha": 249.1,
+      "superficie_max_ha": 2200
+    },
+    "WATENINOP": {
+      "nome": "Cocomero in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 353,
+          "produzione_q": 183491,
+          "resa_q_ha": 519.8
+        }
+      },
+      "resa_media_q_ha": 519.8,
+      "superficie_max_ha": 353
+    },
+    "FENNOPENF": {
+      "nome": "Finocchio in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 40,
+          "produzione_q": 11193,
+          "resa_q_ha": 279.8
+        },
+        "2026": {
+          "superficie_ha": 40,
+          "produzione_q": 11800,
+          "resa_q_ha": 295
+        }
+      },
+      "resa_media_q_ha": 287.4,
+      "superficie_max_ha": 40
+    },
+    "ENDINOPEN": {
+      "nome": "Indivia (riccia e scarola) in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 28,
+          "produzione_q": 5544,
+          "resa_q_ha": 198
+        },
+        "2026": {
+          "superficie_ha": 28,
+          "produzione_q": 4524,
+          "resa_q_ha": 161.6
+        }
+      },
+      "resa_media_q_ha": 179.8,
+      "superficie_max_ha": 28
+    },
+    "RADIOPEN": {
+      "nome": "Ravanello in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 9,
+          "produzione_q": 2851,
+          "resa_q_ha": 316.8
+        }
+      },
+      "resa_media_q_ha": 316.8,
+      "superficie_max_ha": 9
+    },
+    "SPINNOPEN": {
+      "nome": "Spinacio in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 114,
+          "produzione_q": 20921,
+          "resa_q_ha": 183.5
+        }
+      },
+      "resa_media_q_ha": 183.5,
+      "superficie_max_ha": 114
+    },
+    "CHAROPENFI": {
+      "nome": "Bietola da costa in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 64,
+          "produzione_q": 19174,
+          "resa_q_ha": 299.6
+        }
+      },
+      "resa_media_q_ha": 299.6,
+      "superficie_max_ha": 64
+    },
+    "ZUCCA": {
+      "nome": "Zucca",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2106,
+          "produzione_q": 271334,
+          "resa_q_ha": 128.8
+        },
+        "2026": {
+          "superficie_ha": 2106,
+          "produzione_q": 281366,
+          "resa_q_ha": 133.6
+        }
+      },
+      "resa_media_q_ha": 131.2,
+      "superficie_max_ha": 2106
+    },
+    "GARLIC": {
+      "nome": "Aglio",
+      "anni": {
+        "2025": {
+          "superficie_ha": 443,
+          "produzione_q": 29440,
+          "resa_q_ha": 66.5
+        }
+      },
+      "resa_media_q_ha": 66.5,
+      "superficie_max_ha": 443
+    },
+    "CICRADIFRE_OPEN": {
+      "nome": "Cicoria o radicchio per consumo fresco in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5151,
+          "produzione_q": 796069,
+          "resa_q_ha": 154.5
+        },
+        "2026": {
+          "superficie_ha": 5151,
+          "produzione_q": 552430,
+          "resa_q_ha": 107.2
+        }
+      },
+      "resa_media_q_ha": 130.9,
+      "superficie_max_ha": 5151
+    },
+    "OTHALEAFSNOB": {
+      "nome": "Altre verdure a foglia o a stelo diverse dalla bietola da costa",
+      "anni": {
+        "2025": {
+          "superficie_ha": 320,
+          "produzione_q": 102465,
+          "resa_q_ha": 320.2
+        }
+      },
+      "resa_media_q_ha": 320.2,
+      "superficie_max_ha": 320
+    },
+    "OFTTOT": {
+      "nome": "Pomodoro da consumo fresco o da mensa",
+      "anni": {
+        "2025": {
+          "superficie_ha": 14,
+          "produzione_q": 4178,
+          "resa_q_ha": 298.4
+        },
+        "2026": {
+          "superficie_ha": 14,
+          "produzione_q": 3753,
+          "resa_q_ha": 268.1
+        }
+      },
+      "resa_media_q_ha": 283.3,
+      "superficie_max_ha": 14
+    },
+    "OFTP": {
+      "nome": "Pomodoro da trasformazione in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2934,
+          "produzione_q": 1766895,
+          "resa_q_ha": 602.2
+        },
+        "2026": {
+          "superficie_ha": 2720,
+          "produzione_q": 1587284,
+          "resa_q_ha": 583.6
+        }
+      },
+      "resa_media_q_ha": 592.9,
+      "superficie_max_ha": 2934
+    },
+    "STRAIEINO": {
+      "nome": "Fragola in piena aria",
+      "anni": {
+        "2025": {
+          "superficie_ha": 40,
+          "produzione_q": 7352,
+          "resa_q_ha": 183.8
+        },
+        "2026": {
+          "superficie_ha": 40,
+          "produzione_q": 8319,
+          "resa_q_ha": 208
+        }
+      },
+      "resa_media_q_ha": 195.9,
+      "superficie_max_ha": 40
+    },
+    "APPLE": {
+      "nome": "Mela",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5571,
+          "produzione_q": 2573521,
+          "resa_q_ha": 461.9
+        },
+        "2026": {
+          "superficie_ha": 5571,
+          "produzione_q": 3002724,
+          "resa_q_ha": 539
+        }
+      },
+      "resa_media_q_ha": 500.5,
+      "superficie_max_ha": 5571
+    },
+    "PLSFRFESHC": {
+      "nome": "Mele per il consumo fresco",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5421,
+          "produzione_q": 2504654,
+          "resa_q_ha": 462
+        },
+        "2026": {
+          "superficie_ha": 5421,
+          "produzione_q": 2917120,
+          "resa_q_ha": 538.1
+        }
+      },
+      "resa_media_q_ha": 500.1,
+      "superficie_max_ha": 5421
+    },
+    "PLSDSIEDFO": {
+      "nome": "Mele destinate alla trasformazione",
+      "anni": {
+        "2025": {
+          "superficie_ha": 150,
+          "produzione_q": 68867,
+          "resa_q_ha": 459.1
+        },
+        "2026": {
+          "superficie_ha": 150,
+          "produzione_q": 85604,
+          "resa_q_ha": 570.7
+        }
+      },
+      "resa_media_q_ha": 514.9,
+      "superficie_max_ha": 150
+    },
+    "QUIN": {
+      "nome": "Cotogno",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1,
+          "produzione_q": 420,
+          "resa_q_ha": 420
+        }
+      },
+      "resa_media_q_ha": 420,
+      "superficie_max_ha": 1
+    },
+    "PEAR": {
+      "nome": "Pera",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1400,
+          "produzione_q": 250074,
+          "resa_q_ha": 178.6
+        },
+        "2026": {
+          "superficie_ha": 1400,
+          "produzione_q": 325386,
+          "resa_q_ha": 232.4
+        }
+      },
+      "resa_media_q_ha": 205.5,
+      "superficie_max_ha": 1400
+    },
+    "ERORSHCO": {
+      "nome": "Pere per il consumo fresco",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1328,
+          "produzione_q": 236616,
+          "resa_q_ha": 178.2
+        },
+        "2026": {
+          "superficie_ha": 1328,
+          "produzione_q": 300676,
+          "resa_q_ha": 226.4
+        }
+      },
+      "resa_media_q_ha": 202.3,
+      "superficie_max_ha": 1328
+    },
+    "ERETNDFOR": {
+      "nome": "Pere destinate alla trasformazione",
+      "anni": {
+        "2025": {
+          "superficie_ha": 72,
+          "produzione_q": 13458,
+          "resa_q_ha": 186.9
+        },
+        "2026": {
+          "superficie_ha": 72,
+          "produzione_q": 24710,
+          "resa_q_ha": 343.2
+        }
+      },
+      "resa_media_q_ha": 265.1,
+      "superficie_max_ha": 72
+    },
+    "PEACH": {
+      "nome": "Pesca",
+      "anni": {
+        "2025": {
+          "superficie_ha": 610,
+          "produzione_q": 121001,
+          "resa_q_ha": 198.4
+        },
+        "2026": {
+          "superficie_ha": 611,
+          "produzione_q": 161007,
+          "resa_q_ha": 263.5
+        }
+      },
+      "resa_media_q_ha": 231,
+      "superficie_max_ha": 611
+    },
+    "ECENEDEDF": {
+      "nome": "Pesche destinate a consumo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 552,
+          "produzione_q": 109466,
+          "resa_q_ha": 198.3
+        },
+        "2026": {
+          "superficie_ha": 552,
+          "produzione_q": 145435,
+          "resa_q_ha": 263.5
+        }
+      },
+      "resa_media_q_ha": 230.9,
+      "superficie_max_ha": 552
+    },
+    "ECENEDEDFTR": {
+      "nome": "Pesche destinate alla trasformazione",
+      "anni": {
+        "2025": {
+          "superficie_ha": 58,
+          "produzione_q": 11535,
+          "resa_q_ha": 198.9
+        },
+        "2026": {
+          "superficie_ha": 59,
+          "produzione_q": 15572,
+          "resa_q_ha": 263.9
+        }
+      },
+      "resa_media_q_ha": 231.4,
+      "superficie_max_ha": 59
+    },
+    "NECTA": {
+      "nome": "Nettarina (pesca noce)",
+      "anni": {
+        "2025": {
+          "superficie_ha": 653,
+          "produzione_q": 116460,
+          "resa_q_ha": 178.3
+        },
+        "2026": {
+          "superficie_ha": 653,
+          "produzione_q": 150977,
+          "resa_q_ha": 231.2
+        }
+      },
+      "resa_media_q_ha": 204.8,
+      "superficie_max_ha": 653
+    },
+    "ETRNSITENDE": {
+      "nome": "Nettarine destinate a consumo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 653,
+          "produzione_q": 116460,
+          "resa_q_ha": 178.3
+        },
+        "2026": {
+          "superficie_ha": 653,
+          "produzione_q": 150977,
+          "resa_q_ha": 231.2
+        }
+      },
+      "resa_media_q_ha": 204.8,
+      "superficie_max_ha": 653
+    },
+    "APRIC": {
+      "nome": "Albicocca",
+      "anni": {
+        "2025": {
+          "superficie_ha": 213,
+          "produzione_q": 21029,
+          "resa_q_ha": 98.7
+        },
+        "2026": {
+          "superficie_ha": 208,
+          "produzione_q": 40740,
+          "resa_q_ha": 195.9
+        }
+      },
+      "resa_media_q_ha": 147.3,
+      "superficie_max_ha": 213
+    },
+    "CHERR": {
+      "nome": "Ciliegia in complesso",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1714,
+          "produzione_q": 36381,
+          "resa_q_ha": 21.2
+        }
+      },
+      "resa_media_q_ha": 21.2,
+      "superficie_max_ha": 1714
+    },
+    "ORCERE": {
+      "nome": "Amarene",
+      "anni": {
+        "2025": {
+          "superficie_ha": 46,
+          "produzione_q": 1086,
+          "resa_q_ha": 23.6
+        },
+        "2026": {
+          "superficie_ha": 34,
+          "produzione_q": 1395,
+          "resa_q_ha": 41
+        }
+      },
+      "resa_media_q_ha": 32.3,
+      "superficie_max_ha": 46
+    },
+    "SWCHERRIES": {
+      "nome": "Ciliegie dolci",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1668,
+          "produzione_q": 35295,
+          "resa_q_ha": 21.2
+        },
+        "2026": {
+          "superficie_ha": 1644,
+          "produzione_q": 102031,
+          "resa_q_ha": 62.1
+        }
+      },
+      "resa_media_q_ha": 41.7,
+      "superficie_max_ha": 1668
+    },
+    "PLUM": {
+      "nome": "Susina/prugna",
+      "anni": {
+        "2025": {
+          "superficie_ha": 367,
+          "produzione_q": 92448,
+          "resa_q_ha": 251.9
+        },
+        "2026": {
+          "superficie_ha": 357,
+          "produzione_q": 106057,
+          "resa_q_ha": 297.1
+        }
+      },
+      "resa_media_q_ha": 274.5,
+      "superficie_max_ha": 367
+    },
+    "MEDLAR": {
+      "nome": "Nespola comune",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1,
+          "produzione_q": 143,
+          "resa_q_ha": 143
+        }
+      },
+      "resa_media_q_ha": 143,
+      "superficie_max_ha": 1
+    },
+    "FIG": {
+      "nome": "Fico",
+      "anni": {
+        "2025": {
+          "superficie_ha": 25,
+          "produzione_q": 1817,
+          "resa_q_ha": 72.7
+        }
+      },
+      "resa_media_q_ha": 72.7,
+      "superficie_max_ha": 25
+    },
+    "KIWI": {
+      "nome": "Kiwi",
+      "anni": {
+        "2025": {
+          "superficie_ha": 2559,
+          "produzione_q": 481451,
+          "resa_q_ha": 188.1
+        },
+        "2026": {
+          "superficie_ha": 2558,
+          "produzione_q": 504346,
+          "resa_q_ha": 197.2
+        }
+      },
+      "resa_media_q_ha": 192.6,
+      "superficie_max_ha": 2559
+    },
+    "LOTU": {
+      "nome": "Loti o kaki",
+      "anni": {
+        "2025": {
+          "superficie_ha": 135,
+          "produzione_q": 31995,
+          "resa_q_ha": 237
+        }
+      },
+      "resa_media_q_ha": 237,
+      "superficie_max_ha": 135
+    },
+    "POMETES": {
+      "nome": "Melograno",
+      "anni": {
+        "2025": {
+          "superficie_ha": 141,
+          "produzione_q": 29452,
+          "resa_q_ha": 208.9
+        }
+      },
+      "resa_media_q_ha": 208.9,
+      "superficie_max_ha": 141
+    },
+    "REDCURRA": {
+      "nome": "Ribes rosso",
+      "anni": {
+        "2025": {
+          "superficie_ha": 8,
+          "produzione_q": 542,
+          "resa_q_ha": 67.8
+        }
+      },
+      "resa_media_q_ha": 67.8,
+      "superficie_max_ha": 8
+    },
+    "BLACKCURRA": {
+      "nome": "Ribes nero",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5,
+          "produzione_q": 430,
+          "resa_q_ha": 86
+        }
+      },
+      "resa_media_q_ha": 86,
+      "superficie_max_ha": 5
+    },
+    "ROUSPBERRI": {
+      "nome": "Lampone",
+      "anni": {
+        "2025": {
+          "superficie_ha": 59,
+          "produzione_q": 9181,
+          "resa_q_ha": 155.6
+        }
+      },
+      "resa_media_q_ha": 155.6,
+      "superficie_max_ha": 59
+    },
+    "BUBRY": {
+      "nome": "Mirtillo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 237,
+          "produzione_q": 27882,
+          "resa_q_ha": 117.6
+        }
+      },
+      "resa_media_q_ha": 117.6,
+      "superficie_max_ha": 237
+    },
+    "CRAT": {
+      "nome": "Ribes",
+      "anni": {
+        "2025": {
+          "superficie_ha": 13,
+          "produzione_q": 972,
+          "resa_q_ha": 74.8
+        }
+      },
+      "resa_media_q_ha": 74.8,
+      "superficie_max_ha": 13
+    },
+    "OTHETFRUITNOR": {
+      "nome": "Altre bacche diverse da sorbo",
+      "anni": {
+        "2025": {
+          "superficie_ha": 57,
+          "produzione_q": 6130,
+          "resa_q_ha": 107.5
+        }
+      },
+      "resa_media_q_ha": 107.5,
+      "superficie_max_ha": 57
+    },
+    "ALMO": {
+      "nome": "Mandorla",
+      "anni": {
+        "2025": {
+          "superficie_ha": 52,
+          "produzione_q": 104,
+          "resa_q_ha": 2
+        },
+        "2026": {
+          "superficie_ha": 52,
+          "produzione_q": 104,
+          "resa_q_ha": 2
+        }
+      },
+      "resa_media_q_ha": 2,
+      "superficie_max_ha": 52
+    },
+    "HAZEL": {
+      "nome": "Nocciola",
+      "anni": {
+        "2025": {
+          "superficie_ha": 862,
+          "produzione_q": 6085,
+          "resa_q_ha": 7.1
+        },
+        "2026": {
+          "superficie_ha": 956,
+          "produzione_q": 10490,
+          "resa_q_ha": 11
+        }
+      },
+      "resa_media_q_ha": 9.1,
+      "superficie_max_ha": 956
+    },
+    "CHEST": {
+      "nome": "Castagne e marroni",
+      "anni": {
+        "2025": {
+          "superficie_ha": 269,
+          "produzione_q": 2515,
+          "resa_q_ha": 9.3
+        }
+      },
+      "resa_media_q_ha": 9.3,
+      "superficie_max_ha": 269
+    },
+    "WALNU": {
+      "nome": "Noci",
+      "anni": {
+        "2025": {
+          "superficie_ha": 1201,
+          "produzione_q": 37497,
+          "resa_q_ha": 31.2
+        }
+      },
+      "resa_media_q_ha": 31.2,
+      "superficie_max_ha": 1201
+    },
+    "OTHNUTSOPI": {
+      "nome": "Altra frutta a guscio diversa dal pistacchio",
+      "anni": {
+        "2025": {
+          "superficie_ha": 27,
+          "produzione_q": 324,
+          "resa_q_ha": 12
+        }
+      },
+      "resa_media_q_ha": 12,
+      "superficie_max_ha": 27
+    },
+    "PGRAPM": {
+      "nome": "Foraggere permanenti - prati permanenti e pascoli",
+      "anni": {
+        "2025": {
+          "superficie_ha": 84313,
+          "produzione_q": 4378696,
+          "resa_q_ha": 51.9
+        }
+      },
+      "resa_media_q_ha": 51.9,
+      "superficie_max_ha": 84313
+    },
+    "POORINGS": {
+      "nome": "Pascoli poveri",
+      "anni": {
+        "2025": {
+          "superficie_ha": 12934,
+          "produzione_q": 253584,
+          "resa_q_ha": 19.6
+        }
+      },
+      "resa_media_q_ha": 19.6,
+      "superficie_max_ha": 12934
+    },
+    "OTHEZINGS": {
+      "nome": "Altri pascoli",
+      "anni": {
+        "2025": {
+          "superficie_ha": 25802,
+          "produzione_q": 489395,
+          "resa_q_ha": 19
+        }
+      },
+      "resa_media_q_ha": 19,
+      "superficie_max_ha": 25802
+    },
+    "PERMGRASSE": {
+      "nome": "Prati permanenti",
+      "anni": {
+        "2025": {
+          "superficie_ha": 45577,
+          "produzione_q": 3635717,
+          "resa_q_ha": 79.8
+        }
+      },
+      "resa_media_q_ha": 79.8,
+      "superficie_max_ha": 45577
+    },
+    "WINEES": {
+      "nome": "Uva da vino",
+      "anni": {
+        "2025": {
+          "superficie_ha": 96363,
+          "produzione_q": 14662869,
+          "resa_q_ha": 152.2
+        },
+        "2026": {
+          "superficie_ha": 96363,
+          "produzione_q": 14662869,
+          "resa_q_ha": 152.2
+        }
+      },
+      "resa_media_q_ha": 152.2,
+      "superficie_max_ha": 96363
+    },
+    "GRAPEDOPWINE": {
+      "nome": "Uve per vini dop",
+      "anni": {
+        "2025": {
+          "superficie_ha": 77393,
+          "produzione_q": 11473826,
+          "resa_q_ha": 148.3
+        }
+      },
+      "resa_media_q_ha": 148.3,
+      "superficie_max_ha": 77393
+    },
+    "GRAPEIGPWINE": {
+      "nome": "Uve per vini igp",
+      "anni": {
+        "2025": {
+          "superficie_ha": 15908,
+          "produzione_q": 2485884,
+          "resa_q_ha": 156.3
+        }
+      },
+      "resa_media_q_ha": 156.3,
+      "superficie_max_ha": 15908
+    },
+    "OTHGRWINODI": {
+      "nome": "Uve per altri vini (escluso dop e igp)",
+      "anni": {
+        "2025": {
+          "superficie_ha": 3062,
+          "produzione_q": 703159,
+          "resa_q_ha": 229.6
+        }
+      },
+      "resa_media_q_ha": 229.6,
+      "superficie_max_ha": 3062
+    },
+    "TABLEGRAPES": {
+      "nome": "Uva da tavola",
+      "anni": {
+        "2025": {
+          "superficie_ha": 70,
+          "produzione_q": 17500,
+          "resa_q_ha": 250
+        },
+        "2026": {
+          "superficie_ha": 70,
+          "produzione_q": 17500,
+          "resa_q_ha": 250
+        }
+      },
+      "resa_media_q_ha": 250,
+      "superficie_max_ha": 70
+    },
+    "OLIVTAB_OIL": {
+      "nome": "Olive da tavola e da olio",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5115,
+          "produzione_q": 70244,
+          "resa_q_ha": 13.7
+        },
+        "2026": {
+          "superficie_ha": 4998,
+          "produzione_q": 70250,
+          "resa_q_ha": 14.1
+        }
+      },
+      "resa_media_q_ha": 13.9,
+      "superficie_max_ha": 5115
+    },
+    "OLIVT": {
+      "nome": "Olive da tavola",
+      "anni": {
+        "2025": {
+          "superficie_ha": 20,
+          "produzione_q": 224,
+          "resa_q_ha": 11.2
+        }
+      },
+      "resa_media_q_ha": 11.2,
+      "superficie_max_ha": 20
+    },
+    "OHROIE": {
+      "nome": "Altre olive",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5095,
+          "produzione_q": 70020,
+          "resa_q_ha": 13.7
+        }
+      },
+      "resa_media_q_ha": 13.7,
+      "superficie_max_ha": 5095
+    },
+    "OLIVO": {
+      "nome": "Olive da olio",
+      "anni": {
+        "2025": {
+          "superficie_ha": 5095,
+          "produzione_q": 70020,
+          "resa_q_ha": 13.7
+        }
+      },
+      "resa_media_q_ha": 13.7,
+      "superficie_max_ha": 5095
+    }
+  }
+}

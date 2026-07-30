@@ -31,13 +31,40 @@ export function urlAssoluto(percorso) {
  * stesso terreno produce sempre la stessa URL: e la condizione perche il link
  * condiviso e la pagina indicizzata siano la stessa risorsa.
  */
-export function percorsoRisultato({ provincia, terreno, superficieHa, irrigazione, comune }) {
+export function percorsoRisultato({
+  provincia,
+  terreno,
+  superficieHa,
+  irrigazione,
+  comune,
+  sabbia,
+  limo,
+  argilla,
+  ph,
+  salinita,
+  calcare,
+  drenaggio,
+}) {
   const params = new URLSearchParams();
   params.set('provincia', provincia);
   params.set('terreno', terreno);
   params.set('superficie', String(superficieHa));
   params.set('irrigazione', irrigazione ? 'si' : 'no');
   if (comune) params.set('comune', comune);
+
+  // I parametri agronomici facoltativi entrano nella URL solo se l'utente li ha
+  // davvero forniti: cosi il caso base produce una sola URL canonica invece di
+  // moltiplicarsi in varianti equivalenti che diluirebbero l'indicizzazione.
+  if (Number.isFinite(sabbia) && Number.isFinite(limo) && Number.isFinite(argilla)) {
+    params.set('sabbia', String(sabbia));
+    params.set('limo', String(limo));
+    params.set('argilla', String(argilla));
+  }
+  if (Number.isFinite(ph)) params.set('ph', String(ph));
+  if (salinita) params.set('salinita', salinita);
+  if (calcare) params.set('calcare', calcare);
+  if (drenaggio) params.set('drenaggio', drenaggio);
+
   return `/risultato?${params.toString()}`;
 }
 

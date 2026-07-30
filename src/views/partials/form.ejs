@@ -1,6 +1,8 @@
 <%
-  // valori: { provincia, terreno, superficie, irrigazione, comune } - tutti opzionali
+  // valori: { provincia, terreno, superficie, irrigazione, comune, sabbia, limo,
+  //           argilla, ph, salinita, calcare, drenaggio } - tutti opzionali
   const v = typeof valori !== 'undefined' && valori ? valori : {};
+  const haAvanzati = v.sabbia != null || v.ph != null || v.salinita || v.calcare || v.drenaggio;
 %>
 <form class="form" action="/risultato" method="get">
   <div class="form__griglia">
@@ -25,7 +27,7 @@
           <option value="<%= p.slug %>" <%= v.provincia === p.slug ? 'selected' : '' %>><%= p.nome %></option>
         <% }); %>
       </select>
-      <span class="campo__aiuto">I dati di resa ISTAT hanno granularita provinciale.</span>
+      <span class="campo__aiuto">Le rese ISTAT sono regionali; la provincia definisce altimetria e comprensori.</span>
     </p>
 
     <p class="campo">
@@ -35,7 +37,7 @@
           <option value="<%= t %>" <%= v.terreno === t ? 'selected' : '' %>><%= t.charAt(0).toUpperCase() + t.slice(1) %></option>
         <% }); %>
       </select>
-      <span class="campo__aiuto">Tessitura prevalente dell'appezzamento.</span>
+      <span class="campo__aiuto">Tessitura prevalente. Hai l'analisi del suolo? Usa i campi avanzati.</span>
     </p>
 
     <p class="campo">
@@ -55,6 +57,83 @@
     <span class="campo__aiuto">Cambia in modo sostanziale le colture proponibili.</span>
   </p>
 
+  <details class="avanzati" <%= haAvanzati ? 'open' : '' %>>
+    <summary>Dati dell'analisi del suolo <span class="campo__nota">(facoltativi, ma migliorano molto il consiglio)</span></summary>
+
+    <p class="avanzati__intro">
+      Se lasci un campo vuoto non viene usato: nessuna coltura viene penalizzata
+      su un dato che non hai fornito.
+    </p>
+
+    <fieldset class="gruppo">
+      <legend>Tessitura da analisi (%)</legend>
+      <p class="gruppo__aiuto">
+        Inserisci tutte e tre le percentuali: hanno la precedenza sulla classe
+        scelta sopra, e il terreno viene classificato secondo il triangolo USDA.
+      </p>
+      <div class="form__griglia form__griglia--stretta">
+        <p class="campo">
+          <label for="sabbia">Sabbia</label>
+          <input id="sabbia" name="sabbia" type="number" inputmode="decimal" min="0" max="100" step="0.1"
+                 value="<%= v.sabbia != null ? v.sabbia : '' %>" placeholder="es. 35">
+        </p>
+        <p class="campo">
+          <label for="limo">Limo</label>
+          <input id="limo" name="limo" type="number" inputmode="decimal" min="0" max="100" step="0.1"
+                 value="<%= v.limo != null ? v.limo : '' %>" placeholder="es. 40">
+        </p>
+        <p class="campo">
+          <label for="argilla">Argilla</label>
+          <input id="argilla" name="argilla" type="number" inputmode="decimal" min="0" max="100" step="0.1"
+                 value="<%= v.argilla != null ? v.argilla : '' %>" placeholder="es. 25">
+        </p>
+      </div>
+      <p class="gruppo__esito" id="esito-tessitura" role="status"></p>
+    </fieldset>
+
+    <div class="form__griglia">
+      <p class="campo">
+        <label for="ph">pH del terreno</label>
+        <input id="ph" name="ph" type="number" inputmode="decimal" min="3" max="10" step="0.1"
+               value="<%= v.ph != null ? v.ph : '' %>" placeholder="es. 7,4">
+        <span class="campo__aiuto">Esclude le colture fuori tolleranza: e il parametro piu selettivo di tutti.</span>
+      </p>
+
+      <p class="campo">
+        <label for="salinita">Salinita</label>
+        <select id="salinita" name="salinita">
+          <option value="">— non rilevata —</option>
+          <option value="assente" <%= v.salinita === 'assente' ? 'selected' : '' %>>Assente</option>
+          <option value="moderata" <%= v.salinita === 'moderata' ? 'selected' : '' %>>Moderata</option>
+          <option value="elevata" <%= v.salinita === 'elevata' ? 'selected' : '' %>>Elevata</option>
+        </select>
+        <span class="campo__aiuto">Rilevante nel Delta del Po e nella fascia litoranea.</span>
+      </p>
+
+      <p class="campo">
+        <label for="calcare">Calcare attivo</label>
+        <select id="calcare" name="calcare">
+          <option value="">— non rilevato —</option>
+          <option value="basso" <%= v.calcare === 'basso' ? 'selected' : '' %>>Basso</option>
+          <option value="medio" <%= v.calcare === 'medio' ? 'selected' : '' %>>Medio</option>
+          <option value="elevato" <%= v.calcare === 'elevato' ? 'selected' : '' %>>Elevato</option>
+        </select>
+        <span class="campo__aiuto">Determina il rischio di clorosi ferrica sulle arboree.</span>
+      </p>
+
+      <p class="campo">
+        <label for="drenaggio">Drenaggio</label>
+        <select id="drenaggio" name="drenaggio">
+          <option value="">— non valutato —</option>
+          <option value="buono" <%= v.drenaggio === 'buono' ? 'selected' : '' %>>Buono</option>
+          <option value="medio" <%= v.drenaggio === 'medio' ? 'selected' : '' %>>Medio</option>
+          <option value="lento" <%= v.drenaggio === 'lento' ? 'selected' : '' %>>Lento, con ristagni</option>
+        </select>
+        <span class="campo__aiuto">Con drenaggio lento gli impianti arborei vengono esclusi.</span>
+      </p>
+    </div>
+  </details>
+
   <p class="form__azioni">
     <button type="submit">Calcola le colture adatte</button>
   </p>
@@ -62,21 +141,42 @@
 
 <script>
   // Miglioramento progressivo: il form funziona identico senza JavaScript,
-  // perche la risoluzione comune -> provincia la fa comunque il server.
+  // perche comune -> provincia e percentuali -> classe USDA li risolve il server.
   (function () {
     var comune = document.getElementById('comune');
     var provincia = document.getElementById('provincia');
     var terreno = document.getElementById('terreno');
-    if (!comune || !provincia || !terreno) return;
 
-    var slugPerSigla = <%- JSON.stringify(Object.fromEntries(province.map(function (p) { return [p.sigla, p.slug]; }))) %>;
+    if (comune && provincia && terreno) {
+      var slugPerSigla = <%- JSON.stringify(Object.fromEntries(province.map(function (p) { return [p.sigla, p.slug]; }))) %>;
+      comune.addEventListener('change', function () {
+        var scelto = comune.options[comune.selectedIndex];
+        var sigla = scelto.getAttribute('data-provincia');
+        if (slugPerSigla[sigla]) provincia.value = slugPerSigla[sigla];
+        var tessitura = scelto.getAttribute('data-terreno');
+        if (tessitura) terreno.value = tessitura;
+      });
+    }
 
-    comune.addEventListener('change', function () {
-      var scelto = comune.options[comune.selectedIndex];
-      var sigla = scelto.getAttribute('data-provincia');
-      if (slugPerSigla[sigla]) provincia.value = slugPerSigla[sigla];
-      var tessitura = scelto.getAttribute('data-terreno');
-      if (tessitura) terreno.value = tessitura;
-    });
+    // Riscontro immediato sulla somma delle percentuali: evita di scoprire
+    // dopo l'invio che l'analisi non somma a 100.
+    var campi = ['sabbia', 'limo', 'argilla'].map(function (id) { return document.getElementById(id); });
+    var esito = document.getElementById('esito-tessitura');
+    if (esito && campi.every(Boolean)) {
+      var aggiorna = function () {
+        var valori = campi.map(function (c) { return parseFloat(String(c.value).replace(',', '.')); });
+        if (valori.some(isNaN)) { esito.textContent = ''; esito.className = 'gruppo__esito'; return; }
+        var somma = Math.round(valori.reduce(function (s, v) { return s + v; }, 0) * 10) / 10;
+        if (Math.abs(somma - 100) > 5) {
+          esito.textContent = 'Somma ' + somma + '%: deve essere 100% (tolleranza 5 punti).';
+          esito.className = 'gruppo__esito gruppo__esito--errore';
+        } else {
+          esito.textContent = 'Somma ' + somma + '%: la classificazione USDA verra calcolata sul risultato.';
+          esito.className = 'gruppo__esito gruppo__esito--ok';
+        }
+      };
+      campi.forEach(function (c) { c.addEventListener('input', aggiorna); });
+      aggiorna();
+    }
   })();
 </script>

@@ -14,7 +14,8 @@ import {
   getProvince,
   getZone,
 } from './data/index.js';
-import { suggerisci } from './lib/matching.js';
+import { LIVELLI_CALCARE, LIVELLI_DRENAGGIO, LIVELLI_SALINITA, suggerisci } from './lib/matching.js';
+import { analizzaTessitura, caratteristicheTessitura, profiloDaClasse } from './lib/tessitura.js';
 import { plvPerEttaro } from './lib/plv.js';
 import {
   ETICHETTE_IRRIGAZIONE,
@@ -57,6 +58,8 @@ app.locals.etichetteIrrigazione = ETICHETTE_IRRIGAZIONE;
 app.locals.urlAssoluto = urlAssoluto;
 app.locals.percorsoRisultato = percorsoRisultato;
 
+const PH_MIN = 3;
+const PH_MAX = 10;
 const SUPERFICIE_MIN = 0.1;
 const SUPERFICIE_MAX = 5000;
 const SUPERFICIE_PREDEFINITA = 10;
@@ -76,11 +79,28 @@ function leggiCriteri(query) {
   if (!provincia && comune) provincia = getProvincia(comune.provincia);
   if (!provincia) errori.push('Provincia non riconosciuta.');
 
-  let terreno = query.terreno ? String(query.terreno).toLowerCase() : null;
-  if (!terreno && comune) terreno = comune.terreno_prevalente;
-  if (!terreno || !TERRENI.includes(terreno)) {
-    errori.push(`Tipo di terreno non riconosciuto. Valori ammessi: ${TERRENI.join(', ')}.`);
-    terreno = null;
+  // Tessitura: le percentuali da analisi del suolo, se ci sono, hanno la
+  // precedenza sulla classe scelta a mano. E il dato piu preciso dei due, e chi
+  // si prende la briga di inserirle si aspetta che vengano usate.
+  const percentuali = ['sabbia', 'limo', 'argilla'].map((k) =>
+    Number.parseFloat(String(query[k] ?? '').replace(',', '.')),
+  );
+  const haPercentuali = percentuali.every((v) => Number.isFinite(v));
+
+  let tessitura = null;
+  if (haPercentuali) {
+    const esito = analizzaTessitura(...percentuali);
+    if (esito.valido) tessitura = esito;
+    else errori.push(esito.errore);
+  }
+
+  if (!tessitura) {
+    let classe = query.terreno ? String(query.terreno).toLowerCase() : null;
+    if (!classe && comune) classe = comune.terreno_prevalente;
+    tessitura = profiloDaClasse(classe);
+    if (!tessitura) {
+      errori.push(`Tipo di terreno non riconosciuto. Valori ammessi: ${TERRENI.join(', ')}.`);
+    }
   }
 
   const superficieGrezza = Number.parseFloat(String(query.superficie ?? '').replace(',', '.'));
@@ -96,17 +116,42 @@ function leggiCriteri(query) {
 
   const irrigazione = ['si', 'sì', 'true', '1', 'on'].includes(String(query.irrigazione ?? '').toLowerCase());
 
-  return { provincia, terreno, superficieHa, irrigazione, comune, errori };
+  // Parametri agronomici facoltativi: se assenti restano null e non incidono su
+  // nessuna coltura. Un valore fuori scala e un errore dichiarato, non un
+  // silenzioso "ignoro e vado avanti".
+  const phGrezzo = Number.parseFloat(String(query.ph ?? '').replace(',', '.'));
+  let ph = null;
+  if (String(query.ph ?? '').trim() !== '') {
+    if (!Number.isFinite(phGrezzo) || phGrezzo < PH_MIN || phGrezzo > PH_MAX) {
+      errori.push(`Il pH deve essere un numero tra ${PH_MIN} e ${PH_MAX}.`);
+    } else {
+      ph = Math.round(phGrezzo * 10) / 10;
+    }
+  }
+
+  const opzionale = (valore, ammessi) => {
+    const v = String(valore ?? '').toLowerCase();
+    return ammessi.includes(v) ? v : null;
+  };
+
+  return {
+    provincia,
+    tessitura,
+    terreno: tessitura?.semplificata ?? null,
+    superficieHa,
+    irrigazione,
+    ph,
+    salinita: opzionale(query.salinita, LIVELLI_SALINITA),
+    calcare: opzionale(query.calcare, LIVELLI_CALCARE),
+    drenaggio: opzionale(query.drenaggio, LIVELLI_DRENAGGIO),
+    comune,
+    errori,
+  };
 }
 
 /** Vista comune a tutte le pagine che mostrano un risultato di calcolo. */
 function costruisciRisultato(criteri) {
-  const esito = suggerisci(getColture(), {
-    provincia: criteri.provincia,
-    terreno: criteri.terreno,
-    superficieHa: criteri.superficieHa,
-    irrigazione: criteri.irrigazione,
-  });
+  const esito = suggerisci(getColture(), criteri);
 
   const luogo = criteri.comune ? criteri.comune.nome : `provincia di ${criteri.provincia.nome}`;
   const percorso = percorsoRisultato({
@@ -115,9 +160,16 @@ function costruisciRisultato(criteri) {
     superficieHa: criteri.superficieHa,
     irrigazione: criteri.irrigazione,
     comune: criteri.comune?.slug,
+    ...(criteri.tessitura?.valido
+      ? { sabbia: criteri.tessitura.sabbia, limo: criteri.tessitura.limo, argilla: criteri.tessitura.argilla }
+      : {}),
+    ph: criteri.ph ?? undefined,
+    salinita: criteri.salinita ?? undefined,
+    calcare: criteri.calcare ?? undefined,
+    drenaggio: criteri.drenaggio ?? undefined,
   });
 
-  return { esito, luogo, percorso };
+  return { esito, luogo, percorso, noteTessitura: caratteristicheTessitura(criteri.tessitura) };
 }
 
 // ---------------------------------------------------------------- rotte
@@ -150,7 +202,7 @@ app.get('/risultato', (req, res) => {
     });
   }
 
-  const { esito, luogo, percorso } = costruisciRisultato(criteri);
+  const { esito, luogo, percorso, noteTessitura } = costruisciRisultato(criteri);
   const nomiColture = esito.principali.map((r) => r.coltura.nome).join(', ');
 
   res.set('Cache-Control', 'public, max-age=300, s-maxage=3600');
@@ -162,6 +214,7 @@ app.get('/risultato', (req, res) => {
     esito,
     luogo,
     percorso,
+    noteTessitura,
     province: getProvince(),
     comuni: getComuni(),
     terreni: TERRENI,
@@ -183,12 +236,13 @@ app.get('/cosa-coltivare-a/:comune', (req, res, next) => {
   const provincia = getProvincia(comune.provincia);
   const criteri = {
     provincia,
+    tessitura: profiloDaClasse(comune.terreno_prevalente),
     terreno: comune.terreno_prevalente,
     superficieHa: SUPERFICIE_PREDEFINITA,
     irrigazione: true,
     comune,
   };
-  const { esito, percorso } = costruisciRisultato(criteri);
+  const { esito, percorso, noteTessitura } = costruisciRisultato(criteri);
   const nomiColture = esito.principali.map((r) => r.coltura.nome).join(', ');
 
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
@@ -202,6 +256,7 @@ app.get('/cosa-coltivare-a/:comune', (req, res, next) => {
     criteri,
     esito,
     percorso,
+    noteTessitura,
     zone: getZone(),
     province: getProvince(),
     comuni: getComuni(),
@@ -217,12 +272,13 @@ app.get('/cosa-coltivare-in/:provincia', (req, res, next) => {
 
   const criteri = {
     provincia,
+    tessitura: profiloDaClasse(provincia.terreni_prevalenti[0]),
     terreno: provincia.terreni_prevalenti[0],
     superficieHa: SUPERFICIE_PREDEFINITA,
     irrigazione: true,
     comune: null,
   };
-  const { esito, percorso } = costruisciRisultato(criteri);
+  const { esito, percorso, noteTessitura } = costruisciRisultato(criteri);
   const nomiColture = esito.principali.map((r) => r.coltura.nome).join(', ');
 
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
@@ -236,6 +292,7 @@ app.get('/cosa-coltivare-in/:provincia', (req, res, next) => {
     criteri,
     esito,
     percorso,
+    noteTessitura,
     zone: getZone(),
     province: getProvince(),
     comuni: getComuni(),
