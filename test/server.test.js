@@ -132,6 +132,16 @@ describe('file per i crawler', () => {
 });
 
 describe('dati strutturati e crawl budget', () => {
+  it('la home espone il tag di verifica per Google Search Console', async () => {
+    // Se questo tag sparisce, il sito esce da Search Console e si perdono i dati
+    // di ricerca senza nessun segnale visibile. Il test lo blocca.
+    const r = await prendi('/');
+    assert.match(
+      r.corpo,
+      /<meta name="google-site-verification" content="j_lo4dfiCd4wq7JrG_j0p1eD-2Q7zyasHK7FZhxKIOs">/,
+    );
+  });
+
   it('la home dichiara l identita del sito', async () => {
     const r = await prendi('/');
     assert.match(r.corpo, /"@type":"WebSite"/);

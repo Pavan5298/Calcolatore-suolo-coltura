@@ -6,6 +6,12 @@
 <title><%= titolo %></title>
 <meta name="description" content="<%= descrizione %>">
 <link rel="canonical" href="<%= canonico %>">
+<%# Verifica della proprieta del sito per Google Search Console. Google la
+    controlla sulla home, ma il tag sta nel partial condiviso cosi resta su
+    tutte le pagine: se un domani si verifica un sottopercorso o si cambia
+    l'impaginazione della home, la verifica non decade in silenzio. Non e un
+    dato riservato, e pubblico nell'HTML di chiunque visiti il sito. %>
+<meta name="google-site-verification" content="j_lo4dfiCd4wq7JrG_j0p1eD-2Q7zyasHK7FZhxKIOs">
 <% if (typeof noindex !== 'undefined' && noindex) { %>
 <meta name="robots" content="noindex, follow">
 <% } %>
