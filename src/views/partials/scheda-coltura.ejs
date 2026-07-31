@@ -100,6 +100,20 @@
     </details>
   <% } %>
 
+  <% if (c.indice_prezzi_corrente) { %>
+    <p class="mercato">
+      <span class="mercato__gruppo"><%= c.prezzo_gruppo_nome %></span>
+      <% const i = c.indice_prezzi_corrente; %>
+      <% if (i.scarto_da_picco <= -20) { %>
+        prezzi in fase calante: indice <%= i.indice %> (base 2020 = 100), <%= Math.abs(i.scarto_da_picco) %>% sotto il picco recente.
+      <% } else if (i.scarto_da_picco >= -5) { %>
+        prezzi ai massimi recenti: indice <%= i.indice %> (base 2020 = 100).
+      <% } else { %>
+        indice prezzi <%= i.indice %> (base 2020 = 100), <%= Math.abs(i.scarto_da_picco) %>% sotto il picco recente.
+      <% } %>
+    </p>
+  <% } %>
+
   <p class="scheda__metodo">
     PLV: <%= r.plvHa.metodo %>.
     Costi: <%= c.costi_fonte %>, stima di inquadramento.

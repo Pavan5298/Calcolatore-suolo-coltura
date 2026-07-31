@@ -72,6 +72,46 @@ export function percorsoRisultato({
   return `/risultato?${params.toString()}`;
 }
 
+/**
+ * Identita del sito, ripetuta su ogni pagina.
+ * Serve a Google per collegare tra loro le pagine come un'unica entita e per
+ * abilitare la sitelinks searchbox.
+ */
+export function jsonLdSito() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITO.nome,
+    url: urlAssoluto('/'),
+    inLanguage: 'it-IT',
+    description: SITO.descrizione,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: urlAssoluto('/colture?q={search_term_string}') },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+/**
+ * Briciole di pane.
+ * Non sono decorazione: comunicano a Google la gerarchia del sito e fanno
+ * comparire il percorso al posto della URL nei risultati di ricerca.
+ * @param {{nome:string, percorso:string}[]} voci
+ */
+export function jsonLdBriciole(voci) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: voci.map((v, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: v.nome,
+      item: urlAssoluto(v.percorso),
+    })),
+  };
+}
+
 /** Dati strutturati per la pagina risultato: elenco ordinato di colture con stima. */
 export function jsonLdRisultato({ titolo, descrizione, percorso, colture }) {
   return {
@@ -91,38 +131,64 @@ export function jsonLdRisultato({ titolo, descrizione, percorso, colture }) {
 }
 
 /** Dati strutturati per la landing di coltura. */
-export function jsonLdColtura(coltura, plvHa) {
+export function jsonLdColtura(coltura, plvHa, aggiornato) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `${coltura.nome} in Veneto: PLV per ettaro e requisiti del terreno`,
+    headline: `${coltura.nome} in Veneto: margine per ettaro, terreni e costi`,
     about: {
       '@type': 'Thing',
       name: coltura.nome,
       alternateName: coltura.nome_scientifico,
     },
     url: urlAssoluto(`/colture/${coltura.slug}`),
-    inLanguage: 'it',
+    mainEntityOfPage: urlAssoluto(`/colture/${coltura.slug}`),
+    inLanguage: 'it-IT',
     isAccessibleForFree: true,
-    description: `PLV indicativa ${plvHa.tipica} euro/ha in annata tipica. Terreni adatti: ${coltura.terreni.join(', ')}.`,
+    dateModified: aggiornato,
+    description: `${coltura.nome}: margine lordo indicativo ${coltura.margine_lordo_eur_ha} euro/ha, PLV ${plvHa.tipica} euro/ha, ${coltura.manodopera_ore_ha} ore/ha di lavoro. Terreni adatti: ${coltura.terreni.join(', ')}.`,
+    publisher: { '@type': 'Organization', name: SITO.nome, url: urlAssoluto('/') },
   };
 }
 
 /** FAQPage per le landing di zona: intercetta le ricerche in forma di domanda. */
 export function jsonLdFaqZona({ zona, colture }) {
   const elenco = colture.map((r) => r.coltura.nome).join(', ');
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `Cosa coltivare a ${zona}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `Le colture piu adatte ai terreni di ${zona} secondo il nostro modello sono: ${elenco}. La scelta dipende dalla tessitura del terreno, dalla disponibilita di irrigazione e dalla superficie.`,
-        },
+  const migliore = colture[0];
+  const perOra = [...colture].sort((a, b) => (b.coltura.margine_eur_ora ?? 0) - (a.coltura.margine_eur_ora ?? 0))[0];
+
+  const domande = [
+    {
+      '@type': 'Question',
+      name: `Cosa coltivare a ${zona}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Le colture piu adatte ai terreni di ${zona} sono: ${elenco}. La scelta dipende dalla tessitura del terreno, dal pH, dalla disponibilita di irrigazione, dalla superficie e dalla manodopera disponibile.`,
       },
-    ],
-  };
+    },
+  ];
+
+  if (migliore) {
+    domande.push({
+      '@type': 'Question',
+      name: `Quanto rende un ettaro di terreno a ${zona}?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Secondo le rese ISTAT per il Veneto, a ${zona} il ${migliore.coltura.nome.toLowerCase()} produce una PLV indicativa di ${migliore.plvHa.tipica} euro per ettaro in annata tipica, con un margine lordo di circa ${migliore.margineHa} euro per ettaro una volta dedotti i costi di produzione. La PLV non e il reddito: non include i costi ne i contributi PAC.`,
+      },
+    });
+  }
+
+  if (perOra) {
+    domande.push({
+      '@type': 'Question',
+      name: `Qual e la coltura piu redditizia a ${zona} per chi ha poca manodopera?`,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Tra le colture adatte a ${zona}, il ${perOra.coltura.nome.toLowerCase()} offre il miglior margine per ora di lavoro: circa ${perOra.coltura.margine_eur_ora} euro all'ora, con ${perOra.coltura.manodopera_ore_ha} ore per ettaro. Il margine per ettaro e il margine per ora danno spesso classifiche diverse.`,
+      },
+    });
+  }
+
+  return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: domande };
 }

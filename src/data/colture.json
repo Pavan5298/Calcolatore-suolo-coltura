@@ -3,7 +3,8 @@
     "descrizione": "GENERATO da scripts/costruisci-colture.mjs. Non modificare a mano: la sorgente editabile e la TABELLA in quello script.",
     "rese": "ISTAT DCSP_COLTIVAZIONI, Veneto, anni 2025-2026",
     "rese_nota": "L'export e a livello REGIONALE (Veneto), non provinciale: le rese qui dentro valgono per l'intera regione.",
-    "prezzi": "Stime di settore, in attesa di import da ISTAT DCSP_PREZZIAGR",
+    "prezzi": "Livelli in euro/quintale: stime di settore. Volatilita e fase di mercato: ISTAT DCSP_PREZZIAGR, indice base 2020=100.",
+    "prezzi_nota": "L'indice ISTAT non contiene prezzi assoluti: da un numero indice non si ricava un livello. Fornisce pero la volatilita misurata, che sostituisce il coefficiente dichiarato a occhio, e la fase di mercato corrente.",
     "costi": "Costi di produzione e fabbisogno di manodopera: stime di inquadramento tecnico, non rilevazioni. Da validare su RICA.",
     "unita": {
       "resa_q_ha": "quintali per ettaro (1 q = 100 kg)",
@@ -21,7 +22,7 @@
     },
     "avvertenza": "La PLV non e il reddito: non tiene conto dei costi di produzione. Colture con PLV elevata possono avere marginalita inferiore a colture con PLV modesta. I contributi PAC non sono inclusi.",
     "colture": 83,
-    "generato": "2026-07-30"
+    "generato": "2026-07-31"
   },
   "colture": [
     {
@@ -67,9 +68,9 @@
       "superficie_veneto_ha": 140425,
       "diffusione": 0.99,
       "resa_q_ha": {
-        "scarsa": 67.6,
+        "scarsa": 74.9,
         "tipica": 96.5,
-        "buona": 125.5
+        "buona": 118.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -81,7 +82,7 @@
         "tipico": 22,
         "buono": 28
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 1450,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 12,
@@ -91,9 +92,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1486,
+        "scarsa": 1647,
         "tipica": 2123,
-        "buona": 2760
+        "buona": 2599
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -145,9 +156,9 @@
       "superficie_veneto_ha": 10,
       "diffusione": 0.2,
       "resa_q_ha": {
-        "scarsa": 11.4,
+        "scarsa": 12.6,
         "tipica": 16.3,
-        "buona": 21.2
+        "buona": 20
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -158,7 +169,7 @@
         "tipico": 95,
         "buono": 130
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 900,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 14,
@@ -168,9 +179,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1084,
+        "scarsa": 1202,
         "tipica": 1549,
-        "buona": 2014
+        "buona": 1896
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -228,9 +249,9 @@
       "superficie_veneto_ha": 91220,
       "diffusione": 0.96,
       "resa_q_ha": {
-        "scarsa": 40.8,
+        "scarsa": 45.4,
         "tipica": 58.3,
-        "buona": 75.8
+        "buona": 71.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -242,7 +263,7 @@
         "tipico": 23,
         "buono": 29
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.222,
       "costi_eur_ha": 900,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -252,9 +273,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 939,
+        "scarsa": 1043,
         "tipica": 1341,
-        "buona": 1743
+        "buona": 1639
+      },
+      "prezzo_gruppo_istat": "WHEATSPEL",
+      "prezzo_gruppo_nome": "Frumento",
+      "volatilita_prezzo": 0.19,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 110,
+        "scarto_da_media_recente": -12.3,
+        "scarto_da_picco": -42.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -310,9 +341,9 @@
       "superficie_veneto_ha": 14208,
       "diffusione": 0.8,
       "resa_q_ha": {
-        "scarsa": 35.9,
+        "scarsa": 39.9,
         "tipica": 51.3,
-        "buona": 66.7
+        "buona": 62.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -324,7 +355,7 @@
         "tipico": 27,
         "buono": 34
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.222,
       "costi_eur_ha": 950,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -334,9 +365,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 969,
+        "scarsa": 1078,
         "tipica": 1385,
-        "buona": 1801
+        "buona": 1692
+      },
+      "prezzo_gruppo_istat": "WHEATSPEL",
+      "prezzo_gruppo_nome": "Frumento",
+      "volatilita_prezzo": 0.19,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 110,
+        "scarto_da_media_recente": -12.3,
+        "scarto_da_picco": -42.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -389,9 +430,9 @@
       "superficie_veneto_ha": 48,
       "diffusione": 0.33,
       "resa_q_ha": {
-        "scarsa": 31.4,
+        "scarsa": 34.8,
         "tipica": 44.8,
-        "buona": 58.2
+        "buona": 54.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -403,7 +444,7 @@
         "tipico": 23,
         "buono": 30
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 650,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 7,
@@ -413,9 +454,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 721,
+        "scarsa": 799,
         "tipica": 1030,
-        "buona": 1339
+        "buona": 1261
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -466,9 +517,9 @@
       "superficie_veneto_ha": 4154,
       "diffusione": 0.7,
       "resa_q_ha": {
-        "scarsa": 36.8,
+        "scarsa": 40.7,
         "tipica": 52.5,
-        "buona": 68.3
+        "buona": 64.3
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -479,7 +530,7 @@
         "tipico": 42,
         "buono": 55
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 1900,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 18,
@@ -489,9 +540,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1544,
+        "scarsa": 1711,
         "tipica": 2205,
-        "buona": 2867
+        "buona": 2699
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -547,9 +608,9 @@
       "superficie_veneto_ha": 4378,
       "diffusione": 0.7,
       "resa_q_ha": {
-        "scarsa": 38.6,
+        "scarsa": 42.8,
         "tipica": 55.1,
-        "buona": 71.6
+        "buona": 67.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -561,7 +622,7 @@
         "tipico": 20,
         "buono": 25
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 850,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 9,
@@ -571,9 +632,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 771,
+        "scarsa": 855,
         "tipica": 1102,
-        "buona": 1433
+        "buona": 1349
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -632,9 +703,9 @@
       "superficie_veneto_ha": 12626,
       "diffusione": 0.79,
       "resa_q_ha": {
-        "scarsa": 34.7,
+        "scarsa": 38.4,
         "tipica": 49.5,
-        "buona": 64.4
+        "buona": 60.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -646,7 +717,7 @@
         "tipico": 21,
         "buono": 26
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 800,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -656,9 +727,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 728,
+        "scarsa": 807,
         "tipica": 1040,
-        "buona": 1352
+        "buona": 1273
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -716,9 +797,9 @@
       "superficie_veneto_ha": 346,
       "diffusione": 0.49,
       "resa_q_ha": {
-        "scarsa": 25.2,
+        "scarsa": 27.9,
         "tipica": 36,
-        "buona": 46.8
+        "buona": 44.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -730,7 +811,7 @@
         "tipico": 23,
         "buono": 29
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 700,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 7,
@@ -740,9 +821,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 580,
+        "scarsa": 643,
         "tipica": 828,
-        "buona": 1076
+        "buona": 1013
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -799,9 +890,9 @@
       "superficie_veneto_ha": 2725,
       "diffusione": 0.66,
       "resa_q_ha": {
-        "scarsa": 23.8,
+        "scarsa": 26.4,
         "tipica": 34,
-        "buona": 44.2
+        "buona": 41.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -813,7 +904,7 @@
         "tipico": 20,
         "buono": 25
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.224,
       "costi_eur_ha": 600,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 7,
@@ -823,9 +914,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 476,
+        "scarsa": 528,
         "tipica": 680,
-        "buona": 884
+        "buona": 832
+      },
+      "prezzo_gruppo_istat": "CEREA",
+      "prezzo_gruppo_nome": "Cereali",
+      "volatilita_prezzo": 0.193,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 119,
+        "scarto_da_media_recente": -10.5,
+        "scarto_da_picco": -39.9
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -880,9 +981,9 @@
       "superficie_veneto_ha": 18,
       "diffusione": 0.25,
       "resa_q_ha": {
-        "scarsa": 11.3,
+        "scarsa": 13.2,
         "tipica": 15.7,
-        "buona": 20.1
+        "buona": 18.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -893,7 +994,7 @@
         "tipico": 1000,
         "buono": 1400
       },
-      "variabilita_plv": 0.28,
+      "variabilita_plv": 0.161,
       "costi_eur_ha": 8000,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 350,
@@ -903,9 +1004,19 @@
       "anni_alla_produzione": 3,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 11304,
+        "scarsa": 13172,
         "tipica": 15700,
-        "buona": 20096
+        "buona": 18228
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.16,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -960,9 +1071,9 @@
       "superficie_veneto_ha": 3496,
       "diffusione": 0.68,
       "resa_q_ha": {
-        "scarsa": 25.1,
+        "scarsa": 29.3,
         "tipica": 34.9,
-        "buona": 44.7
+        "buona": 40.5
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -973,7 +1084,7 @@
         "tipico": 280,
         "buono": 340
       },
-      "variabilita_plv": 0.28,
+      "variabilita_plv": 0.161,
       "costi_eur_ha": 6500,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 250,
@@ -983,9 +1094,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 7036,
+        "scarsa": 8199,
         "tipica": 9772,
-        "buona": 12508
+        "buona": 11345
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.16,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1042,9 +1163,9 @@
       "superficie_veneto_ha": 19,
       "diffusione": 0.25,
       "resa_q_ha": {
-        "scarsa": 27.9,
+        "scarsa": 32.6,
         "tipica": 38.8,
-        "buona": 49.7
+        "buona": 45
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1055,7 +1176,7 @@
         "tipico": 60,
         "buono": 85
       },
-      "variabilita_plv": 0.28,
+      "variabilita_plv": 0.161,
       "costi_eur_ha": 1350,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 12,
@@ -1065,9 +1186,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1676,
+        "scarsa": 1953,
         "tipica": 2328,
-        "buona": 2980
+        "buona": 2703
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.16,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1123,9 +1254,9 @@
       "superficie_veneto_ha": 152,
       "diffusione": 0.42,
       "resa_q_ha": {
-        "scarsa": 103.4,
+        "scarsa": 120.5,
         "tipica": 143.6,
-        "buona": 183.8
+        "buona": 166.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1136,7 +1267,7 @@
         "tipico": 12,
         "buono": 18
       },
-      "variabilita_plv": 0.28,
+      "variabilita_plv": 0.161,
       "costi_eur_ha": 1200,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 15,
@@ -1146,9 +1277,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 1241,
+        "scarsa": 1446,
         "tipica": 1723,
-        "buona": 2205
+        "buona": 2000
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.16,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1202,9 +1343,9 @@
       "superficie_veneto_ha": 4734,
       "diffusione": 0.71,
       "resa_q_ha": {
-        "scarsa": 399.9,
+        "scarsa": 466,
         "tipica": 555.4,
-        "buona": 710.9
+        "buona": 644.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1215,7 +1356,7 @@
         "tipico": 4.8,
         "buono": 5.6
       },
-      "variabilita_plv": 0.28,
+      "variabilita_plv": 0.161,
       "costi_eur_ha": 2200,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 16,
@@ -1225,9 +1366,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 1920,
+        "scarsa": 2237,
         "tipica": 2666,
-        "buona": 3412
+        "buona": 3095
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.16,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1287,9 +1438,9 @@
       "superficie_veneto_ha": 8807,
       "diffusione": 0.76,
       "resa_q_ha": {
-        "scarsa": 140.9,
+        "scarsa": 149.6,
         "tipica": 187.9,
-        "buona": 234.9
+        "buona": 226.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1300,7 +1451,7 @@
         "tipico": 14,
         "buono": 18
       },
-      "variabilita_plv": 0.25,
+      "variabilita_plv": 0.204,
       "costi_eur_ha": 1600,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 22,
@@ -1310,9 +1461,19 @@
       "anni_alla_produzione": 1,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1973,
+        "scarsa": 2094,
         "tipica": 2631,
-        "buona": 3289
+        "buona": 3168
+      },
+      "prezzo_gruppo_istat": "FORAGANTS",
+      "prezzo_gruppo_nome": "Foraggere",
+      "volatilita_prezzo": 0.188,
+      "volatilita_resa_stimata": 0.15,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 3.5,
+        "scarto_da_picco": -23
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1368,9 +1529,9 @@
       "superficie_veneto_ha": 49054,
       "diffusione": 0.91,
       "resa_q_ha": {
-        "scarsa": 427.7,
+        "scarsa": 454,
         "tipica": 570.3,
-        "buona": 712.9
+        "buona": 686.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1381,7 +1542,7 @@
         "tipico": 5.8,
         "buono": 7.5
       },
-      "variabilita_plv": 0.25,
+      "variabilita_plv": 0.204,
       "costi_eur_ha": 2300,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 12,
@@ -1391,9 +1552,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 2481,
+        "scarsa": 2633,
         "tipica": 3308,
-        "buona": 4135
+        "buona": 3983
+      },
+      "prezzo_gruppo_istat": "FORAGANTS",
+      "prezzo_gruppo_nome": "Foraggere",
+      "volatilita_prezzo": 0.188,
+      "volatilita_resa_stimata": 0.15,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 3.5,
+        "scarto_da_picco": -23
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1450,9 +1621,9 @@
       "superficie_veneto_ha": 20702,
       "diffusione": 0.83,
       "resa_q_ha": {
-        "scarsa": 90.1,
+        "scarsa": 95.6,
         "tipica": 120.1,
-        "buona": 150.1
+        "buona": 144.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1463,7 +1634,7 @@
         "tipico": 18,
         "buono": 24
       },
-      "variabilita_plv": 0.25,
+      "variabilita_plv": 0.204,
       "costi_eur_ha": 1700,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 26,
@@ -1473,9 +1644,19 @@
       "anni_alla_produzione": 1,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1622,
+        "scarsa": 1721,
         "tipica": 2162,
-        "buona": 2703
+        "buona": 2603
+      },
+      "prezzo_gruppo_istat": "FORAGANTS",
+      "prezzo_gruppo_nome": "Foraggere",
+      "volatilita_prezzo": 0.188,
+      "volatilita_resa_stimata": 0.15,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 3.5,
+        "scarto_da_picco": -23
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1534,9 +1715,9 @@
       "superficie_veneto_ha": 45577,
       "diffusione": 0.9,
       "resa_q_ha": {
-        "scarsa": 59.9,
+        "scarsa": 63.5,
         "tipica": 79.8,
-        "buona": 99.8
+        "buona": 96.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1547,7 +1728,7 @@
         "tipico": 14,
         "buono": 18
       },
-      "variabilita_plv": 0.25,
+      "variabilita_plv": 0.204,
       "costi_eur_ha": 900,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 16,
@@ -1557,9 +1738,19 @@
       "anni_alla_produzione": 1,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 838,
+        "scarsa": 889,
         "tipica": 1117,
-        "buona": 1396
+        "buona": 1345
+      },
+      "prezzo_gruppo_istat": "FORAGANTS",
+      "prezzo_gruppo_nome": "Foraggere",
+      "volatilita_prezzo": 0.188,
+      "volatilita_resa_stimata": 0.15,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 3.5,
+        "scarto_da_picco": -23
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1616,9 +1807,9 @@
       "superficie_veneto_ha": 59,
       "diffusione": 0.34,
       "resa_q_ha": {
-        "scarsa": 101.1,
+        "scarsa": 121.4,
         "tipica": 155.6,
-        "buona": 210.1
+        "buona": 189.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1629,7 +1820,7 @@
         "tipico": 900,
         "buono": 1300
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 106430,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 1100,
@@ -1639,9 +1830,19 @@
       "anni_alla_produzione": 3,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 91026,
+        "scarsa": 109231,
         "tipica": 140040,
-        "buona": 189054
+        "buona": 170849
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1700,9 +1901,9 @@
       "superficie_veneto_ha": 237,
       "diffusione": 0.46,
       "resa_q_ha": {
-        "scarsa": 76.4,
+        "scarsa": 91.7,
         "tipica": 117.6,
-        "buona": 158.8
+        "buona": 143.5
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1713,7 +1914,7 @@
         "tipico": 750,
         "buono": 1100
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 65268,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 900,
@@ -1723,9 +1924,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 57330,
+        "scarsa": 68796,
         "tipica": 88200,
-        "buona": 119070
+        "buona": 107604
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1785,9 +1996,9 @@
       "superficie_veneto_ha": 40,
       "diffusione": 0.31,
       "resa_q_ha": {
-        "scarsa": 127.3,
+        "scarsa": 152.8,
         "tipica": 195.9,
-        "buona": 264.5
+        "buona": 239
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1799,7 +2010,7 @@
         "tipico": 380,
         "buono": 550
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 55832,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 900,
@@ -1809,9 +2020,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 48387,
+        "scarsa": 58065,
         "tipica": 74442,
-        "buona": 100497
+        "buona": 90819
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1866,9 +2087,9 @@
       "superficie_veneto_ha": 13,
       "diffusione": 0.22,
       "resa_q_ha": {
-        "scarsa": 48.6,
+        "scarsa": 58.3,
         "tipica": 74.8,
-        "buona": 101
+        "buona": 91.3
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1879,7 +2100,7 @@
         "tipico": 600,
         "buono": 900
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 33211,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 700,
@@ -1889,9 +2110,19 @@
       "anni_alla_produzione": 3,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 29172,
+        "scarsa": 35006,
         "tipica": 44880,
-        "buona": 60588
+        "buona": 54754
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -1947,9 +2178,9 @@
       "superficie_veneto_ha": 141,
       "diffusione": 0.42,
       "resa_q_ha": {
-        "scarsa": 135.8,
+        "scarsa": 162.9,
         "tipica": 208.9,
-        "buona": 282
+        "buona": 254.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -1960,7 +2191,7 @@
         "tipico": 120,
         "buono": 180
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 17046,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 250,
@@ -1970,9 +2201,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 16294,
+        "scarsa": 19553,
         "tipica": 25068,
-        "buona": 33842
+        "buona": 30583
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2027,9 +2268,9 @@
       "superficie_veneto_ha": 70,
       "diffusione": 0.36,
       "resa_q_ha": {
-        "scarsa": 162.5,
+        "scarsa": 195,
         "tipica": 250,
-        "buona": 337.5
+        "buona": 305
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2041,7 +2282,7 @@
         "tipico": 95,
         "buono": 150
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 16150,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 700,
@@ -2051,9 +2292,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 15438,
+        "scarsa": 18525,
         "tipica": 23750,
-        "buona": 32063
+        "buona": 28975
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2112,9 +2363,9 @@
       "superficie_veneto_ha": 5571,
       "diffusione": 0.72,
       "resa_q_ha": {
-        "scarsa": 325.3,
+        "scarsa": 390.4,
         "tipica": 500.5,
-        "buona": 675.7
+        "buona": 610.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2126,7 +2377,7 @@
         "tipico": 40,
         "buono": 60
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 13614,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 500,
@@ -2136,9 +2387,19 @@
       "anni_alla_produzione": 5,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 13013,
+        "scarsa": 15616,
         "tipica": 20020,
-        "buona": 27027
+        "buona": 24424
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2195,9 +2456,9 @@
       "superficie_veneto_ha": 135,
       "diffusione": 0.41,
       "resa_q_ha": {
-        "scarsa": 154.1,
+        "scarsa": 184.9,
         "tipica": 237,
-        "buona": 320
+        "buona": 289.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2208,7 +2469,7 @@
         "tipico": 75,
         "buono": 115
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 12087,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 220,
@@ -2218,9 +2479,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 11554,
+        "scarsa": 13865,
         "tipica": 17775,
-        "buona": 23996
+        "buona": 21686
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2276,9 +2547,9 @@
       "superficie_veneto_ha": 25,
       "diffusione": 0.27,
       "resa_q_ha": {
-        "scarsa": 47.3,
+        "scarsa": 56.7,
         "tipica": 72.7,
-        "buona": 98.1
+        "buona": 88.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2289,7 +2560,7 @@
         "tipico": 240,
         "buono": 360
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 11865,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 300,
@@ -2299,9 +2570,19 @@
       "anni_alla_produzione": 3,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 11341,
+        "scarsa": 13609,
         "tipica": 17448,
-        "buona": 23555
+        "buona": 21287
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2358,9 +2639,9 @@
       "superficie_veneto_ha": 367,
       "diffusione": 0.5,
       "resa_q_ha": {
-        "scarsa": 178.4,
+        "scarsa": 214.1,
         "tipica": 274.5,
-        "buona": 370.6
+        "buona": 334.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2372,7 +2653,7 @@
         "tipico": 55,
         "buono": 85
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 10267,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 280,
@@ -2382,9 +2663,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 9814,
+        "scarsa": 11776,
         "tipica": 15098,
-        "buona": 20382
+        "buona": 18420
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2439,9 +2730,9 @@
       "superficie_veneto_ha": 611,
       "diffusione": 0.54,
       "resa_q_ha": {
-        "scarsa": 150.2,
+        "scarsa": 180.2,
         "tipica": 231,
-        "buona": 311.9
+        "buona": 281.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2453,7 +2744,7 @@
         "tipico": 60,
         "buono": 95
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 9425,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 400,
@@ -2463,9 +2754,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 9009,
+        "scarsa": 10811,
         "tipica": 13860,
-        "buona": 18711
+        "buona": 16909
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2520,9 +2821,9 @@
       "superficie_veneto_ha": 2559,
       "diffusione": 0.66,
       "resa_q_ha": {
-        "scarsa": 125.2,
+        "scarsa": 150.2,
         "tipica": 192.6,
-        "buona": 260
+        "buona": 235
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2534,7 +2835,7 @@
         "tipico": 70,
         "buono": 110
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 9168,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 400,
@@ -2544,9 +2845,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8763,
+        "scarsa": 10516,
         "tipica": 13482,
-        "buona": 18201
+        "buona": 16448
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2603,9 +2914,9 @@
       "superficie_veneto_ha": 653,
       "diffusione": 0.54,
       "resa_q_ha": {
-        "scarsa": 133.1,
+        "scarsa": 159.7,
         "tipica": 204.8,
-        "buona": 276.5
+        "buona": 249.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2617,7 +2928,7 @@
         "tipico": 65,
         "buono": 100
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 9052,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 420,
@@ -2627,9 +2938,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8653,
+        "scarsa": 10383,
         "tipica": 13312,
-        "buona": 17971
+        "buona": 16241
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2683,9 +3004,9 @@
       "superficie_veneto_ha": 213,
       "diffusione": 0.45,
       "resa_q_ha": {
-        "scarsa": 95.7,
+        "scarsa": 114.9,
         "tipica": 147.3,
-        "buona": 198.9
+        "buona": 179.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2697,7 +3018,7 @@
         "tipico": 85,
         "buono": 130
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 8514,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 320,
@@ -2707,9 +3028,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8139,
+        "scarsa": 9766,
         "tipica": 12521,
-        "buona": 16903
+        "buona": 15276
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2766,9 +3097,9 @@
       "superficie_veneto_ha": 1201,
       "diffusione": 0.6,
       "resa_q_ha": {
-        "scarsa": 20.3,
+        "scarsa": 24.3,
         "tipica": 31.2,
-        "buona": 42.1
+        "buona": 38.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2779,7 +3110,7 @@
         "tipico": 260,
         "buono": 380
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 4462,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 60,
@@ -2789,9 +3120,19 @@
       "anni_alla_produzione": 8,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5273,
+        "scarsa": 6327,
         "tipica": 8112,
-        "buona": 10951
+        "buona": 9897
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2848,9 +3189,9 @@
       "superficie_veneto_ha": 1400,
       "diffusione": 0.61,
       "resa_q_ha": {
-        "scarsa": 133.6,
+        "scarsa": 160.3,
         "tipica": 205.5,
-        "buona": 277.4
+        "buona": 250.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2862,7 +3203,7 @@
         "tipico": 50,
         "buono": 80
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 6987,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 400,
@@ -2872,9 +3213,19 @@
       "anni_alla_produzione": 5,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 6679,
+        "scarsa": 8015,
         "tipica": 10275,
-        "buona": 13871
+        "buona": 12536
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -2933,9 +3284,9 @@
       "superficie_veneto_ha": 1668,
       "diffusione": 0.62,
       "resa_q_ha": {
-        "scarsa": 27.1,
+        "scarsa": 32.5,
         "tipica": 41.7,
-        "buona": 56.3
+        "buona": 50.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -2947,7 +3298,7 @@
         "tipico": 240,
         "buono": 380
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 6805,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 550,
@@ -2957,9 +3308,19 @@
       "anni_alla_produzione": 5,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 6505,
+        "scarsa": 7806,
         "tipica": 10008,
-        "buona": 13511
+        "buona": 12210
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3018,9 +3379,9 @@
       "superficie_veneto_ha": 96363,
       "diffusione": 0.96,
       "resa_q_ha": {
-        "scarsa": 98.9,
+        "scarsa": 120.4,
         "tipica": 152.2,
-        "buona": 205.5
+        "buona": 184
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3032,7 +3393,7 @@
         "tipico": 60,
         "buono": 110
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.209,
       "costi_eur_ha": 5936,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 250,
@@ -3042,9 +3403,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5936,
+        "scarsa": 7223,
         "tipica": 9132,
-        "buona": 12328
+        "buona": 11041
+      },
+      "prezzo_gruppo_istat": "WINE",
+      "prezzo_gruppo_nome": "Vino",
+      "volatilita_prezzo": 0.052,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 111,
+        "scarto_da_media_recente": 0.7,
+        "scarto_da_picco": -3.5
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3101,9 +3472,9 @@
       "superficie_veneto_ha": 46,
       "diffusione": 0.32,
       "resa_q_ha": {
-        "scarsa": 21,
+        "scarsa": 25.2,
         "tipica": 32.3,
-        "buona": 43.6
+        "buona": 39.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3115,7 +3486,7 @@
         "tipico": 120,
         "buono": 180
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 2636,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 120,
@@ -3125,9 +3496,19 @@
       "anni_alla_produzione": 4,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 2519,
+        "scarsa": 3023,
         "tipica": 3876,
-        "buona": 5233
+        "buona": 4729
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3181,9 +3562,9 @@
       "superficie_veneto_ha": 269,
       "diffusione": 0.47,
       "resa_q_ha": {
-        "scarsa": 6,
+        "scarsa": 7.3,
         "tipica": 9.3,
-        "buona": 12.6
+        "buona": 11.3
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3194,7 +3575,7 @@
         "tipico": 280,
         "buono": 420
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 1432,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 120,
@@ -3204,9 +3585,19 @@
       "anni_alla_produzione": 8,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1693,
+        "scarsa": 2031,
         "tipica": 2604,
-        "buona": 3515
+        "buona": 3177
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3265,9 +3656,9 @@
       "superficie_veneto_ha": 956,
       "diffusione": 0.58,
       "resa_q_ha": {
-        "scarsa": 5.9,
+        "scarsa": 7.1,
         "tipica": 9.1,
-        "buona": 12.3
+        "buona": 11.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3279,7 +3670,7 @@
         "tipico": 300,
         "buono": 450
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 1583,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 70,
@@ -3289,9 +3680,19 @@
       "anni_alla_produzione": 6,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1775,
+        "scarsa": 2129,
         "tipica": 2730,
-        "buona": 3686
+        "buona": 3331
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3348,9 +3749,9 @@
       "superficie_veneto_ha": 5095,
       "diffusione": 0.72,
       "resa_q_ha": {
-        "scarsa": 8.9,
+        "scarsa": 9.5,
         "tipica": 13.7,
-        "buona": 18.5
+        "buona": 17.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3361,7 +3762,7 @@
         "tipico": 120,
         "buono": 180
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.309,
       "costi_eur_ha": 1019,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 150,
@@ -3371,9 +3772,19 @@
       "anni_alla_produzione": 5,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1069,
+        "scarsa": 1136,
         "tipica": 1644,
-        "buona": 2219
+        "buona": 2152
+      },
+      "prezzo_gruppo_istat": "OLIVE",
+      "prezzo_gruppo_nome": "Olio d'oliva",
+      "volatilita_prezzo": 0.273,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 177,
+        "scarto_da_media_recente": -5.5,
+        "scarto_da_picco": -18.4
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3427,9 +3838,9 @@
       "superficie_veneto_ha": 52,
       "diffusione": 0.33,
       "resa_q_ha": {
-        "scarsa": 1.3,
+        "scarsa": 1.6,
         "tipica": 2,
-        "buona": 2.7
+        "buona": 2.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3441,7 +3852,7 @@
         "tipico": 450,
         "buono": 650
       },
-      "variabilita_plv": 0.35,
+      "variabilita_plv": 0.22,
       "costi_eur_ha": 540,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 60,
@@ -3451,9 +3862,19 @@
       "anni_alla_produzione": 5,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 585,
+        "scarsa": 702,
         "tipica": 900,
-        "buona": 1215
+        "buona": 1098
+      },
+      "prezzo_gruppo_istat": "FRUIT",
+      "prezzo_gruppo_nome": "Frutta",
+      "volatilita_prezzo": 0.096,
+      "volatilita_resa_stimata": 0.24,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 145,
+        "scarto_da_media_recente": 13.7,
+        "scarto_da_picco": -11.6
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3511,9 +3932,9 @@
       "superficie_veneto_ha": 431,
       "diffusione": 0.51,
       "resa_q_ha": {
-        "scarsa": 36.6,
+        "scarsa": 43.1,
         "tipica": 52.3,
-        "buona": 68
+        "buona": 61.5
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3525,7 +3946,7 @@
         "tipico": 160,
         "buono": 230
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 4500,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 110,
@@ -3535,9 +3956,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5858,
+        "scarsa": 6904,
         "tipica": 8368,
-        "buona": 10878
+        "buona": 9832
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3596,9 +4027,9 @@
       "superficie_veneto_ha": 4,
       "diffusione": 0.14,
       "resa_q_ha": {
-        "scarsa": 16.4,
+        "scarsa": 19.3,
         "tipica": 23.4,
-        "buona": 30.4
+        "buona": 27.5
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3610,7 +4041,7 @@
         "tipico": 260,
         "buono": 380
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 2800,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 45,
@@ -3620,9 +4051,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 4259,
+        "scarsa": 5019,
         "tipica": 6084,
-        "buona": 7909
+        "buona": 7149
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3679,9 +4120,9 @@
       "superficie_veneto_ha": 13,
       "diffusione": 0.22,
       "resa_q_ha": {
-        "scarsa": 17.5,
+        "scarsa": 20.6,
         "tipica": 25,
-        "buona": 32.5
+        "buona": 29.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3693,7 +4134,7 @@
         "tipico": 130,
         "buono": 180
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 1500,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 16,
@@ -3703,9 +4144,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 2275,
+        "scarsa": 2681,
         "tipica": 3250,
-        "buona": 4225
+        "buona": 3819
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3761,9 +4212,9 @@
       "superficie_veneto_ha": 14,
       "diffusione": 0.23,
       "resa_q_ha": {
-        "scarsa": 32.1,
+        "scarsa": 37.8,
         "tipica": 45.8,
-        "buona": 59.5
+        "buona": 53.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3775,7 +4226,7 @@
         "tipico": 36,
         "buono": 48
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 700,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -3785,9 +4236,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1154,
+        "scarsa": 1360,
         "tipica": 1649,
-        "buona": 2144
+        "buona": 1938
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3840,9 +4301,9 @@
       "superficie_veneto_ha": 142693,
       "diffusione": 1,
       "resa_q_ha": {
-        "scarsa": 25.1,
+        "scarsa": 29.6,
         "tipica": 35.9,
-        "buona": 46.7
+        "buona": 42.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3854,7 +4315,7 @@
         "tipico": 45,
         "buono": 58
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 950,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 9,
@@ -3864,9 +4325,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 1131,
+        "scarsa": 1333,
         "tipica": 1616,
-        "buona": 2101
+        "buona": 1899
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -3922,9 +4393,9 @@
       "superficie_veneto_ha": 4592,
       "diffusione": 0.71,
       "resa_q_ha": {
-        "scarsa": 22.4,
+        "scarsa": 26.4,
         "tipica": 32,
-        "buona": 41.6
+        "buona": 37.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -3936,7 +4407,7 @@
         "tipico": 42,
         "buono": 54
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 750,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -3946,9 +4417,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 941,
+        "scarsa": 1109,
         "tipica": 1344,
-        "buona": 1747
+        "buona": 1579
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4004,9 +4485,9 @@
       "superficie_veneto_ha": 2128,
       "diffusione": 0.64,
       "resa_q_ha": {
-        "scarsa": 21.6,
+        "scarsa": 25.4,
         "tipica": 30.8,
-        "buona": 40
+        "buona": 36.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4018,7 +4499,7 @@
         "tipico": 45,
         "buono": 56
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 800,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -4028,9 +4509,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 970,
+        "scarsa": 1143,
         "tipica": 1386,
-        "buona": 1802
+        "buona": 1629
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4086,9 +4577,9 @@
       "superficie_veneto_ha": 182,
       "diffusione": 0.44,
       "resa_q_ha": {
-        "scarsa": 25.6,
+        "scarsa": 30.2,
         "tipica": 36.6,
-        "buona": 47.6
+        "buona": 43
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4100,7 +4591,7 @@
         "tipico": 32,
         "buono": 42
       },
-      "variabilita_plv": 0.3,
+      "variabilita_plv": 0.175,
       "costi_eur_ha": 750,
       "costi_fonte": "stima tecnica assoluta",
       "manodopera_ore_ha": 8,
@@ -4110,9 +4601,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 820,
+        "scarsa": 966,
         "tipica": 1171,
-        "buona": 1522
+        "buona": 1376
+      },
+      "prezzo_gruppo_istat": "INDUSLCRO",
+      "prezzo_gruppo_nome": "Piante industriali",
+      "volatilita_prezzo": 0.101,
+      "volatilita_resa_stimata": 0.18,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 131,
+        "scarto_da_media_recente": 2.6,
+        "scarto_da_picco": -12.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4167,9 +4668,9 @@
       "superficie_veneto_ha": 19,
       "diffusione": 0.25,
       "resa_q_ha": {
-        "scarsa": 151.3,
+        "scarsa": 197.9,
         "tipica": 252.1,
-        "buona": 352.9
+        "buona": 306.3
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4181,7 +4682,7 @@
         "tipico": 140,
         "buono": 200
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 25412,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 300,
@@ -4191,9 +4692,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 21176,
+        "scarsa": 27706,
         "tipica": 35294,
-        "buona": 49412
+        "buona": 42882
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4248,9 +4759,9 @@
       "superficie_veneto_ha": 36,
       "diffusione": 0.3,
       "resa_q_ha": {
-        "scarsa": 219.2,
+        "scarsa": 286.8,
         "tipica": 365.3,
-        "buona": 511.4
+        "buona": 443.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4262,7 +4773,7 @@
         "tipico": 85,
         "buono": 130
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 22357,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 550,
@@ -4272,9 +4783,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 18631,
+        "scarsa": 24375,
         "tipica": 31051,
-        "buona": 43471
+        "buona": 37727
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4330,9 +4851,9 @@
       "superficie_veneto_ha": 67,
       "diffusione": 0.35,
       "resa_q_ha": {
-        "scarsa": 229.7,
+        "scarsa": 300.6,
         "tipica": 382.9,
-        "buona": 536.1
+        "buona": 465.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4344,7 +4865,7 @@
         "tipico": 70,
         "buono": 110
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 19298,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 500,
@@ -4354,9 +4875,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 16082,
+        "scarsa": 21040,
         "tipica": 26803,
-        "buona": 37524
+        "buona": 32566
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4412,9 +4943,9 @@
       "superficie_veneto_ha": 16,
       "diffusione": 0.24,
       "resa_q_ha": {
-        "scarsa": 263.9,
+        "scarsa": 345.2,
         "tipica": 439.8,
-        "buona": 615.7
+        "buona": 534.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4425,7 +4956,7 @@
         "tipico": 55,
         "buono": 85
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 17416,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 450,
@@ -4435,9 +4966,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 14513,
+        "scarsa": 18988,
         "tipica": 24189,
-        "buona": 33865
+        "buona": 29390
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4494,9 +5035,9 @@
       "superficie_veneto_ha": 1741,
       "diffusione": 0.63,
       "resa_q_ha": {
-        "scarsa": 42.8,
+        "scarsa": 56,
         "tipica": 71.4,
-        "buona": 100
+        "buona": 86.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4508,7 +5049,7 @@
         "tipico": 320,
         "buono": 450
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 16451,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 400,
@@ -4518,9 +5059,19 @@
       "anni_alla_produzione": 3,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 13709,
+        "scarsa": 17936,
         "tipica": 22848,
-        "buona": 31987
+        "buona": 27760
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4576,9 +5127,9 @@
       "superficie_veneto_ha": 9,
       "diffusione": 0.19,
       "resa_q_ha": {
-        "scarsa": 190.1,
+        "scarsa": 248.7,
         "tipica": 316.8,
-        "buona": 443.5
+        "buona": 384.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4589,7 +5140,7 @@
         "tipico": 70,
         "buono": 110
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 15967,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 300,
@@ -4599,9 +5150,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 13306,
+        "scarsa": 17408,
         "tipica": 22176,
-        "buona": 31046
+        "buona": 26944
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4656,9 +5217,9 @@
       "superficie_veneto_ha": 32,
       "diffusione": 0.29,
       "resa_q_ha": {
-        "scarsa": 209.3,
+        "scarsa": 273.9,
         "tipica": 348.9,
-        "buona": 488.5
+        "buona": 423.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4669,7 +5230,7 @@
         "tipico": 60,
         "buono": 90
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 15072,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 350,
@@ -4679,9 +5240,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 12560,
+        "scarsa": 16433,
         "tipica": 20934,
-        "buona": 29308
+        "buona": 25435
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4738,9 +5309,9 @@
       "superficie_veneto_ha": 23,
       "diffusione": 0.27,
       "resa_q_ha": {
-        "scarsa": 184.7,
+        "scarsa": 241.7,
         "tipica": 307.9,
-        "buona": 431.1
+        "buona": 374.1
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4752,7 +5323,7 @@
         "tipico": 65,
         "buono": 95
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 14410,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 180,
@@ -4762,9 +5333,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 12008,
+        "scarsa": 15711,
         "tipica": 20014,
-        "buona": 28020
+        "buona": 24317
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4819,9 +5400,9 @@
       "superficie_veneto_ha": 14,
       "diffusione": 0.23,
       "resa_q_ha": {
-        "scarsa": 170,
+        "scarsa": 222.4,
         "tipica": 283.3,
-        "buona": 396.6
+        "buona": 344.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4833,7 +5414,7 @@
         "tipico": 70,
         "buono": 110
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 14278,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 450,
@@ -4843,9 +5424,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 11899,
+        "scarsa": 15567,
         "tipica": 19831,
-        "buona": 27763
+        "buona": 24095
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4896,9 +5487,9 @@
       "superficie_veneto_ha": 443,
       "diffusione": 0.51,
       "resa_q_ha": {
-        "scarsa": 39.9,
+        "scarsa": 52.2,
         "tipica": 66.5,
-        "buona": 93.1
+        "buona": 80.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4909,7 +5500,7 @@
         "tipico": 250,
         "buono": 340
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 11970,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 400,
@@ -4919,9 +5510,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 9975,
+        "scarsa": 13051,
         "tipica": 16625,
-        "buona": 23275
+        "buona": 20199
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -4979,9 +5580,9 @@
       "superficie_veneto_ha": 180,
       "diffusione": 0.44,
       "resa_q_ha": {
-        "scarsa": 156.9,
+        "scarsa": 205.3,
         "tipica": 261.5,
-        "buona": 366.1
+        "buona": 317.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -4993,7 +5594,7 @@
         "tipico": 60,
         "buono": 90
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 11297,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 250,
@@ -5003,9 +5604,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 9414,
+        "scarsa": 12317,
         "tipica": 15690,
-        "buona": 21966
+        "buona": 19063
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5061,9 +5672,9 @@
       "superficie_veneto_ha": 595,
       "diffusione": 0.54,
       "resa_q_ha": {
-        "scarsa": 284.8,
+        "scarsa": 372.6,
         "tipica": 474.7,
-        "buona": 664.6
+        "buona": 576.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5075,7 +5686,7 @@
         "tipico": 32,
         "buono": 48
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 10937,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 90,
@@ -5085,9 +5696,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 9114,
+        "scarsa": 11924,
         "tipica": 15190,
-        "buona": 21266
+        "buona": 18456
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5142,9 +5763,9 @@
       "superficie_veneto_ha": 2200,
       "diffusione": 0.65,
       "resa_q_ha": {
-        "scarsa": 149.5,
+        "scarsa": 195.5,
         "tipica": 249.1,
-        "buona": 348.7
+        "buona": 302.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5156,7 +5777,7 @@
         "tipico": 60,
         "buono": 90
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 10761,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 500,
@@ -5166,9 +5787,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8968,
+        "scarsa": 11733,
         "tipica": 14946,
-        "buona": 20924
+        "buona": 18159
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5223,9 +5854,9 @@
       "superficie_veneto_ha": 372,
       "diffusione": 0.5,
       "resa_q_ha": {
-        "scarsa": 174.7,
+        "scarsa": 228.6,
         "tipica": 291.2,
-        "buona": 407.7
+        "buona": 353.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5237,7 +5868,7 @@
         "tipico": 50,
         "buono": 75
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 10483,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 250,
@@ -5247,9 +5878,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8736,
+        "scarsa": 11430,
         "tipica": 14560,
-        "buona": 20384
+        "buona": 17690
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5304,9 +5945,9 @@
       "superficie_veneto_ha": 40,
       "diffusione": 0.31,
       "resa_q_ha": {
-        "scarsa": 172.4,
+        "scarsa": 225.6,
         "tipica": 287.4,
-        "buona": 402.4
+        "buona": 349.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5318,7 +5959,7 @@
         "tipico": 50,
         "buono": 75
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 10346,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 200,
@@ -5328,9 +5969,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8622,
+        "scarsa": 11280,
         "tipica": 14370,
-        "buona": 20118
+        "buona": 17460
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5387,9 +6038,9 @@
       "superficie_veneto_ha": 315,
       "diffusione": 0.48,
       "resa_q_ha": {
-        "scarsa": 163.6,
+        "scarsa": 214,
         "tipica": 272.6,
-        "buona": 381.6
+        "buona": 331.2
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5400,7 +6051,7 @@
         "tipico": 50,
         "buono": 75
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 9814,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 300,
@@ -5410,9 +6061,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8178,
+        "scarsa": 10700,
         "tipica": 13630,
-        "buona": 19082
+        "buona": 16560
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5467,9 +6128,9 @@
       "superficie_veneto_ha": 64,
       "diffusione": 0.35,
       "resa_q_ha": {
-        "scarsa": 179.8,
+        "scarsa": 235.2,
         "tipica": 299.6,
-        "buona": 419.4
+        "buona": 364
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5480,7 +6141,7 @@
         "tipico": 45,
         "buono": 68
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 9707,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 250,
@@ -5490,9 +6151,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 8089,
+        "scarsa": 10583,
         "tipica": 13482,
-        "buona": 18875
+        "buona": 16381
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5550,9 +6221,9 @@
       "superficie_veneto_ha": 4022,
       "diffusione": 0.7,
       "resa_q_ha": {
-        "scarsa": 253.1,
+        "scarsa": 302.9,
         "tipica": 421.9,
-        "buona": 590.7
+        "buona": 540.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5564,7 +6235,7 @@
         "tipico": 26,
         "buono": 36
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.282,
       "costi_eur_ha": 7898,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 80,
@@ -5574,9 +6245,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 6581,
+        "scarsa": 7876,
         "tipica": 10969,
-        "buona": 15357
+        "buona": 14062
+      },
+      "prezzo_gruppo_istat": "POTAT",
+      "prezzo_gruppo_nome": "Patate",
+      "volatilita_prezzo": 0.249,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 175,
+        "scarto_da_media_recente": -0.6,
+        "scarto_da_picco": -16.3
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5634,9 +6315,9 @@
       "superficie_veneto_ha": 254,
       "diffusione": 0.46,
       "resa_q_ha": {
-        "scarsa": 145.4,
+        "scarsa": 190.2,
         "tipica": 242.3,
-        "buona": 339.2
+        "buona": 294.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5648,7 +6329,7 @@
         "tipico": 45,
         "buono": 70
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 7851,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 180,
@@ -5658,9 +6339,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 6542,
+        "scarsa": 8560,
         "tipica": 10904,
-        "buona": 15266
+        "buona": 13248
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5715,9 +6406,9 @@
       "superficie_veneto_ha": 201,
       "diffusione": 0.45,
       "resa_q_ha": {
-        "scarsa": 80.8,
+        "scarsa": 105.7,
         "tipica": 134.7,
-        "buona": 188.6
+        "buona": 163.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5728,7 +6419,7 @@
         "tipico": 80,
         "buono": 120
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 7759,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 150,
@@ -5738,9 +6429,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 6466,
+        "scarsa": 8459,
         "tipica": 10776,
-        "buona": 15086
+        "buona": 13093
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5798,9 +6499,9 @@
       "superficie_veneto_ha": 195,
       "diffusione": 0.44,
       "resa_q_ha": {
-        "scarsa": 188.3,
+        "scarsa": 246.3,
         "tipica": 313.8,
-        "buona": 439.3
+        "buona": 381.3
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5812,7 +6513,7 @@
         "tipico": 32,
         "buono": 48
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 7230,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 150,
@@ -5822,9 +6523,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 6025,
+        "scarsa": 7883,
         "tipica": 10042,
-        "buona": 14059
+        "buona": 12201
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5877,9 +6588,9 @@
       "superficie_veneto_ha": 5151,
       "diffusione": 0.72,
       "resa_q_ha": {
-        "scarsa": 78.5,
+        "scarsa": 102.8,
         "tipica": 130.9,
-        "buona": 183.3
+        "buona": 159
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5891,7 +6602,7 @@
         "tipico": 75,
         "buono": 105
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 7069,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 350,
@@ -5901,9 +6612,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5891,
+        "scarsa": 7707,
         "tipica": 9818,
-        "buona": 13745
+        "buona": 11929
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -5956,9 +6677,9 @@
       "superficie_veneto_ha": 353,
       "diffusione": 0.49,
       "resa_q_ha": {
-        "scarsa": 311.9,
+        "scarsa": 408,
         "tipica": 519.8,
-        "buona": 727.7
+        "buona": 631.6
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -5969,7 +6690,7 @@
         "tipico": 18,
         "buono": 28
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 6736,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 150,
@@ -5979,9 +6700,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5614,
+        "scarsa": 7344,
         "tipica": 9356,
-        "buona": 13098
+        "buona": 11368
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6038,9 +6769,9 @@
       "superficie_veneto_ha": 114,
       "diffusione": 0.4,
       "resa_q_ha": {
-        "scarsa": 110.1,
+        "scarsa": 144,
         "tipica": 183.5,
-        "buona": 256.9
+        "buona": 223
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6051,7 +6782,7 @@
         "tipico": 50,
         "buono": 75
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 6606,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 40,
@@ -6061,9 +6792,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 5505,
+        "scarsa": 7202,
         "tipica": 9175,
-        "buona": 12845
+        "buona": 11148
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6118,9 +6859,9 @@
       "superficie_veneto_ha": 17,
       "diffusione": 0.24,
       "resa_q_ha": {
-        "scarsa": 129.3,
+        "scarsa": 169.2,
         "tipica": 215.5,
-        "buona": 301.7
+        "buona": 261.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6131,7 +6872,7 @@
         "tipico": 42,
         "buono": 62
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 6517,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 90,
@@ -6141,9 +6882,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5431,
+        "scarsa": 7105,
         "tipica": 9051,
-        "buona": 12671
+        "buona": 10997
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6196,9 +6947,9 @@
       "superficie_veneto_ha": 28,
       "diffusione": 0.28,
       "resa_q_ha": {
-        "scarsa": 107.9,
+        "scarsa": 141.1,
         "tipica": 179.8,
-        "buona": 251.7
+        "buona": 218.5
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6210,7 +6961,7 @@
         "tipico": 50,
         "buono": 75
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 6473,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 220,
@@ -6220,9 +6971,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5394,
+        "scarsa": 7057,
         "tipica": 8990,
-        "buona": 12586
+        "buona": 10923
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6277,9 +7038,9 @@
       "superficie_veneto_ha": 793,
       "diffusione": 0.56,
       "resa_q_ha": {
-        "scarsa": 176.2,
+        "scarsa": 230.6,
         "tipica": 293.7,
-        "buona": 411.2
+        "buona": 356.8
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6291,7 +7052,7 @@
         "tipico": 30,
         "buono": 45
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 6344,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 110,
@@ -6301,9 +7062,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5287,
+        "scarsa": 6917,
         "tipica": 8811,
-        "buona": 12335
+        "buona": 10705
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6361,9 +7132,9 @@
       "superficie_veneto_ha": 1313,
       "diffusione": 0.6,
       "resa_q_ha": {
-        "scarsa": 209.2,
+        "scarsa": 273.7,
         "tipica": 348.7,
-        "buona": 488.2
+        "buona": 423.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6375,7 +7146,7 @@
         "tipico": 24,
         "buono": 36
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 6026,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 120,
@@ -6385,9 +7156,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 5021,
+        "scarsa": 6570,
         "tipica": 8369,
-        "buona": 11717
+        "buona": 10168
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6439,9 +7220,9 @@
       "superficie_veneto_ha": 33,
       "diffusione": 0.3,
       "resa_q_ha": {
-        "scarsa": 43.8,
+        "scarsa": 57.3,
         "tipica": 73,
-        "buona": 102.2
+        "buona": 88.7
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6453,7 +7234,7 @@
         "tipico": 110,
         "buono": 170
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 5782,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 200,
@@ -6463,9 +7244,19 @@
       "anni_alla_produzione": 2,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 4818,
+        "scarsa": 6304,
         "tipica": 8030,
-        "buona": 11242
+        "buona": 9756
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6519,9 +7310,9 @@
       "superficie_veneto_ha": 2934,
       "diffusione": 0.67,
       "resa_q_ha": {
-        "scarsa": 355.7,
+        "scarsa": 465.4,
         "tipica": 592.9,
-        "buona": 830.1
+        "buona": 720.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6533,7 +7324,7 @@
         "tipico": 12,
         "buono": 14.5
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 5123,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 45,
@@ -6543,9 +7334,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 4269,
+        "scarsa": 5585,
         "tipica": 7115,
-        "buona": 9961
+        "buona": 8645
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6602,9 +7403,9 @@
       "superficie_veneto_ha": 1329,
       "diffusione": 0.6,
       "resa_q_ha": {
-        "scarsa": 23.4,
+        "scarsa": 30.6,
         "tipica": 39,
-        "buona": 54.6
+        "buona": 47.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6616,7 +7417,7 @@
         "tipico": 110,
         "buono": 160
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 3089,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 60,
@@ -6626,9 +7427,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 2574,
+        "scarsa": 3368,
         "tipica": 4290,
-        "buona": 6006
+        "buona": 5212
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6681,9 +7492,9 @@
       "superficie_veneto_ha": 2106,
       "diffusione": 0.64,
       "resa_q_ha": {
-        "scarsa": 78.7,
+        "scarsa": 103,
         "tipica": 131.2,
-        "buona": 183.7
+        "buona": 159.4
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6695,7 +7506,7 @@
         "tipico": 26,
         "buono": 34
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 2456,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 120,
@@ -6705,9 +7516,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": false,
       "plv_eur_ha": {
-        "scarsa": 2047,
+        "scarsa": 2678,
         "tipica": 3411,
-        "buona": 4775
+        "buona": 4144
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,
@@ -6763,9 +7584,9 @@
       "superficie_veneto_ha": 2010,
       "diffusione": 0.64,
       "resa_q_ha": {
-        "scarsa": 36,
+        "scarsa": 47.1,
         "tipica": 60,
-        "buona": 84
+        "buona": 72.9
       },
       "resa_fonte": "istat",
       "resa_anni": [
@@ -6776,7 +7597,7 @@
         "tipico": 48,
         "buono": 65
       },
-      "variabilita_plv": 0.4,
+      "variabilita_plv": 0.215,
       "costi_eur_ha": 2074,
       "costi_fonte": "quota tipica di categoria sulla PLV",
       "manodopera_ore_ha": 15,
@@ -6786,9 +7607,19 @@
       "anni_alla_produzione": null,
       "contratto_filiera": true,
       "plv_eur_ha": {
-        "scarsa": 1728,
+        "scarsa": 2261,
         "tipica": 2880,
-        "buona": 4032
+        "buona": 3499
+      },
+      "prezzo_gruppo_istat": "FRESHETABL",
+      "prezzo_gruppo_nome": "Ortaggi freschi",
+      "volatilita_prezzo": 0.125,
+      "volatilita_resa_stimata": 0.22,
+      "indice_prezzi_corrente": {
+        "periodo": "2026-03",
+        "indice": 151,
+        "scarto_da_media_recente": 11.8,
+        "scarto_da_picco": -13.7
       },
       "unita_resa_speciale": null,
       "unita_prezzo_speciale": null,

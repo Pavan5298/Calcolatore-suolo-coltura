@@ -183,8 +183,7 @@ code {
 .campo__aiuto { font-size: .82rem; color: var(--testo-tenue); }
 
 .campo select,
-.campo input[type="number"],
-.condividi input {
+.campo input[type="number"] {
   font: inherit;
   padding: .55rem .65rem;
   border: 1px solid var(--bordo);
@@ -231,8 +230,6 @@ button:hover, .bottone:hover { background: var(--verde-scuro); color: #fff; }
   button:hover, .bottone:hover { color: #10170f; }
 }
 
-.condividi { margin: 1.25rem 0 0; max-width: 34rem; }
-.condividi label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: .3rem; }
 
 /* ------------------------------------------------------------------- passi */
 
@@ -542,3 +539,15 @@ button:hover, .bottone:hover { background: var(--verde-scuro); color: #fff; }
 }
 .vincoli { white-space: nowrap; }
 .vincoli .etichetta { font-size: .68rem; }
+
+.mercato {
+  margin: 0;
+  font-size: .82rem;
+  color: var(--testo-tenue);
+  padding: .5rem .7rem;
+  background: var(--fondo);
+  border-radius: 8px;
+  border-left: 3px solid var(--grano);
+}
+.mercato__gruppo { font-weight: 600; color: var(--testo); }
+.mercato__gruppo::after { content: ' —'; }

@@ -131,6 +131,48 @@ describe('file per i crawler', () => {
   });
 });
 
+describe('dati strutturati e crawl budget', () => {
+  it('la home dichiara l identita del sito', async () => {
+    const r = await prendi('/');
+    assert.match(r.corpo, /"@type":"WebSite"/);
+  });
+
+  it('le landing di zona espongono FAQ e briciole di pane', async () => {
+    const r = await prendi('/cosa-coltivare-a/adria');
+    assert.match(r.corpo, /"@type":"FAQPage"/);
+    assert.match(r.corpo, /"@type":"BreadcrumbList"/);
+    // le FAQ devono coprire le domande che la gente cerca davvero
+    assert.match(r.corpo, /Quanto rende un ettaro/);
+    assert.match(r.corpo, /poca manodopera/);
+  });
+
+  it('le schede coltura espongono Article con data di aggiornamento', async () => {
+    const r = await prendi('/colture/mais');
+    assert.match(r.corpo, /"@type":"Article"/);
+    assert.match(r.corpo, /"dateModified":"\d{4}-\d{2}-\d{2}"/);
+  });
+
+  it('robots.txt protegge il crawl budget dalle varianti del risultato', async () => {
+    // La combinatoria dei parametri e enorme: scansionarla brucerebbe il budget
+    // su pagine quasi identiche invece che sulle landing.
+    const r = await prendi('/robots.txt');
+    assert.match(r.corpo, /Disallow: \/risultato\?/);
+  });
+
+  it('la sitemap dichiara lastmod e priorita', async () => {
+    const r = await prendi('/sitemap.xml');
+    assert.match(r.corpo, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
+    assert.match(r.corpo, /<priority>1\.0<\/priority>/);
+    // le landing di zona e coltura devono avere priorita superiore alle pagine di servizio
+    assert.match(r.corpo, /cosa-coltivare-in\/rovigo<\/loc><lastmod>[^<]+<\/lastmod><changefreq>monthly<\/changefreq><priority>0\.9/);
+  });
+
+  it('comprime le risposte HTML', async () => {
+    const risposta = await fetch(`${base}/colture`, { headers: { 'Accept-Encoding': 'gzip' } });
+    assert.equal(risposta.headers.get('content-encoding'), 'gzip');
+  });
+});
+
 describe('requisiti SEO su ogni pagina indicizzabile', () => {
   const pagine = [
     '/',

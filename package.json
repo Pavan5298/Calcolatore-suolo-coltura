@@ -11,13 +11,12 @@
     "start": "node src/avvio.js",
     "dev": "node --watch src/avvio.js",
     "test": "node --test \"test/*.test.js\"",
-    "import:rese": "node scripts/import-istat.mjs rese",
-    "import:prezzi": "node scripts/import-istat.mjs prezzi",
-    "import:discover": "node scripts/import-istat.mjs discover",
-    "importa": "node scripts/importa-istat-csv.mjs",
+    "importa:rese": "node scripts/importa-istat-csv.mjs",
+    "importa:prezzi": "node scripts/importa-prezzi-istat.mjs",
     "costruisci": "node scripts/costruisci-colture.mjs"
   },
   "dependencies": {
+    "compression": "^1.8.1",
     "ejs": "^3.1.10",
     "express": "^4.21.2"
   }

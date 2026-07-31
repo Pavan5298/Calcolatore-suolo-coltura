@@ -26,6 +26,8 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { parseCsv } from './lib/csv-sdmx.mjs';
+
 const radice = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const cartellaRaw = join(radice, 'src', 'data', 'raw');
 
@@ -34,67 +36,19 @@ const SUPERFICIE_TOTALE = 'ART';
 const PRODUZIONE_RACCOLTA = 'HP_Q_EXT';
 const PRODUZIONE_TOTALE = 'TP_QUIN_EXT';
 
-/** Parser CSV: gestisce virgolette doppie e separatore virgola. */
-export function parseCsv(testo) {
-  const righe = [];
-  let riga = [];
-  let campo = '';
-  let inVirgolette = false;
-
-  for (let i = 0; i < testo.length; i += 1) {
-    const c = testo[i];
-    if (inVirgolette) {
-      if (c === '"') {
-        if (testo[i + 1] === '"') { campo += '"'; i += 1; } else { inVirgolette = false; }
-      } else campo += c;
-      continue;
-    }
-    // Una virgoletta apre un campo quotato SOLO a inizio campo. L'intestazione
-    // dell'export ISTAT contiene una virgoletta spuria a meta campo
-    // ('Stato dell"'osservazione'): trattarla come delimitatore farebbe
-    // inghiottire il resto del file in un unico campo.
-    if (c === '"' && campo === '') { inVirgolette = true; continue; }
-    if (c === ',') { riga.push(campo); campo = ''; continue; }
-    if (c === '\r') continue;
-    if (c === '\n') { riga.push(campo); righe.push(riga); riga = []; campo = ''; continue; }
-    campo += c;
-  }
-  if (campo !== '' || riga.length > 0) { riga.push(campo); righe.push(riga); }
-  if (righe.length === 0) return [];
-
-  const intestazione = righe[0].map((k) => k.trim());
-
-  // Nell'export ISTAT alcuni testi lunghi (denominazioni di coltura, note
-  // metodologiche) sono racchiusi tra APICI SINGOLI, che il formato CSV non
-  // riconosce come quoting: le virgole interne spezzano il campo e la riga
-  // risulta piu lunga dell'intestazione. Riguarda ~30% delle righe, quindi
-  // scartarle non e accettabile.
-  //
-  // Lo sfasamento puo cadere prima o dopo le colonne che ci servono, percio non
-  // si puo indicizzare ne dalla testa ne dalla coda. L'ancora affidabile e
-  // TIME_PERIOD: e l'anno, quindi il primo campo di quattro cifre dopo il
-  // codice coltura. Da li si ricavano nome (tutto quel che precede) e valore
-  // (il campo successivo), e il resto della riga si puo ignorare.
-  const iNome = intestazione.indexOf('Tipo di coltivazione');
-  const CAMPI_TESTA = ['FREQ', 'Frequenza', 'REF_AREA', 'Territorio', 'DATA_TYPE', 'Indicatore', 'TYPE_OF_CROP'];
-
-  return righe.slice(1).map((r) => {
-    const posPeriodo = r.findIndex((v, i) => i >= iNome && /^\d{4}$/.test(v));
-    if (posPeriodo < 0) return null;
-
-    const record = Object.fromEntries(CAMPI_TESTA.map((k, i) => [k, r[i]]));
-    record[intestazione[iNome]] = r.slice(iNome, posPeriodo).join(',');
-    record.TIME_PERIOD = r[posPeriodo];
-    record.Osservazione = r[posPeriodo + 1];
-    return record;
-  }).filter(Boolean);
-}
-
 function trovaFile(opzioni) {
   if (opzioni.file) return resolve(radice, opzioni.file);
-  const candidati = readdirSync(cartellaRaw).filter((n) => n.toLowerCase().endsWith('.csv'));
+  // Il filtro sul dataflow e necessario: nella stessa cartella convivono piu
+  // export ISTAT e prendere il primo in ordine alfabetico significa leggere
+  // l'indice dei prezzi al posto delle coltivazioni.
+  const candidati = readdirSync(cartellaRaw).filter(
+    (n) => n.toLowerCase().endsWith('.csv') && n.includes('COLTIVAZIONI'),
+  );
   if (candidati.length === 0) {
-    throw new Error(`Nessun CSV in ${cartellaRaw}. Scarica l'export dal databrowser ISTAT e mettilo li.`);
+    throw new Error(
+      `Nessun export DCSP_COLTIVAZIONI in ${cartellaRaw}.\n` +
+        '  Scarica dal databrowser ISTAT il dataflow 101_1015 e mettilo li.',
+    );
   }
   return join(cartellaRaw, candidati[0]);
 }
@@ -109,9 +63,10 @@ const opzioni = Object.fromEntries(
 const percorso = trovaFile(opzioni);
 console.log(`Leggo ${percorso}`);
 
-// Gli export ISTAT arrivano con BOM: va tolto prima del parsing, altrimenti la
-// prima intestazione di colonna non corrisponde mai.
-const righe = parseCsv(readFileSync(percorso, 'utf8').replace(/^\uFEFF/, ''));
+const righe = parseCsv(readFileSync(percorso, 'utf8'), {
+  ancoraPeriodo: /^\d{4}$/,
+  campoDescrittivo: 'Tipo di coltivazione',
+});
 
 // Alcune denominazioni ISTAT contengono virgole non quotate ("Altri cereali
 // n.c.a. (miglio, scagliola, ecc.)") e sfasano le colonne. Sono aggregati

@@ -1,3 +1,4 @@
+import compression from 'compression';
 import express from 'express';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,15 +34,22 @@ import {
 } from './lib/format.js';
 import {
   SITO,
+  jsonLdBriciole,
   jsonLdColtura,
   jsonLdFaqZona,
   jsonLdRisultato,
+  jsonLdSito,
   percorsoRisultato,
   urlAssoluto,
 } from './lib/seo.js';
 
 const radice = dirname(fileURLToPath(import.meta.url));
 const app = express();
+
+// La compressione e la singola ottimizzazione di velocita con il rapporto
+// beneficio/costo piu alto: una pagina risultato passa da ~75 KB a ~12 KB, e il
+// tempo di caricamento e un fattore di posizionamento oltre che di abbandono.
+app.use(compression());
 
 app.set('view engine', 'ejs');
 app.set('views', join(radice, 'views'));
@@ -64,6 +72,7 @@ app.locals.etichettaAffidabilita = etichettaAffidabilita;
 app.locals.etichetteIrrigazione = ETICHETTE_IRRIGAZIONE;
 app.locals.urlAssoluto = urlAssoluto;
 app.locals.percorsoRisultato = percorsoRisultato;
+app.locals.jsonLdSito = jsonLdSito;
 
 const PH_MIN = 3;
 const PH_MAX = 10;
@@ -195,7 +204,7 @@ app.get('/', (req, res) => {
     terreni: TERRENI,
     superficiePredefinita: SUPERFICIE_PREDEFINITA,
     colture: getColture(),
-    jsonLd: null,
+    jsonLd: jsonLdSito(),
   });
 });
 
@@ -219,7 +228,7 @@ app.get('/risultato', (req, res) => {
   res.set('Cache-Control', 'public, max-age=300, s-maxage=3600');
   res.render('risultato', {
     titolo: `Cosa coltivare su ${formattaEttari(criteri.superficieHa)} di terreno ${criteri.terreno} a ${luogo}`,
-    descrizione: `Colture piu adatte e PLV stimata per ${formattaEttari(criteri.superficieHa)} di terreno ${criteri.terreno} a ${luogo}${criteri.irrigazione ? ' con irrigazione' : ' senza irrigazione'}: ${nomiColture}.`,
+    descrizione: `Colture piu adatte a ${formattaEttari(criteri.superficieHa)} di terreno ${criteri.terreno} a ${luogo}${criteri.irrigazione ? ' con irrigazione' : ' in asciutto'}: ${nomiColture}. Margine lordo e PLV per ettaro su rese ISTAT.`,
     canonico: urlAssoluto(percorso),
     criteri,
     esito,
@@ -230,12 +239,19 @@ app.get('/risultato', (req, res) => {
     comuni: getComuni(),
     terreni: TERRENI,
     zone: getZone(),
-    jsonLd: jsonLdRisultato({
-      titolo: `Colture consigliate a ${luogo}`,
-      descrizione: `Colture compatibili con terreno ${criteri.terreno} a ${luogo}.`,
-      percorso,
-      colture: esito.principali,
-    }),
+    jsonLd: [
+      jsonLdRisultato({
+        titolo: `Colture consigliate a ${luogo}`,
+        descrizione: `Colture compatibili con terreno ${criteri.terreno} a ${luogo}.`,
+        percorso,
+        colture: esito.principali,
+      }),
+      jsonLdBriciole([
+        { nome: 'Calcolatore', percorso: '/' },
+        { nome: `Provincia di ${criteri.provincia.nome}`, percorso: `/cosa-coltivare-in/${criteri.provincia.slug}` },
+        { nome: 'Risultato', percorso },
+      ]),
+    ],
   });
 });
 
@@ -258,8 +274,8 @@ app.get('/cosa-coltivare-a/:comune', (req, res, next) => {
 
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('zona', {
-    titolo: `Cosa coltivare a ${comune.nome}: colture adatte e PLV per ettaro`,
-    descrizione: `Le colture piu adatte ai terreni di ${comune.nome} (provincia di ${provincia.nome}): ${nomiColture}. Stima della PLV per ettaro e calcolatore sulla tua superficie.`,
+    titolo: `Cosa coltivare a ${comune.nome}: colture adatte e quanto rendono`,
+    descrizione: `Le colture piu adatte ai terreni di ${comune.nome} (${provincia.nome}): ${nomiColture}. Margine lordo e PLV per ettaro su rese ISTAT, con calcolatore sulla tua superficie.`,
     canonico: urlAssoluto(`/cosa-coltivare-a/${comune.slug}`),
     ambito: 'comune',
     comune,
@@ -273,7 +289,14 @@ app.get('/cosa-coltivare-a/:comune', (req, res, next) => {
     comuni: getComuni(),
     terreni: TERRENI,
     altriComuni: getComuniByProvincia(provincia.sigla).filter((c) => c.slug !== comune.slug),
-    jsonLd: jsonLdFaqZona({ zona: comune.nome, colture: esito.principali }),
+    jsonLd: [
+      jsonLdFaqZona({ zona: comune.nome, colture: esito.principali }),
+      jsonLdBriciole([
+        { nome: 'Calcolatore', percorso: '/' },
+        { nome: `Provincia di ${provincia.nome}`, percorso: `/cosa-coltivare-in/${provincia.slug}` },
+        { nome: comune.nome, percorso: `/cosa-coltivare-a/${comune.slug}` },
+      ]),
+    ],
   });
 });
 
@@ -294,8 +317,8 @@ app.get('/cosa-coltivare-in/:provincia', (req, res, next) => {
 
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('zona', {
-    titolo: `Cosa coltivare in provincia di ${provincia.nome}: colture adatte e PLV per ettaro`,
-    descrizione: `Le colture piu adatte in provincia di ${provincia.nome}: ${nomiColture}. Stima della PLV per ettaro e calcolatore sulla tua superficie.`,
+    titolo: `Cosa coltivare in provincia di ${provincia.nome}: colture e redditivita`,
+    descrizione: `Le colture piu adatte in provincia di ${provincia.nome}: ${nomiColture}. Margine lordo e PLV per ettaro su rese ISTAT, con calcolatore sulla tua superficie.`,
     canonico: urlAssoluto(`/cosa-coltivare-in/${provincia.slug}`),
     ambito: 'provincia',
     comune: null,
@@ -309,15 +332,21 @@ app.get('/cosa-coltivare-in/:provincia', (req, res, next) => {
     comuni: getComuni(),
     terreni: TERRENI,
     altriComuni: getComuniByProvincia(provincia.sigla),
-    jsonLd: jsonLdFaqZona({ zona: `provincia di ${provincia.nome}`, colture: esito.principali }),
+    jsonLd: [
+      jsonLdFaqZona({ zona: `provincia di ${provincia.nome}`, colture: esito.principali }),
+      jsonLdBriciole([
+        { nome: 'Calcolatore', percorso: '/' },
+        { nome: `Provincia di ${provincia.nome}`, percorso: `/cosa-coltivare-in/${provincia.slug}` },
+      ]),
+    ],
   });
 });
 
 app.get('/colture', (req, res) => {
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('colture', {
-    titolo: 'Colture del Veneto: PLV per ettaro e terreni adatti',
-    descrizione: 'Elenco delle colture considerate dal calcolatore, con PLV indicativa per ettaro, terreni adatti e fabbisogno irriguo.',
+    titolo: `Le ${getColture().length} colture del Veneto a confronto: margine per ettaro e per ora`,
+    descrizione: `Confronto tra ${getColture().length} colture venete: margine lordo per ettaro, margine per ora di lavoro, PLV, terreni adatti e fabbisogno irriguo. Rese da ISTAT.`,
     canonico: urlAssoluto('/colture'),
     colture: getColture().map((c) => ({ coltura: c, plvHa: plvPerEttaro(c) })),
     jsonLd: null,
@@ -333,14 +362,21 @@ app.get('/colture/:slug', (req, res, next) => {
 
   res.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
   res.render('coltura', {
-    titolo: `${coltura.nome} in Veneto: PLV per ettaro, terreni e irrigazione`,
-    descrizione: `${coltura.nome}: PLV indicativa ${formattaEuro(plvHa.tipica)} per ettaro in annata tipica, da ${formattaEuro(plvHa.scarsa)} a ${formattaEuro(plvHa.buona)}. Terreni adatti, fabbisogno irriguo e province vocate.`,
+    titolo: `${coltura.nome} in Veneto: quanto rende, terreni adatti e costi`,
+    descrizione: `${coltura.nome}: margine lordo indicativo ${formattaEuro(coltura.margine_lordo_eur_ha)}/ha, PLV ${formattaEuro(plvHa.tipica)}/ha, ${coltura.manodopera_ore_ha} ore di lavoro per ettaro. Terreni, pH, irrigazione e province vocate.`,
     canonico: urlAssoluto(`/colture/${coltura.slug}`),
     coltura,
     plvHa,
     province,
     superficiePredefinita: SUPERFICIE_PREDEFINITA,
-    jsonLd: jsonLdColtura(coltura, plvHa),
+    jsonLd: [
+      jsonLdColtura(coltura, plvHa, getMeta().colture.generato),
+      jsonLdBriciole([
+        { nome: 'Calcolatore', percorso: '/' },
+        { nome: 'Colture', percorso: '/colture' },
+        { nome: coltura.nome, percorso: `/colture/${coltura.slug}` },
+      ]),
+    ],
   });
 });
 
@@ -358,21 +394,37 @@ app.get('/metodologia', (req, res) => {
 // ------------------------------------------------------ file per i crawler
 
 app.get('/robots.txt', (req, res) => {
-  res.type('text/plain').send(`User-agent: *\nAllow: /\n\nSitemap: ${urlAssoluto('/sitemap.xml')}\n`);
+  // Le pagine risultato restano accessibili e condivisibili, ma non vanno
+  // scansionate a tappeto: la combinatoria dei parametri e enorme e brucerebbe
+  // il crawl budget su pagine quasi identiche. Le landing di comune, provincia e
+  // coltura sono le pagine su cui vogliamo posizionarci.
+  res
+    .type('text/plain')
+    .send(
+      `User-agent: *\nAllow: /\nDisallow: /risultato?\n\nSitemap: ${urlAssoluto('/sitemap.xml')}\n`,
+    );
 });
 
 app.get('/sitemap.xml', (req, res) => {
+  // La data di ultima modifica e quella del dataset: e l'unica cosa che cambia
+  // davvero tra un deploy e l'altro, e dichiararla evita che i crawler
+  // ripassino su pagine identiche.
+  const aggiornato = getMeta().colture.generato;
+
   const percorsi = [
-    '/',
-    '/colture',
-    '/metodologia',
-    ...getProvince().map((p) => `/cosa-coltivare-in/${p.slug}`),
-    ...getComuni().map((c) => `/cosa-coltivare-a/${c.slug}`),
-    ...getColture().map((c) => `/colture/${c.slug}`),
+    { p: '/', priorita: '1.0' },
+    { p: '/colture', priorita: '0.9' },
+    { p: '/metodologia', priorita: '0.5' },
+    ...getProvince().map((x) => ({ p: `/cosa-coltivare-in/${x.slug}`, priorita: '0.9' })),
+    ...getColture().map((x) => ({ p: `/colture/${x.slug}`, priorita: '0.8' })),
+    ...getComuni().map((x) => ({ p: `/cosa-coltivare-a/${x.slug}`, priorita: '0.7' })),
   ];
 
   const corpo = percorsi
-    .map((p) => `  <url><loc>${urlAssoluto(p)}</loc><changefreq>monthly</changefreq></url>`)
+    .map(
+      ({ p, priorita }) =>
+        `  <url><loc>${urlAssoluto(p)}</loc><lastmod>${aggiornato}</lastmod><changefreq>monthly</changefreq><priority>${priorita}</priority></url>`,
+    )
     .join('\n');
 
   res.set('Cache-Control', 'public, max-age=3600');

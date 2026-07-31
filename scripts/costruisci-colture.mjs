@@ -49,16 +49,57 @@ import { fileURLToPath } from 'node:url';
 
 const radice = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-// Variabilita tipica della PLV per categoria, usata per costruire il range
-// annata scarsa / buona finche non c'e una serie storica di almeno 5 anni.
-const VARIABILITA = {
-  cereali: 0.3,
-  'oleaginose e proteiche': 0.3,
-  'colture industriali': 0.28,
-  foraggere: 0.25,
-  orticole: 0.4,
-  frutta: 0.35,
+/**
+ * Variabilita della RESA, per categoria. Resta una stima dichiarata: ISTAT non
+ * offre una serie di rese abbastanza lunga per misurarla.
+ */
+const VARIABILITA_RESA = {
+  cereali: 0.18,
+  'oleaginose e proteiche': 0.18,
+  'colture industriali': 0.16,
+  foraggere: 0.15,
+  orticole: 0.22,
+  frutta: 0.24,
 };
+
+/**
+ * Gruppo dell'indice prezzi ISTAT (dataflow 101_12) a cui ogni categoria fa
+ * capo. Da li si prende la volatilita del prezzo MISURATA, che sostituisce la
+ * meta "prezzo" del coefficiente di variabilita.
+ */
+const GRUPPO_PREZZI = {
+  cereali: 'CEREA',
+  'oleaginose e proteiche': 'INDUSLCRO',
+  'colture industriali': 'INDUSLCRO',
+  foraggere: 'FORAGANTS',
+  orticole: 'FRESHETABL',
+  frutta: 'FRUIT',
+};
+
+/** Eccezioni per singola coltura, dove esiste un gruppo piu specifico. */
+const GRUPPO_PREZZI_COLTURA = {
+  'frumento-tenero': 'WHEATSPEL',
+  'frumento-duro': 'WHEATSPEL',
+  patata: 'POTAT',
+  olivo: 'OLIVE',
+  'vite-da-vino': 'WINE',
+  'uva-da-tavola': 'FRUIT',
+};
+
+/**
+ * Combina la volatilita della resa e quella del prezzo in un coefficiente di
+ * variabilita della PLV.
+ *
+ * Non e la somma in quadratura pura: resa e prezzo sono NEGATIVAMENTE correlati
+ * (l'annata scarsa fa salire il prezzo), quindi la variabilita del prodotto e
+ * inferiore a quella che si otterrebbe assumendoli indipendenti. Il fattore 0,85
+ * incorpora una correlazione moderatamente negativa. Resta una semplificazione,
+ * ma parte da un dato misurato invece che da un numero dichiarato a occhio.
+ */
+function variabilitaPlv(cvResa, cvPrezzo) {
+  const combinata = Math.sqrt(cvResa ** 2 + cvPrezzo ** 2) * 0.85;
+  return Math.round(Math.max(0.12, Math.min(0.55, combinata)) * 1000) / 1000;
+}
 
 /* eslint-disable */
 const TABELLA = [
@@ -176,6 +217,7 @@ function province(pv) {
 }
 
 const istat = JSON.parse(readFileSync(join(radice, 'src', 'data', 'istat-veneto.json'), 'utf8'));
+const prezzi = JSON.parse(readFileSync(join(radice, 'src', 'data', 'istat-prezzi.json'), 'utf8'));
 
 // La diffusione pesa quanto una coltura e effettivamente praticata in Veneto.
 // Su scala logaritmica, perche le superfici vanno da pochi ettari a 140.000 e
@@ -194,7 +236,15 @@ for (const riga of TABELLA) {
   }
 
   const categoria = riga.c;
-  const variabilita = riga.v ?? VARIABILITA[categoria] ?? 0.3;
+  const codiceGruppo = GRUPPO_PREZZI_COLTURA[riga.s] ?? GRUPPO_PREZZI[categoria] ?? null;
+  const gruppoPrezzi = codiceGruppo ? prezzi.gruppi[codiceGruppo] : null;
+  if (codiceGruppo && !gruppoPrezzi) {
+    problemi.push(`${riga.s}: gruppo prezzi ${codiceGruppo} non trovato nell'import`);
+  }
+
+  const cvResa = VARIABILITA_RESA[categoria] ?? 0.2;
+  const cvPrezzo = gruppoPrezzi?.coefficiente_variazione ?? 0.2;
+  const variabilita = riga.v ?? variabilitaPlv(cvResa, cvPrezzo);
 
   const resaIstat = datiIstat?.resa_media_q_ha ?? null;
   const resaTipica = resaIstat ?? riga.r?.[1] ?? null;
@@ -266,6 +316,18 @@ for (const riga of TABELLA) {
       tipica: plvTipica,
       buona: Math.round(plvTipica * (1 + variabilita)),
     },
+    prezzo_gruppo_istat: codiceGruppo,
+    prezzo_gruppo_nome: gruppoPrezzi?.nome ?? null,
+    volatilita_prezzo: gruppoPrezzi?.coefficiente_variazione ?? null,
+    volatilita_resa_stimata: cvResa,
+    indice_prezzi_corrente: gruppoPrezzi
+      ? {
+          periodo: gruppoPrezzi.ultimo_periodo,
+          indice: gruppoPrezzi.ultimo_indice,
+          scarto_da_media_recente: gruppoPrezzi.scarto_da_media_recente,
+          scarto_da_picco: gruppoPrezzi.scarto_da_picco,
+        }
+      : null,
     unita_resa_speciale: riga.ur ?? null,
     unita_prezzo_speciale: riga.up ?? null,
     affidabilita,
@@ -291,7 +353,10 @@ writeFileSync(
           'GENERATO da scripts/costruisci-colture.mjs. Non modificare a mano: la sorgente editabile e la TABELLA in quello script.',
         rese: `ISTAT DCSP_COLTIVAZIONI, Veneto, anni ${istat._meta.anni.join('-')}`,
         rese_nota: istat._meta.territorio_nota,
-        prezzi: 'Stime di settore, in attesa di import da ISTAT DCSP_PREZZIAGR',
+        prezzi:
+          'Livelli in euro/quintale: stime di settore. Volatilita e fase di mercato: ISTAT DCSP_PREZZIAGR, indice base 2020=100.',
+        prezzi_nota:
+          "L'indice ISTAT non contiene prezzi assoluti: da un numero indice non si ricava un livello. Fornisce pero la volatilita misurata, che sostituisce il coefficiente dichiarato a occhio, e la fase di mercato corrente.",
         costi: 'Costi di produzione e fabbisogno di manodopera: stime di inquadramento tecnico, non rilevazioni. Da validare su RICA.',
         unita: {
           resa_q_ha: 'quintali per ettaro (1 q = 100 kg)',

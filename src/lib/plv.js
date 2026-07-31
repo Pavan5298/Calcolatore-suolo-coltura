@@ -92,10 +92,14 @@ export function plvPerEttaro(coltura) {
     const tipica = resa * prezzo;
     const anniIstat = coltura.resa_anni?.length;
 
+    const fonteVariabilita = Number.isFinite(coltura.volatilita_prezzo)
+      ? `volatilita prezzo misurata su indice ISTAT (${Math.round(coltura.volatilita_prezzo * 100)}%) e variabilita di resa stimata (${Math.round((coltura.volatilita_resa_stimata ?? 0) * 100)}%)`
+      : 'coefficiente di variabilita dichiarato';
+
     const metodo =
       coltura.resa_fonte === 'istat'
-        ? `resa ISTAT (${coltura.resa_anni?.join('-') ?? 'Veneto'}) x prezzo stimato, range da coefficiente di variabilita ${Math.round(variabilita * 100)}%`
-        : `resa e prezzo stimati, range da coefficiente di variabilita ${Math.round(variabilita * 100)}%`;
+        ? `resa ISTAT (${coltura.resa_anni?.join('-') ?? 'Veneto'}) x prezzo stimato, range ±${Math.round(variabilita * 100)}% da ${fonteVariabilita}`
+        : `resa e prezzo stimati, range ±${Math.round(variabilita * 100)}% da ${fonteVariabilita}`;
 
     return {
       scarsa: Math.round(tipica * (1 - variabilita)),

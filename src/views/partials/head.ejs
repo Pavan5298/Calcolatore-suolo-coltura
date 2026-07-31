@@ -19,7 +19,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>">
 <link rel="stylesheet" href="/stile.css">
 <% if (typeof jsonLd !== 'undefined' && jsonLd) { %>
-<script type="application/ld+json"><%- JSON.stringify(jsonLd) %></script>
+<% (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).forEach(function (blocco) { %>
+<script type="application/ld+json"><%- JSON.stringify(blocco) %></script>
+<% }); %>
 <% } %>
 </head>
 <body>

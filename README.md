@@ -35,19 +35,19 @@ geografiche AVEPA — si riscrive quel file e non il resto.
 npm install
 npm start              # avvia su http://localhost:3000
 npm run dev            # con ricarica automatica
-npm test               # 102 test: dataset, PLV, tessitura, matching, rotte e SEO
+npm test               # 108 test: dataset, PLV, tessitura, matching, rotte e SEO
 ```
 
 Aggiornare i dati:
 
 ```bash
-npm run importa        # legge l'export CSV ISTAT in src/data/raw/ -> istat-veneto.json
-npm run costruisci     # unisce rese ISTAT + tabella curata -> src/data/colture.json
+npm run importa:rese     # export DCSP_COLTIVAZIONI -> istat-veneto.json (rese e superfici)
+npm run importa:prezzi   # export DCSP_PREZZIAGR   -> istat-prezzi.json (indice e volatilita)
+npm run costruisci       # unisce tutto con la tabella curata -> src/data/colture.json
 ```
 
 Il ciclo e sempre questo: si scarica un nuovo export dal databrowser ISTAT, lo si
-mette in `src/data/raw/`, si lancia `npm run importa && npm run costruisci` e si
-committa il risultato.
+mette in `src/data/raw/`, si lanciano i tre comandi e si committa il risultato.
 
 Per correggere un prezzo o un requisito agronomico si modifica la **tabella
 curata** in `scripts/costruisci-colture.mjs` e si rilancia `npm run costruisci`.
@@ -85,6 +85,20 @@ test/                     suite di test
 ```
 
 ---
+
+## SEO e velocita
+
+| Intervento | Effetto |
+|---|---|
+| Rendering lato server, nessun build step | Il contenuto indicizzabile e nel primo byte |
+| Compressione gzip | Pagina risultato da 78 KB a 10,5 KB |
+| Un solo CSS, nessun font o script esterno | Nessuna richiesta di rete oltre alla pagina |
+| `title`, `description`, `canonical`, Open Graph per pagina | Verificati dai test, pagina per pagina |
+| JSON-LD: `WebSite`, `BreadcrumbList`, `FAQPage`, `Article`, `ItemList` | Percorso al posto della URL nei risultati, FAQ in rich snippet |
+| FAQ generate sui dati reali della zona | Intercettano "quanto rende un ettaro a…", "cosa coltivare a…" |
+| `Disallow: /risultato?` in robots.txt | Il crawl budget va sulle landing, non sulla combinatoria dei parametri |
+| Sitemap con `lastmod` e `priority` | 149 URL, priorita piu alta alle landing di zona e coltura |
+| Cache-Control differenziato | 30 giorni sugli asset, 1 giorno sulle landing |
 
 ## Rotte
 
@@ -187,17 +201,25 @@ per il prezzo peggiore: resa e prezzo sono negativamente correlati, e quel
 prodotto descrive uno scenario mai verificatosi.
 
 Il metodo corretto - percentili sulla serie di PLV annuali - richiede almeno 5
-annate. L'export ISTAT attualmente caricato ne copre 2, quindi il range si
-costruisce con un **coefficiente di variabilita dichiarato applicato alla PLV**,
-non separatamente a resa e prezzo: applicandolo al prodotto si evita per
-costruzione l'errore di correlazione. `src/lib/plv.js` implementa entrambi i
-metodi e passa al primo appena la serie e abbastanza lunga.
+annate di rese. L'export ISTAT ne copre 2, quindi il range si costruisce con un
+**coefficiente di variabilita applicato alla PLV**, non separatamente a resa e
+prezzo: applicandolo al prodotto si evita per costruzione l'errore di
+correlazione.
+
+Quel coefficiente non e piu dichiarato a occhio: combina la **volatilita del
+prezzo misurata** sull'indice ISTAT con una variabilita di resa stimata per
+categoria, con un fattore 0,85 che incorpora la correlazione negativa.
+`src/lib/plv.js` implementa entrambi i metodi e passa ai percentili appena la
+serie di rese e abbastanza lunga.
 
 ### Prossimo passo sui dati
 
-Scaricare da ISTAT `DCSP_PREZZIAGR` (prezzi dei prodotti agricoli) e una serie di
-rese piu lunga di 5 anni. Con quelli, prezzi e range diventano entrambi
-riproducibili.
+1. **Serie di rese piu lunga** (2015-2024 invece di 2025-2026): fa scattare il
+   metodo dei percentili, gia implementato.
+2. **Prezzi assoluti in €/q**: l'indice ISTAT non li contiene. Vanno da ISMEA
+   (banca dati prezzi all'origine, export manuale) o da contabilita aziendale.
+   E l'ultimo anello ancora stimato della catena PLV.
+3. **Costi di produzione** validati su RICA o su contabilita reali.
 
 ---
 

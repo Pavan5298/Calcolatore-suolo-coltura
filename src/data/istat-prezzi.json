@@ -1,0 +1,586 @@
+{
+  "_meta": {
+    "fonte": "ISTAT, dataflow 101_12 (DCSP_PREZZIAGR), indice dei prezzi alla produzione, base 2020=100",
+    "licenza": "CC-BY: citare ISTAT come fonte",
+    "natura": "E' un numero indice, non un prezzo: da qui NON si ricavano euro al quintale. Serve per la volatilita misurata e per la fase di mercato.",
+    "territorio": "Italia (nazionale)",
+    "territorio_nota": "L'indice non e disponibile su base regionale: la volatilita e quindi nazionale, applicata al Veneto.",
+    "frequenza": "mensile",
+    "gruppi": 22,
+    "importato": "2026-07-31"
+  },
+  "gruppi": {
+    "CEREA": {
+      "nome": "Cereali",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100,
+        "2021": 132,
+        "2022": 186.7,
+        "2023": 145.5,
+        "2024": 125.6,
+        "2025": 127.9,
+        "2026": 119.7
+      },
+      "coefficiente_variazione": 0.193,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 119,
+      "picco_indice": 198,
+      "scarto_da_media_recente": -10.5,
+      "scarto_da_picco": -39.9
+    },
+    "CROPUT": {
+      "nome": "Prodotti vegetali",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 109.1,
+        "2022": 128.9,
+        "2023": 128.7,
+        "2024": 130.6,
+        "2025": 129.8,
+        "2026": 132.3
+      },
+      "coefficiente_variazione": 0.099,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 135,
+      "picco_indice": 140,
+      "scarto_da_media_recente": 4.1,
+      "scarto_da_picco": -3.6
+    },
+    "CROPUTE": {
+      "nome": "Prodotti vegetali (esclusi frutta e ortaggi)",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100,
+        "2021": 111.5,
+        "2022": 136.5,
+        "2023": 127.8,
+        "2024": 128.1,
+        "2025": 128.6,
+        "2026": 125
+      },
+      "coefficiente_variazione": 0.101,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 125,
+      "picco_indice": 141,
+      "scarto_da_media_recente": -2.5,
+      "scarto_da_picco": -11.3
+    },
+    "WHEATSPEL": {
+      "nome": "Frumento",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.2,
+        "2021": 131.2,
+        "2022": 180.2,
+        "2023": 138.2,
+        "2024": 121.9,
+        "2025": 116.3,
+        "2026": 110.3
+      },
+      "coefficiente_variazione": 0.19,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 110,
+      "picco_indice": 192,
+      "scarto_da_media_recente": -12.3,
+      "scarto_da_picco": -42.7
+    },
+    "INDUSLCRO": {
+      "nome": "Piante industriali",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.9,
+        "2021": 124.4,
+        "2022": 142.2,
+        "2023": 130.2,
+        "2024": 126.3,
+        "2025": 126.4,
+        "2026": 129.7
+      },
+      "coefficiente_variazione": 0.101,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 131,
+      "picco_indice": 150,
+      "scarto_da_media_recente": 2.6,
+      "scarto_da_picco": -12.7
+    },
+    "FORAGANTS": {
+      "nome": "Foraggere",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 119.7,
+        "2022": 176.8,
+        "2023": 165.3,
+        "2024": 129.4,
+        "2025": 142.8,
+        "2026": 150.3
+      },
+      "coefficiente_variazione": 0.188,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 151,
+      "picco_indice": 196,
+      "scarto_da_media_recente": 3.5,
+      "scarto_da_picco": -23
+    },
+    "VEGETSAND": {
+      "nome": "Ortaggi e prodotti orticoli",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 104.8,
+        "2022": 123.3,
+        "2023": 130.7,
+        "2024": 139.6,
+        "2025": 131.2,
+        "2026": 146.3
+      },
+      "coefficiente_variazione": 0.119,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 151,
+      "picco_indice": 169,
+      "scarto_da_media_recente": 12.8,
+      "scarto_da_picco": -10.7
+    },
+    "FRESHETABL": {
+      "nome": "Ortaggi freschi",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 104,
+        "2022": 123,
+        "2023": 132.2,
+        "2024": 142.3,
+        "2025": 130.6,
+        "2026": 145.7
+      },
+      "coefficiente_variazione": 0.125,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 151,
+      "picco_indice": 175,
+      "scarto_da_media_recente": 11.8,
+      "scarto_da_picco": -13.7
+    },
+    "PLANTDFLO": {
+      "nome": "Fiori e piante",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100,
+        "2021": 110,
+        "2022": 124,
+        "2023": 122.1,
+        "2024": 124.8,
+        "2025": 134.7,
+        "2026": 151
+      },
+      "coefficiente_variazione": 0.094,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 152,
+      "picco_indice": 158,
+      "scarto_da_media_recente": 19.5,
+      "scarto_da_picco": -3.8
+    },
+    "POTAT": {
+      "nome": "Patate",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 98.4,
+        "2021": 98.2,
+        "2022": 134.9,
+        "2023": 183.9,
+        "2024": 182.3,
+        "2025": 161.8,
+        "2026": 172.7
+      },
+      "coefficiente_variazione": 0.249,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 175,
+      "picco_indice": 209,
+      "scarto_da_media_recente": -0.6,
+      "scarto_da_picco": -16.3
+    },
+    "FRUIT": {
+      "nome": "Frutta",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.8,
+        "2021": 107.7,
+        "2022": 113.9,
+        "2023": 127.7,
+        "2024": 123.2,
+        "2025": 131.7,
+        "2026": 133.3
+      },
+      "coefficiente_variazione": 0.096,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 145,
+      "picco_indice": 164,
+      "scarto_da_media_recente": 13.7,
+      "scarto_da_picco": -11.6
+    },
+    "WINE": {
+      "nome": "Vino",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.9,
+        "2021": 100.5,
+        "2022": 108.1,
+        "2023": 104.1,
+        "2024": 112.8,
+        "2025": 113.8,
+        "2026": 111
+      },
+      "coefficiente_variazione": 0.052,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 111,
+      "picco_indice": 115,
+      "scarto_da_media_recente": 0.7,
+      "scarto_da_picco": -3.5
+    },
+    "OLIVE": {
+      "nome": "Olio d'oliva",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.9,
+        "2021": 110.8,
+        "2022": 125,
+        "2023": 159.9,
+        "2024": 205.9,
+        "2025": 196.2,
+        "2026": 177
+      },
+      "coefficiente_variazione": 0.273,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 177,
+      "picco_indice": 217,
+      "scarto_da_media_recente": -5.5,
+      "scarto_da_picco": -18.4
+    },
+    "ANIMATPUT": {
+      "nome": "Animali e prodotti animali",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.9,
+        "2021": 104.7,
+        "2022": 129.6,
+        "2023": 138.3,
+        "2024": 139.5,
+        "2025": 153.1,
+        "2026": 146
+      },
+      "coefficiente_variazione": 0.15,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 146,
+      "picco_indice": 160,
+      "scarto_da_media_recente": 1.6,
+      "scarto_da_picco": -8.8
+    },
+    "ANIMA": {
+      "nome": "Animali",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.2,
+        "2021": 107.3,
+        "2022": 131.6,
+        "2023": 140.1,
+        "2024": 137.5,
+        "2025": 151.4,
+        "2026": 147.3
+      },
+      "coefficiente_variazione": 0.143,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 148,
+      "picco_indice": 161,
+      "scarto_da_media_recente": 3.5,
+      "scarto_da_picco": -8.1
+    },
+    "CATTL": {
+      "nome": "Bovini",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.9,
+        "2021": 103.9,
+        "2022": 125.6,
+        "2023": 130.8,
+        "2024": 137.5,
+        "2025": 167.3,
+        "2026": 182
+      },
+      "coefficiente_variazione": 0.176,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 183,
+      "picco_indice": 183,
+      "scarto_da_media_recente": 26,
+      "scarto_da_picco": 0
+    },
+    "PIGS": {
+      "nome": "Suini",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.2,
+        "2021": 108.1,
+        "2022": 127.4,
+        "2023": 155.2,
+        "2024": 146.3,
+        "2025": 141.5,
+        "2026": 117.7
+      },
+      "coefficiente_variazione": 0.154,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 118,
+      "picco_indice": 163,
+      "scarto_da_media_recente": -20.1,
+      "scarto_da_picco": -27.6
+    },
+    "SHEEPGOAT": {
+      "nome": "Ovini e caprini",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 102.3,
+        "2022": 116.1,
+        "2023": 119.8,
+        "2024": 127.3,
+        "2025": 141.1,
+        "2026": 145
+      },
+      "coefficiente_variazione": 0.12,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 148,
+      "picco_indice": 148,
+      "scarto_da_media_recente": 14.4,
+      "scarto_da_picco": 0
+    },
+    "POULT": {
+      "nome": "Pollame",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.2,
+        "2021": 110,
+        "2022": 147.8,
+        "2023": 136.3,
+        "2024": 128.5,
+        "2025": 148.7,
+        "2026": 147.7
+      },
+      "coefficiente_variazione": 0.141,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 149,
+      "picco_indice": 161,
+      "scarto_da_media_recente": 8.1,
+      "scarto_da_picco": -7.5
+    },
+    "ANIMAODUCT": {
+      "nome": "Prodotti animali",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 100.9,
+        "2022": 126.7,
+        "2023": 136.5,
+        "2024": 141.8,
+        "2025": 155.6,
+        "2026": 143.7
+      },
+      "coefficiente_variazione": 0.162,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 142,
+      "picco_indice": 159,
+      "scarto_da_media_recente": -1.8,
+      "scarto_da_picco": -10.7
+    },
+    "TOTAGRICOUT_NOFV": {
+      "nome": "Indice generale (esclusi frutta e ortaggi)",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 100.1,
+        "2021": 108.3,
+        "2022": 133.1,
+        "2023": 132.9,
+        "2024": 133.7,
+        "2025": 140.6,
+        "2026": 135.3
+      },
+      "coefficiente_variazione": 0.12,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 135,
+      "picco_indice": 143,
+      "scarto_da_media_recente": -0.5,
+      "scarto_da_picco": -5.6
+    },
+    "TOTAGRICOUT": {
+      "nome": "Indice generale beni e servizi prodotti",
+      "anni_completi": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "medie_annue": {
+        "2020": 99.9,
+        "2021": 107.7,
+        "2022": 129.3,
+        "2023": 131.9,
+        "2024": 133.7,
+        "2025": 137.9,
+        "2026": 137
+      },
+      "coefficiente_variazione": 0.116,
+      "ultimo_periodo": "2026-03",
+      "ultimo_indice": 139,
+      "picco_indice": 144,
+      "scarto_da_media_recente": 3.3,
+      "scarto_da_picco": -3.5
+    }
+  }
+}
